@@ -86,7 +86,7 @@
 <meta property="og:site_name" content="Nei">
 <meta property="og:description" content="第四章 函数 函数表达式和函数声明式：  //命名函数表达式 var demo=funtion d(){     console.log(&amp;quot;Hello World!&amp;quot;); };  //函数表达式 var demo=function(){     console.log(&amp;quot;Hello World!&amp;quot;); };  //函数声明式 function demo(){">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:updated_time" content="2018-12-24T07:48:32.645Z">
+<meta property="og:updated_time" content="2018-12-25T06:47:19.486Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="js设计模式第二天">
 <meta name="twitter:description" content="第四章 函数 函数表达式和函数声明式：  //命名函数表达式 var demo=funtion d(){     console.log(&amp;quot;Hello World!&amp;quot;); };  //函数表达式 var demo=function(){     console.log(&amp;quot;Hello World!&amp;quot;); };  //函数声明式 function demo(){">
@@ -357,6 +357,49 @@ var bar = function () {
 </code></pre><p>  }</p>
 </li>
 </ul>
+<h2 id="返回函数"><a href="#返回函数" class="headerlink" title="返回函数"></a>返回函数</h2><blockquote>
+<p>函数也是对象，因此它们也可以用作为返回值。<br>下面有个demo：</p>
+</blockquote>
+<pre><code>var setup=function(){
+    alert(1);
+    return function(){
+        alert(2);
+    };
+};
+var my=setup(); //alert 1
+my(); // alert 2
+</code></pre><blockquote>
+<p>由于setup()包装了返回函数，它创建了一个闭包，可以用这个闭包存储一些私有数据，这些数据仅可以被该返回函数访问，但外部代码却无法访问。<br>Demo：</p>
+</blockquote>
+<pre><code>var setup=function(){
+    var count = 0;
+    return function(){
+        return (count+=1);
+    };
+};
+
+var next=setup();
+next(); //result is 1
+next(); //result is 2
+next(); //result is 3
+</code></pre><h2 id="自定义函数"><a href="#自定义函数" class="headerlink" title="自定义函数"></a>自定义函数</h2><blockquote>
+<p>如果创建了一个新函数并且将其分配给保存另外函数的同一个变量，那么就以一个新函数覆盖了旧函数。在某种程度上，回收了旧函数指针以指向一个新函数。而这一切发生在旧函数体的内部。在这种情况下，该函数以一个新的实现覆盖并重新定义了自身，这可能听起来比实际上更复杂，Demo：</p>
+</blockquote>
+<pre><code>var scareMe=function(){
+    alert(&quot;Boo!&quot;);
+    scareMe=function(){
+        alert(&quot;Double boo!&quot;);
+    };
+};
+
+scareMe(); //输出 Boo
+scareMe(); //输出 Double boo!
+</code></pre><blockquote>
+<p> 当函数有且执行一次时，这种模式非常有效。</p>
+</blockquote>
+<h2 id="即时函数"><a href="#即时函数" class="headerlink" title="即时函数"></a>即时函数</h2><blockquote>
+<p>保护了全局作作用域不受污染。</p>
+</blockquote>
 
       
     </div>
@@ -537,7 +580,7 @@ var bar = function () {
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#第四章-函数"><span class="nav-number">1.</span> <span class="nav-text">第四章 函数</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#区别："><span class="nav-number">1.1.</span> <span class="nav-text">区别：</span></a></li></ol></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#第四章-函数"><span class="nav-number">1.</span> <span class="nav-text">第四章 函数</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#区别："><span class="nav-number">1.1.</span> <span class="nav-text">区别：</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#返回函数"><span class="nav-number">2.</span> <span class="nav-text">返回函数</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#自定义函数"><span class="nav-number">3.</span> <span class="nav-text">自定义函数</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#即时函数"><span class="nav-number">4.</span> <span class="nav-text">即时函数</span></a></li></ol></div>
             
 
           </div>
