@@ -68,7 +68,7 @@
 
 
 
-  <meta name="keywords" content="Hexo, NexT" />
+  <meta name="keywords" content="设计模式," />
 
 
 
@@ -80,13 +80,14 @@
 
 
 <meta name="description" content="for循环 循环对象为dom时，保存dom对象的长度可以提高浏览器性能（现在还是的嘛？）  来自构造函数的对象 目前，我所说知道的两种创建对象的方法，对象字面量和new Object。其中，对象字面量方法更简单明了，另一个原因是它只是强调了该对象仅是一个可变哈希映射，而不是从对象中提取属性和方法。与new Object相比，对象字面量没有作用域解析，因为它可能创造了一个一样的局部构造函数，解析器需">
+<meta name="keywords" content="设计模式">
 <meta property="og:type" content="article">
 <meta property="og:title" content="js设计模式第一天">
 <meta property="og:url" content="http://yoursite.com/2018/12/20/js设计模式第一天/index.html">
 <meta property="og:site_name" content="Nei">
 <meta property="og:description" content="for循环 循环对象为dom时，保存dom对象的长度可以提高浏览器性能（现在还是的嘛？）  来自构造函数的对象 目前，我所说知道的两种创建对象的方法，对象字面量和new Object。其中，对象字面量方法更简单明了，另一个原因是它只是强调了该对象仅是一个可变哈希映射，而不是从对象中提取属性和方法。与new Object相比，对象字面量没有作用域解析，因为它可能创造了一个一样的局部构造函数，解析器需">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:updated_time" content="2018-12-24T07:30:27.834Z">
+<meta property="og:updated_time" content="2018-12-26T06:57:26.349Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="js设计模式第一天">
 <meta name="twitter:description" content="for循环 循环对象为dom时，保存dom对象的长度可以提高浏览器性能（现在还是的嘛？）  来自构造函数的对象 目前，我所说知道的两种创建对象的方法，对象字面量和new Object。其中，对象字面量方法更简单明了，另一个原因是它只是强调了该对象仅是一个可变哈希映射，而不是从对象中提取属性和方法。与new Object相比，对象字面量没有作用域解析，因为它可能创造了一个一样的局部构造函数，解析器需">
@@ -200,6 +201,26 @@
         </li>
       
         
+        <li class="menu-item menu-item-tags">
+          <a href="/tags/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
+            
+            标签
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br />
+            
+            分类
+          </a>
+        </li>
+      
+        
         <li class="menu-item menu-item-archives">
           <a href="/archives/" rel="section">
             
@@ -282,6 +303,28 @@
           </span>
 
           
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/设计模式/" itemprop="url" rel="index">
+                    <span itemprop="name">设计模式</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
 
           
             
@@ -290,6 +333,11 @@
           
           
 
+          
+            <span class="post-meta-divider">|</span>
+            <span class="page-pv"><i class="fa fa-file-o"></i>
+            <span class="busuanzi-value" id="busuanzi_value_page_pv" ></span>
+            </span>
           
 
           
@@ -370,6 +418,12 @@ console.log(second.tastes;)//输出&quot;yummy&quot;
     
 
     <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/设计模式/" rel="tag"># 设计模式</a>
+          
+        </div>
       
 
       
@@ -476,7 +530,25 @@ console.log(second.tastes;)//输出&quot;yummy&quot;
             
 
             
+              
+              
+              <div class="site-state-item site-state-categories">
+                <a href="/categories/index.html">
+                  <span class="site-state-item-count">5</span>
+                  <span class="site-state-item-name">分类</span>
+                </a>
+              </div>
+            
 
+            
+              
+              
+              <div class="site-state-item site-state-tags">
+                <a href="/tags/index.html">
+                  <span class="site-state-item-count">7</span>
+                  <span class="site-state-item-name">标签</span>
+                </a>
+              </div>
             
 
           </nav>
@@ -487,33 +559,27 @@ console.log(second.tastes;)//输出&quot;yummy&quot;
             <div class="links-of-author motion-element">
                 
                   <span class="links-of-author-item">
-                    <a href="git@github.com:LeiDeMing" target="_blank" title="GitHub">
+                    <a href="https://github.com/LeiDeMing" target="_blank" title="GitHub">
                       
-                        <i class="fa fa-fw fa-globe"></i>GitHub</a>
+                        <i class="fa fa-fw fa-github"></i>GitHub</a>
                   </span>
                 
                   <span class="links-of-author-item">
-                    <a href="your-twitter-url" target="_blank" title="Twitter">
+                    <a href="https://twitter.com/Nei940723" target="_blank" title="Twitter">
                       
-                        <i class="fa fa-fw fa-globe"></i>Twitter</a>
+                        <i class="fa fa-fw fa-twitter"></i>Twitter</a>
                   </span>
                 
                   <span class="links-of-author-item">
-                    <a href="your-weibo-url" target="_blank" title="Weibo">
+                    <a href="https://weibo.com/5511471250/profile?rightmod=1&wvr=6&mod=personinfo" target="_blank" title="Weibo">
                       
-                        <i class="fa fa-fw fa-globe"></i>Weibo</a>
+                        <i class="fa fa-fw fa-weibo"></i>Weibo</a>
                   </span>
                 
                   <span class="links-of-author-item">
-                    <a href="your-douban-url" target="_blank" title="DouBan">
+                    <a href="mailto:xuan136371773@gmail.com" target="_blank" title="E-Mail">
                       
-                        <i class="fa fa-fw fa-globe"></i>DouBan</a>
-                  </span>
-                
-                  <span class="links-of-author-item">
-                    <a href="your-zhihu-url" target="_blank" title="ZhiHu">
-                      
-                        <i class="fa fa-fw fa-globe"></i>ZhiHu</a>
+                        <i class="fa fa-fw fa-envelope"></i>E-Mail</a>
                   </span>
                 
             </div>
@@ -584,6 +650,26 @@ console.log(second.tastes;)//输出&quot;yummy&quot;
 
 
         
+<div class="busuanzi-count">
+  <script async src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+  
+    <span class="site-uv">
+      <i class="fa fa-user"></i>
+      <span class="busuanzi-value" id="busuanzi_value_site_uv"></span>
+      
+    </span>
+  
+
+  
+    <span class="site-pv">
+      <i class="fa fa-eye"></i>
+      <span class="busuanzi-value" id="busuanzi_value_site_pv"></span>
+      
+    </span>
+  
+</div>
+
 
 
 
