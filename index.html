@@ -259,7 +259,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/12/24/js设计模式第二天/">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/12/24/js设计模式第四章/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="Nei">
@@ -278,7 +278,7 @@
         
           <h1 class="post-title" itemprop="name headline">
                 
-                <a class="post-title-link" href="/2018/12/24/js设计模式第二天/" itemprop="url">js设计模式第二天</a></h1>
+                <a class="post-title-link" href="/2018/12/24/js设计模式第四章/" itemprop="url">js设计模式第四章</a></h1>
         
 
         <div class="post-meta">
@@ -441,9 +441,23 @@ scareMe(); //输出 Double boo!
 <p> 当函数有且执行一次时，这种模式非常有效。</p>
 </blockquote>
 <h2 id="即时函数"><a href="#即时函数" class="headerlink" title="即时函数"></a>即时函数</h2><blockquote>
-<p>保护了全局作作用域不受污染。</p>
+<p>即时函数模式，该模式有一下几部分组成：</p>
 </blockquote>
-
+<ul>
+<li>可以使用函数表达式定义一个函数（函数声明则无法达到这个效果）</li>
+<li>在末尾添加一组括号，这将导致该函数立即执行。</li>
+<li>将整个函数包括在括号中（只有不将该函数分配给变量才需要这样做）。</li>
+</ul>
+<blockquote>
+<p>这种模式的好处就是形成了作用域沙箱。避免了全局污染，并且可以执行一些一次新函数，而不必去创建复用函数。</p>
+</blockquote>
+<pre><code>(function(){
+    var days=[&apos;Sun&apos;,&apos;Mon&apos;,&apos;Tue&apos;,&apos;Wed&apos;,&apos;Thu&apos;,&apos;Fri&apos;,&apos;Sat&apos;],
+        today=new Date(),
+        msg=&apos;Today is &apos; + days[today.getDay()] + &apos;, &apos; + today.getDate();
+    alert(msg);
+}())
+</code></pre>
           
         
       
@@ -633,7 +647,7 @@ scareMe(); //输出 Double boo!
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/12/20/js设计模式第一天/">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/12/20/js设计模式第三章/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="Nei">
@@ -652,7 +666,7 @@ scareMe(); //输出 Double boo!
         
           <h1 class="post-title" itemprop="name headline">
                 
-                <a class="post-title-link" href="/2018/12/20/js设计模式第一天/" itemprop="url">js设计模式第一天</a></h1>
+                <a class="post-title-link" href="/2018/12/20/js设计模式第三章/" itemprop="url">js设计模式第三章</a></h1>
         
 
         <div class="post-meta">
