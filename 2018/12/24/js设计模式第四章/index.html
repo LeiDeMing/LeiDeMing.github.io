@@ -87,7 +87,7 @@
 <meta property="og:site_name" content="Nei">
 <meta property="og:description" content="第四章 函数 函数表达式和函数声明式：  //命名函数表达式 var demo=funtion d(){     console.log(&amp;quot;Hello World!&amp;quot;); };  //函数表达式 var demo=function(){     console.log(&amp;quot;Hello World!&amp;quot;); };  //函数声明式 function demo(){">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:updated_time" content="2019-01-03T06:24:45.975Z">
+<meta property="og:updated_time" content="2019-01-03T09:58:38.175Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="js设计模式第四章">
 <meta name="twitter:description" content="第四章 函数 函数表达式和函数声明式：  //命名函数表达式 var demo=funtion d(){     console.log(&amp;quot;Hello World!&amp;quot;); };  //函数表达式 var demo=function(){     console.log(&amp;quot;Hello World!&amp;quot;); };  //函数声明式 function demo(){">
@@ -414,7 +414,57 @@ var bar = function () {
 </code></pre><p>  }</p>
 </li>
 </ul>
-<h2 id="回调函数"><a href="#回调函数" class="headerlink" title="回调函数"></a>回调函数</h2><h2 id="返回函数"><a href="#返回函数" class="headerlink" title="返回函数"></a>返回函数</h2><blockquote>
+<h2 id="回调模式"><a href="#回调模式" class="headerlink" title="回调模式"></a>回调模式</h2><blockquote>
+<p>函数都是对象，函数可以被当做参数传递给其他函数，当一个函数被当做参数传递给另一个函数，且执行，这叫回调。</p>
+</blockquote>
+<p>Code：</p>
+<pre><code>function writeCode(callback){
+    //do something
+    callback();
+}
+
+function introduce(){
+    // do something
+}
+
+//传递函数，执行回调
+writeCode(introduce);
+</code></pre><h3 id="回调与作用域"><a href="#回调与作用域" class="headerlink" title="回调与作用域"></a>回调与作用域</h3><blockquote>
+<p>如果传递的对象不是一个函数，而是一个对象的方法，并且这个方法用this来引用所属的对象，那可能会导致意想不到的后果。</p>
+</blockquote>
+<p>假设一个方法paint(),它是一个名为myapp的对象的方法：</p>
+<pre><code>var myapp={};
+myapp.color=&quot;red&quot;;
+myapp.paint=function(node){
+    node.style.color=this.color;
+};
+</code></pre><p>函数findNodes()执行以下语句：</p>
+<pre><code>var findNodes=function(callback){
+    // ...
+    if(typeof callback === &quot;function&quot;){
+        callback(found);
+    }
+};
+</code></pre><p>如果执行findNodes(myapp.paint)并不会得到如期的结果，因为此时this的引用的对象发生了改变，变成了findNodes，而findNodes并没有color这个属性。那我们怎么得到预期的结果呢？</p>
+<p>一个解决方法，我们传递回调函数，并且也传递回调函数所属的对象：</p>
+<pre><code>var findNodes = function(callback,callback_obj){
+    // ...
+    if(typeof callback === &quot;function&quot;){
+        callback(callback_obj,found);
+    }
+};
+</code></pre><p>那我们的写法将变成findNodes(myapp.paint,myapp)，我们也可以将第一个参数写成字符串的形式，这样无需写两遍对象名，<br>findNodes(“paint”,myapp),Code：</p>
+<pre><code>var findNodes = function(callback,callback_obj){
+    // ...  
+    if(typeof callback === &quot;string&quot; ){
+        callback = callback_obj[callback]
+    }
+
+    if(typeof callback === &quot;function&quot;){
+        callback.call(callback_obj,found)
+    }
+};
+</code></pre><h2 id="返回函数"><a href="#返回函数" class="headerlink" title="返回函数"></a>返回函数</h2><blockquote>
 <p>函数也是对象，因此它们也可以用作为返回值。<br>下面有个demo：</p>
 </blockquote>
 <pre><code>var setup=function(){
@@ -426,7 +476,7 @@ var bar = function () {
 var my=setup(); //alert 1
 my(); // alert 2
 </code></pre><blockquote>
-<p>由于setup()包装了返回函数，它创建了一个闭包，可以用这个闭包存储一些私有数据，这些数据仅可以被该返回函数访问，但外部代码却无法访问。<br>Demo：</p>
+<p>由于setup()包装了返回函数，它创建了一个闭包(粗俗的理解就是函数中的函数)，可以用这个闭包存储一些私有数据，这些数据仅可以被该返回函数访问，但外部代码却无法访问。<br>Demo：</p>
 </blockquote>
 <pre><code>var setup=function(){
     var count = 0;
@@ -439,6 +489,10 @@ var next=setup();
 next(); //result is 1
 next(); //result is 2
 next(); //result is 3
+</code></pre><blockquote>
+<p>但是这种模式有个缺点，就是定义在自身时，已添加的属性和方法都会丢失，此外，如果该函数使用了不同的名称，比如重新分配给了另外一个变量或者以对象的方法来使用，那么重定义的部分将永远不会发生。并且将会执行原函数体。<br>Code：</p>
+</blockquote>
+<pre><code>//添加一个新属性
 </code></pre><h2 id="自定义函数"><a href="#自定义函数" class="headerlink" title="自定义函数"></a>自定义函数</h2><blockquote>
 <p>如果创建了一个新函数并且将其分配给保存另外函数的同一个变量，那么就以一个新函数覆盖了旧函数。在某种程度上，回收了旧函数指针以指向一个新函数。而这一切发生在旧函数体的内部。在这种情况下，该函数以一个新的实现覆盖并重新定义了自身，这可能听起来比实际上更复杂，Demo：</p>
 </blockquote>
@@ -673,7 +727,7 @@ scareMe(); //输出 Double boo!
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#第四章-函数"><span class="nav-number">1.</span> <span class="nav-text">第四章 函数</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#区别："><span class="nav-number">1.1.</span> <span class="nav-text">区别：</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#回调函数"><span class="nav-number">2.</span> <span class="nav-text">回调函数</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#返回函数"><span class="nav-number">3.</span> <span class="nav-text">返回函数</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#自定义函数"><span class="nav-number">4.</span> <span class="nav-text">自定义函数</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#即时函数"><span class="nav-number">5.</span> <span class="nav-text">即时函数</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#即时对象初始化"><span class="nav-number">6.</span> <span class="nav-text">即时对象初始化</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#初始化时分支"><span class="nav-number">7.</span> <span class="nav-text">初始化时分支</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#备忘模式"><span class="nav-number">8.</span> <span class="nav-text">备忘模式</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#配置对象"><span class="nav-number">9.</span> <span class="nav-text">配置对象</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#curry"><span class="nav-number">10.</span> <span class="nav-text">curry</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#第四章-函数"><span class="nav-number">1.</span> <span class="nav-text">第四章 函数</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#区别："><span class="nav-number">1.1.</span> <span class="nav-text">区别：</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#回调模式"><span class="nav-number">2.</span> <span class="nav-text">回调模式</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#回调与作用域"><span class="nav-number">2.1.</span> <span class="nav-text">回调与作用域</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#返回函数"><span class="nav-number">3.</span> <span class="nav-text">返回函数</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#自定义函数"><span class="nav-number">4.</span> <span class="nav-text">自定义函数</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#即时函数"><span class="nav-number">5.</span> <span class="nav-text">即时函数</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#即时对象初始化"><span class="nav-number">6.</span> <span class="nav-text">即时对象初始化</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#初始化时分支"><span class="nav-number">7.</span> <span class="nav-text">初始化时分支</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#备忘模式"><span class="nav-number">8.</span> <span class="nav-text">备忘模式</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#配置对象"><span class="nav-number">9.</span> <span class="nav-text">配置对象</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#curry"><span class="nav-number">10.</span> <span class="nav-text">curry</span></a></li></ol></div>
             
 
           </div>
