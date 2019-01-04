@@ -590,7 +590,7 @@ myapp.paint=function(node){
 var my=setup(); //alert 1
 my(); // alert 2
 </code></pre><blockquote>
-<p>由于setup()包装了返回函数，它创建了一个闭包(粗俗的理解就是函数中的函数)，可以用这个闭包存储一些私有数据，这些数据仅可以被该返回函数访问，但外部代码却无法访问。<br>Demo：</p>
+<p>由于setup()包装了返回函数，它创建了一个闭包(粗俗的理解就是函数中的函数)，可以用这个闭包存储一些私有数据，这些数据仅可以被该返回函数访问，但外部代码却无法访问。<br>Code：</p>
 </blockquote>
 <pre><code>var setup=function(){
     var count = 0;
@@ -603,12 +603,8 @@ var next=setup();
 next(); //result is 1
 next(); //result is 2
 next(); //result is 3
-</code></pre><blockquote>
-<p>但是这种模式有个缺点，就是定义在自身时，已添加的属性和方法都会丢失，此外，如果该函数使用了不同的名称，比如重新分配给了另外一个变量或者以对象的方法来使用，那么重定义的部分将永远不会发生。并且将会执行原函数体。<br>Code：</p>
-</blockquote>
-<pre><code>//添加一个新属性
 </code></pre><h2 id="自定义函数"><a href="#自定义函数" class="headerlink" title="自定义函数"></a>自定义函数</h2><blockquote>
-<p>如果创建了一个新函数并且将其分配给保存另外函数的同一个变量，那么就以一个新函数覆盖了旧函数。在某种程度上，回收了旧函数指针以指向一个新函数。而这一切发生在旧函数体的内部。在这种情况下，该函数以一个新的实现覆盖并重新定义了自身，这可能听起来比实际上更复杂，Demo：</p>
+<p>如果创建了一个新函数并且将其分配给保存另外函数的同一个变量，那么就以一个新函数覆盖了旧函数。在某种程度上，回收了旧函数指针以指向一个新函数。而这一切发生在旧函数体的内部。在这种情况下，该函数以一个新的实现覆盖并重新定义了自身，这可能听起来比实际上更复杂，Code：</p>
 </blockquote>
 <pre><code>var scareMe=function(){
     alert(&quot;Boo!&quot;);
@@ -620,8 +616,32 @@ next(); //result is 3
 scareMe(); //输出 Boo
 scareMe(); //输出 Double boo!
 </code></pre><blockquote>
-<p> 当函数有且执行一次时，这种模式非常有效。</p>
+<p> 当函数有且执行一次时，这种模式非常有效。<br>但是这种模式有个缺点，就是定义在自身时，已添加的属性和方法都会丢失，此外，如果该函数使用了不同的名称，比如重新分配给了另外一个变量或者以对象的方法来使用，那么重定义的部分将永远不会发生。并且将会执行原函数体。<br>Code：</p>
 </blockquote>
+<pre><code>//1 添加一个新属性
+scareMe.property=&quot;property&quot;;
+
+//2 赋值给另一个不同名称的变量
+var prank=scareMe;
+
+//3 作为一个方法使用
+var spooky = {
+    boo:scareMe
+};
+
+// 
+prank(); //输出 &quot;bool&quot;
+prank(); //输出 &quot;bool&quot;
+console.log(prank.property) //输出 &quot;property&quot;
+
+spooky.boo(); //输出 &quot;bool&quot;
+spooky.boo(); //输出 &quot;bool&quot;
+console.log(spooky.boo.property); //输出 &quot;property&quot;
+
+scareMe(); //输出 &quot;Double boo!&quot;
+scareMe(); //输出 &quot;Double boo!&quot;
+console.log(scareMe.property); // 输出 &quot;undefined&quot;
+</code></pre><p>当我们以新名称和作为一个方法使用时，scareMe指针一直被重写，至此scareMe函数自定义的部分一直没有执行。直到当我们直接执行scareMe时，指针没有被重写，自定义部分才得以执行。</p>
 <h2 id="即时函数"><a href="#即时函数" class="headerlink" title="即时函数"></a>即时函数</h2><blockquote>
 <p>即时函数模式，该模式有一下几部分组成：</p>
 </blockquote>
@@ -639,7 +659,133 @@ scareMe(); //输出 Double boo!
         msg=&apos;Today is &apos; + days[today.getDay()] + &apos;, &apos; + today.getDate();
     alert(msg);
 }())
-</code></pre><h2 id="即时对象初始化"><a href="#即时对象初始化" class="headerlink" title="即时对象初始化"></a>即时对象初始化</h2><h2 id="初始化时分支"><a href="#初始化时分支" class="headerlink" title="初始化时分支"></a>初始化时分支</h2><h2 id="备忘模式"><a href="#备忘模式" class="headerlink" title="备忘模式"></a>备忘模式</h2><h2 id="配置对象"><a href="#配置对象" class="headerlink" title="配置对象"></a>配置对象</h2><h2 id="curry"><a href="#curry" class="headerlink" title="curry"></a>curry</h2>
+</code></pre><h3 id="即时函数的参数"><a href="#即时函数的参数" class="headerlink" title="即时函数的参数"></a>即时函数的参数</h3><blockquote>
+<p>即时函数同样可以传递参数，Code：</p>
+</blockquote>
+<pre><code>;(function(who,when){
+    console.log(&quot;I met &quot; + who + &quot; on &quot; + when)
+})(&quot;Nei&quot;,new Date());
+</code></pre><h3 id="即时函数的返回值"><a href="#即时函数的返回值" class="headerlink" title="即时函数的返回值"></a>即时函数的返回值</h3><blockquote>
+<p>当然即时函数同样可以返回值，Code：</p>
+</blockquote>
+<pre><code>var result=(function(){
+    return 2+2;
+})();
+</code></pre><blockquote>
+<p>赋值给一个变量时，即时函数可以不需要最外层括号，Code：</p>
+</blockquote>
+<pre><code>var result=function(){
+    return 2+2;
+}();
+</code></pre><blockquote>
+<p>即时函数不单单可以返回整数值，同样还可以返回其他类型，例如返回函数。形成一个闭包，在一个函数作用域中保留变量。Code：</p>
+</blockquote>
+<pre><code>var getResult=(function(){
+    var res = 2 + 2;
+    return function(){
+        return res;
+    };
+})();
+</code></pre><blockquote>
+<p>于是我们可以借用即时函数，在创建对象时，可以将对象的属性永久保留在内存中。Code：</p>
+</blockquote>
+<pre><code>var o = {
+    message: (function(){
+        var who = &quot;me&quot;,
+            what = &quot;call&quot;;
+        return who + &quot; &quot; + what;
+    })(),
+    getMsg:function(){
+        return this.message;
+    }
+};
+</code></pre><h3 id="优点"><a href="#优点" class="headerlink" title="优点"></a>优点</h3><ul>
+<li>即时函数模式创建了自调用的函数局部变量，避免了全局空间被临时变量污染。</li>
+</ul>
+<!-- ## 即时对象初始化 -->
+<h2 id="初始化时分支"><a href="#初始化时分支" class="headerlink" title="初始化时分支"></a>初始化时分支</h2><blockquote>
+<p>初始化时分支时一种优化模式，当知道某个条件在整个程序生命周期内都不会发生改变的时候，仅对该条件测试一次时很有意义的。浏览器嗅探（功能检测）就是一个典型的例子。Code：</p>
+</blockquote>
+<pre><code>var utils = {
+    addListener:function(el,type,fn){
+        if(typeof window.addEvenListener === &quot;function&quot;){
+            el.addEventListener(type,fn,false);
+        }else if(typeof document.attachEvent === &quot;function&quot;){
+            el.attachEven(&apos;on&apos;+type,fn);
+        }
+    },
+    removeListener:function(el,type,fn){
+        //......
+    }
+};
+// 当我们每次调用utils.addListener 或 utils.removeListener时，都会重复执行检测代码。但是对于这样不会变的特性时，我们可以执行一次性检查代码。
+</code></pre><p>一次性检查Code：</p>
+<pre><code>var utils = {
+    addListener:null,
+    removeListener:null
+};
+
+if(typeof window.addEventListener===&quot;function&quot;{
+    utils.addListener = function(el,type,fn){
+        el.addEventListener(type,fn,false);
+    };
+    utils.removeListener = function (el,type,fn) {
+        el.removeEventListener(type,fn,false);
+    }
+}else if(){
+    // ie......
+}else{
+    // 更早浏览器兼容模式
+}
+</code></pre><h2 id="备忘模式"><a href="#备忘模式" class="headerlink" title="备忘模式"></a>备忘模式</h2><blockquote>
+<p>函数也是对象，我们可以添加属性上去，例如我们在大量计算的时候，就可以将结果缓存在函数对象上，Code：</p>
+</blockquote>
+<pre><code>var myFunc = function (param){
+    if(!myFunc.cache[param]){
+        var result = {};
+        //...大计算
+        myFunc.cache[param]=result;
+    }
+    return myFunc.cache[param]
+};
+myFunc.cache={};
+</code></pre><p>当然我们的参数一般都不只一个，这时怎么办呢？看Code：</p>
+<pre><code>var myFunc = function (){
+    var cachekey = JSON.stringfy(Array.prototype.slice.call(arguments)),
+        result;
+    if(!myFunc.cache[cachekey]){
+        result = {};
+        //...大计算
+        myFunc.cache[cachekey]=result;
+    }
+    return myFunc.cache[cachekey]
+};
+myFunc.cache={};
+</code></pre><h2 id="配置对象"><a href="#配置对象" class="headerlink" title="配置对象"></a>配置对象</h2><blockquote>
+<p>调用函数，传入参数时，一种传参方式是多少个参数传递多少个参数，Code：</p>
+</blockquote>
+<pre><code>Demo(one,two,three,four,five,...);
+</code></pre><p>但是这样传参，参数一旦很多，函数将变得难看和难以维护。<br>所以我们传参时，将参数写进一个对象中，这样传参就是只有传递一个对象。</p>
+<pre><code>var conf={
+    username:&apos;Nei&apos;,
+    first:&apos;N&apos;,
+    last:&apos;de&apos;
+};
+
+Demo(conf)
+</code></pre><p>配置对象的优点在于：</p>
+<ul>
+<li>不需要记住众多的参数以及其顺序。</li>
+<li>可以安全忽略可选参数。</li>
+<li>更加易于阅读和维护。</li>
+<li>更加易于添加和删除参数。</li>
+</ul>
+<p>而缺点在于：</p>
+<ul>
+<li>需要记住参数名称。</li>
+<li>属性名称无法被压缩。？<!-- ## curry --></li>
+</ul>
+
           
         
       
