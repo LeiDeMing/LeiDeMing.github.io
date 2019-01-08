@@ -68,7 +68,7 @@
 
 
 
-  <meta name="keywords" content="export," />
+  <meta name="keywords" content="Hexo, NexT" />
 
 
 
@@ -79,18 +79,17 @@
 
 
 
-<meta name="description" content="声明式export对比default export。　　export const 是用const关键字命名的export。那什么是default export呢，每个文件，你都能有一个default export。当你导入时，你必须明确的写出文件的名字，就像这样：import MyDefaultExport from “./MyFileWithADefaultExport”;但是你在导入的时候不局">
-<meta name="keywords" content="export">
+<meta name="description" content="命名空间模式 命名空间有助于减少程序中所需要的全局变量的数量，并且同事还有助于避免命名冲突或过长的名字前缀。我们可以创建一个全局对象，将所需的方法，属性添加到这个对象中。避免了变量全局污染。而且同样能避免与第三库的命名冲突。但是同样存在一些缺点：  使用的时候，需要附加全局对象这个前缀，增加了很多重复代码。 长嵌套名字意味着更长的属性解析查询时间 一个全局对象意味着，任何部分的代码都能修改这个全局">
 <meta property="og:type" content="article">
-<meta property="og:title" content="export const VS default export">
-<meta property="og:url" content="http://yoursite.com/2018/12/19/export/index.html">
+<meta property="og:title" content="js设计模式第五章">
+<meta property="og:url" content="http://yoursite.com/2019/01/08/js设计模式第五章/index.html">
 <meta property="og:site_name" content="Nei">
-<meta property="og:description" content="声明式export对比default export。　　export const 是用const关键字命名的export。那什么是default export呢，每个文件，你都能有一个default export。当你导入时，你必须明确的写出文件的名字，就像这样：import MyDefaultExport from “./MyFileWithADefaultExport”;但是你在导入的时候不局">
+<meta property="og:description" content="命名空间模式 命名空间有助于减少程序中所需要的全局变量的数量，并且同事还有助于避免命名冲突或过长的名字前缀。我们可以创建一个全局对象，将所需的方法，属性添加到这个对象中。避免了变量全局污染。而且同样能避免与第三库的命名冲突。但是同样存在一些缺点：  使用的时候，需要附加全局对象这个前缀，增加了很多重复代码。 长嵌套名字意味着更长的属性解析查询时间 一个全局对象意味着，任何部分的代码都能修改这个全局">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:updated_time" content="2018-12-26T06:57:26.349Z">
+<meta property="og:updated_time" content="2019-01-08T09:46:00.654Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="export const VS default export">
-<meta name="twitter:description" content="声明式export对比default export。　　export const 是用const关键字命名的export。那什么是default export呢，每个文件，你都能有一个default export。当你导入时，你必须明确的写出文件的名字，就像这样：import MyDefaultExport from “./MyFileWithADefaultExport”;但是你在导入的时候不局">
+<meta name="twitter:title" content="js设计模式第五章">
+<meta name="twitter:description" content="命名空间模式 命名空间有助于减少程序中所需要的全局变量的数量，并且同事还有助于避免命名冲突或过长的名字前缀。我们可以创建一个全局对象，将所需的方法，属性添加到这个对象中。避免了变量全局污染。而且同样能避免与第三库的命名冲突。但是同样存在一些缺点：  使用的时候，需要附加全局对象这个前缀，增加了很多重复代码。 长嵌套名字意味着更长的属性解析查询时间 一个全局对象意味着，任何部分的代码都能修改这个全局">
 
 
 
@@ -120,13 +119,13 @@
 
 
 
-  <link rel="canonical" href="http://yoursite.com/2018/12/19/export/"/>
+  <link rel="canonical" href="http://yoursite.com/2019/01/08/js设计模式第五章/"/>
 
 
 
 
 
-  <title>export const VS default export | Nei</title>
+  <title>js设计模式第五章 | Nei</title>
   
 
 
@@ -272,7 +271,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/12/19/export/">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/01/08/js设计模式第五章/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="Nei">
@@ -289,7 +288,7 @@
 
         
         
-          <h1 class="post-title" itemprop="name headline">export const VS default export</h1>
+          <h1 class="post-title" itemprop="name headline">js设计模式第五章</h1>
         
 
         <div class="post-meta">
@@ -301,8 +300,8 @@
               
                 <span class="post-meta-item-text">发表于</span>
               
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-12-19T16:10:43+08:00">
-                2018-12-19
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2019-01-08T16:43:59+08:00">
+                2019-01-08
               </time>
             
 
@@ -311,28 +310,6 @@
             
           </span>
 
-          
-            <span class="post-category" >
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">分类于</span>
-              
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/javascript/" itemprop="url" rel="index">
-                    <span itemprop="name">javascript</span>
-                  </a>
-                </span>
-
-                
-                
-              
-            </span>
           
 
           
@@ -366,16 +343,67 @@
       
 
       
-        <h2 id="声明式export对比default-export。"><a href="#声明式export对比default-export。" class="headerlink" title="声明式export对比default export。"></a>声明式export对比default export。</h2><p>　　export const 是用const关键字命名的export。那什么是default export呢，每个文件，你都能有一个default export。当你导入时，你必须明确的写出文件的名字，就像这样：import MyDefaultExport from “./MyFileWithADefaultExport”;但是你在导入的时候不局限于一种命名。</p>
-<h2 id="声明export（export-const）"><a href="#声明export（export-const）" class="headerlink" title="声明export（export const）"></a>声明export（export const）</h2><p>　　当你使用这种规则的时候，你能够在每个文件有多种声明的导入。当你导入明确的export时，你得这样准备。</p>
+        <h2 id="命名空间模式"><a href="#命名空间模式" class="headerlink" title="命名空间模式"></a>命名空间模式</h2><blockquote>
+<p>命名空间有助于减少程序中所需要的全局变量的数量，并且同事还有助于避免命名冲突或过长的名字前缀。我们可以创建一个全局对象，将所需的方法，属性添加到这个对象中。避免了变量全局污染。而且同样能避免与第三库的命名冲突。但是同样存在一些缺点：</p>
 <ul>
-<li>导入多重声明exports：import {MyClass, MyOtherClass} from “./MyClass”;</li>
-<li>当有多个文件声明，但是你如果只想要一个声明的时候，你可以使用as：import {MyClass2 as MyClass2Alias} from “./MyClass2”;</li>
-<li>当你想要把一个文件里面的所有的模块都导入出来时，你可以使用as，把它们映射到一个对象上：import * as MyClasses from “./MyClass”;</li>
+<li>使用的时候，需要附加全局对象这个前缀，增加了很多重复代码。</li>
+<li>长嵌套名字意味着更长的属性解析查询时间</li>
+<li>一个全局对象意味着，任何部分的代码都能修改这个全局对象，并且影响所有调用该对象的地方。</li>
 </ul>
-<p>　　当你想导入MyClasses.MyClass and MyClass.MyOtherClass时，你能使用default export 或者声明式export，再或者在同时你可以使用这两种规则。句法规则上的优势，default export 更轻量更加的简约，这是为什么它被大量使用的原因。<br>　　note：default export 实际上也是声明式export，只不过是用default 声明，这也是为什么你能够这样导入模块：import {default as MyDefaultExport} from “./MyFileWithADefaultExport”;</p>
-<p>附原文链接：<a href="https://stackoverflow.com/questions/33611812/javascript-es6-export-const-vs-export-default" target="_blank" rel="noopener">https://stackoverflow.com/questions/33611812/javascript-es6-export-const-vs-export-default</a></p>
+</blockquote>
+<h3 id="通用命名空间函数"><a href="#通用命名空间函数" class="headerlink" title="通用命名空间函数"></a>通用命名空间函数</h3><blockquote>
+<p>当我们往这个全局对象添加一个属性时，可能覆盖之前已经定义的属性了，所有我们在添加时，先得检测这个添加的属性在这个全局对象中是否已经存在。Code：</p>
+</blockquote>
+<pre><code>var MYAPP={};
 
+if(typeof MYAPP === &quot;undefined&quot;){
+    var MYAPP={};
+}
+
+var MYAPP = MYAPP || {};
+</code></pre><blockquote>
+<p>这种检测一个对象好使，但是检测链式对象时，显得乏力，代码也会变得臃肿。所有我们需要设计一个可以检测链式对象的方法。Code：</p>
+</blockquote>
+<pre><code>MYAPP.namespace(&apos;MYAPP.modules.module2&apos;);
+</code></pre><blockquote>
+<p>具体的方法实现。Code：</p>
+</blockquote>
+<pre><code>var MYAPP = MYAPP || {};
+
+MYAPP.namespace = function (ns_string){
+    var parts = ns_string.split(&apos;.&apos;),
+        parent = MYAPP,
+        i;
+    if(parent[0] === &quot;MYAPP&quot;){
+        parts = parts.slice(1);
+    }
+
+    for(i=0; i &lt; parts.length; i++&gt;){
+        if(typeof parts[i] === &quot;undefined&quot;){
+            parent[parts[i]]={};
+        }
+        parent = parent[parts[i]]
+    }
+    return parent;
+};
+</code></pre><h2 id="声明依赖关系"><a href="#声明依赖关系" class="headerlink" title="声明依赖关系"></a>声明依赖关系</h2><blockquote>
+<p>在函数或顶部声明代码所依赖的模块是一个很好的方法。因为这种声明仅涉及创建一个局部变量并使其指向所需的模块。Code：</p>
+</blockquote>
+<pre><code>var myFunction = function (){
+    var event = YAHOO.util.Event,
+        dom = YAHOO.util.Dom;
+};
+</code></pre><p>这种模式有如下几个优点：</p>
+<ul>
+<li>显示的依赖声明表明需要的特定脚本已经包含在该页面中。</li>
+<li>在函数顶部的前期声明可以使页面维护者很容易地发现并解析依赖。</li>
+<li>解析局部变量的速度总是要比解析全局变量（YAHOO）要快，甚至比使用全局变量的嵌套属性（YAHOO.util.Dom）还要快。</li>
+<li>将第三方模块赋值给重命名的局部变量，可以拥有更好的代码量，因为我们可以使用更短的局部变量。</li>
+</ul>
+<h2 id="私有属性和方法"><a href="#私有属性和方法" class="headerlink" title="私有属性和方法"></a>私有属性和方法</h2><blockquote>
+<p>js中并没有特殊的语法来表示私有、保护、或公共属性和方法。因为js中所有对象的成员都是公共的。</p>
+</blockquote>
+<h2 id="模块模式"><a href="#模块模式" class="headerlink" title="模块模式"></a>模块模式</h2><h2 id="沙箱模式"><a href="#沙箱模式" class="headerlink" title="沙箱模式"></a>沙箱模式</h2><h2 id="静态成员"><a href="#静态成员" class="headerlink" title="静态成员"></a>静态成员</h2><h2 id="对象常亮"><a href="#对象常亮" class="headerlink" title="对象常亮"></a>对象常亮</h2><h2 id="链模式"><a href="#链模式" class="headerlink" title="链模式"></a>链模式</h2><h2 id="method-方法"><a href="#method-方法" class="headerlink" title="method()方法"></a>method()方法</h2>
       
     </div>
     
@@ -390,12 +418,6 @@
 
     <footer class="post-footer">
       
-        <div class="post-tags">
-          
-            <a href="/tags/export/" rel="tag"># export</a>
-          
-        </div>
-      
 
       
       
@@ -405,8 +427,8 @@
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/2018/12/19/什么是normalize/" rel="next" title="什么是normalize">
-                <i class="fa fa-chevron-left"></i> 什么是normalize
+              <a href="/2018/12/28/html2pdf注意事项/" rel="next" title="html2pdf注意事项">
+                <i class="fa fa-chevron-left"></i> html2pdf注意事项
               </a>
             
           </div>
@@ -414,10 +436,6 @@
           <span class="post-nav-divider"></span>
 
           <div class="post-nav-prev post-nav-item">
-            
-              <a href="/2018/12/19/Array-prototype-reduce/" rel="prev" title="Array.prototype.reduce">
-                Array.prototype.reduce <i class="fa fa-chevron-right"></i>
-              </a>
             
           </div>
         </div>
@@ -577,7 +595,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#声明式export对比default-export。"><span class="nav-number">1.</span> <span class="nav-text">声明式export对比default export。</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#声明export（export-const）"><span class="nav-number">2.</span> <span class="nav-text">声明export（export const）</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#命名空间模式"><span class="nav-number">1.</span> <span class="nav-text">命名空间模式</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#通用命名空间函数"><span class="nav-number">1.1.</span> <span class="nav-text">通用命名空间函数</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#声明依赖关系"><span class="nav-number">2.</span> <span class="nav-text">声明依赖关系</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#私有属性和方法"><span class="nav-number">3.</span> <span class="nav-text">私有属性和方法</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#模块模式"><span class="nav-number">4.</span> <span class="nav-text">模块模式</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#沙箱模式"><span class="nav-number">5.</span> <span class="nav-text">沙箱模式</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#静态成员"><span class="nav-number">6.</span> <span class="nav-text">静态成员</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#对象常亮"><span class="nav-number">7.</span> <span class="nav-text">对象常亮</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#链模式"><span class="nav-number">8.</span> <span class="nav-text">链模式</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#method-方法"><span class="nav-number">9.</span> <span class="nav-text">method()方法</span></a></li></ol></div>
             
 
           </div>
