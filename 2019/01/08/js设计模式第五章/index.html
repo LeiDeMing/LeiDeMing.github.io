@@ -86,7 +86,7 @@
 <meta property="og:site_name" content="Nei">
 <meta property="og:description" content="命名空间模式 命名空间有助于减少程序中所需要的全局变量的数量，并且同事还有助于避免命名冲突或过长的名字前缀。我们可以创建一个全局对象，将所需的方法，属性添加到这个对象中。避免了变量全局污染。而且同样能避免与第三库的命名冲突。但是同样存在一些缺点：  使用的时候，需要附加全局对象这个前缀，增加了很多重复代码。 长嵌套名字意味着更长的属性解析查询时间 一个全局对象意味着，任何部分的代码都能修改这个全局">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:updated_time" content="2019-01-08T09:46:00.654Z">
+<meta property="og:updated_time" content="2019-01-23T03:19:08.659Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="js设计模式第五章">
 <meta name="twitter:description" content="命名空间模式 命名空间有助于减少程序中所需要的全局变量的数量，并且同事还有助于避免命名冲突或过长的名字前缀。我们可以创建一个全局对象，将所需的方法，属性添加到这个对象中。避免了变量全局污染。而且同样能避免与第三库的命名冲突。但是同样存在一些缺点：  使用的时候，需要附加全局对象这个前缀，增加了很多重复代码。 长嵌套名字意味着更长的属性解析查询时间 一个全局对象意味着，任何部分的代码都能修改这个全局">
@@ -403,7 +403,41 @@ MYAPP.namespace = function (ns_string){
 <h2 id="私有属性和方法"><a href="#私有属性和方法" class="headerlink" title="私有属性和方法"></a>私有属性和方法</h2><blockquote>
 <p>js中并没有特殊的语法来表示私有、保护、或公共属性和方法。因为js中所有对象的成员都是公共的。</p>
 </blockquote>
-<h2 id="模块模式"><a href="#模块模式" class="headerlink" title="模块模式"></a>模块模式</h2><h2 id="沙箱模式"><a href="#沙箱模式" class="headerlink" title="沙箱模式"></a>沙箱模式</h2><h2 id="静态成员"><a href="#静态成员" class="headerlink" title="静态成员"></a>静态成员</h2><h2 id="对象常亮"><a href="#对象常亮" class="headerlink" title="对象常亮"></a>对象常亮</h2><h2 id="链模式"><a href="#链模式" class="headerlink" title="链模式"></a>链模式</h2><h2 id="method-方法"><a href="#method-方法" class="headerlink" title="method()方法"></a>method()方法</h2>
+<p>比如我们随便创建一个对象：</p>
+<pre><code>var obj{
+    name:&apos;nei&apos;,
+    run:function(){
+        console.log(&apos;Run&apos;);
+    }
+};
+
+obj.name //公共的，可以随便访问的。
+</code></pre><p>即使使用构造函数同样如此：</p>
+<pre><code>function Obj(){
+    this.name=&apos;Nei&apos;;
+    this.run=function(){
+        console.log(&apos;run&apos;);
+    };
+}
+
+var o1=new Obj();
+
+o1.name //公共的 可以随便访问的
+</code></pre><p>但是有时我们需要私有成员，所以诞生了下面的这些生成私有成员的方法。</p>
+<h3 id="私有成员"><a href="#私有成员" class="headerlink" title="私有成员"></a>私有成员</h3><blockquote>
+<p>虽然js本身没有直接创建私有成员的方法，但是我们将变量控制在函数作用域内，保证外部访问不到它，这样一样可以创建私有成员，比如我们创建一个类，在类里面创建一个局部变量，然后用公共方法将它暴露出去，这样我们就可以创建一个私有变量，但是有个公共方法又可以访问到它。</p>
+</blockquote>
+<pre><code>function Nei(){
+    var _name=&apos;nei&apos;;
+    this.getName=function(){
+        return _name;
+    };
+}
+
+var n=new Nei();
+n.name   //undefined
+n.getName() //&quot;nei&quot;
+</code></pre><h2 id="模块模式"><a href="#模块模式" class="headerlink" title="模块模式"></a>模块模式</h2><h2 id="沙箱模式"><a href="#沙箱模式" class="headerlink" title="沙箱模式"></a>沙箱模式</h2><h2 id="静态成员"><a href="#静态成员" class="headerlink" title="静态成员"></a>静态成员</h2><h2 id="对象常亮"><a href="#对象常亮" class="headerlink" title="对象常亮"></a>对象常亮</h2><h2 id="链模式"><a href="#链模式" class="headerlink" title="链模式"></a>链模式</h2><h2 id="method-方法"><a href="#method-方法" class="headerlink" title="method()方法"></a>method()方法</h2>
       
     </div>
     
@@ -427,8 +461,8 @@ MYAPP.namespace = function (ns_string){
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/2018/12/28/html2pdf注意事项/" rel="next" title="html2pdf注意事项">
-                <i class="fa fa-chevron-left"></i> html2pdf注意事项
+              <a href="/2018/12/24/js设计模式第四章/" rel="next" title="js设计模式第四章">
+                <i class="fa fa-chevron-left"></i> js设计模式第四章
               </a>
             
           </div>
@@ -512,7 +546,7 @@ MYAPP.namespace = function (ns_string){
               
                 <a href="/archives/">
               
-                  <span class="site-state-item-count">11</span>
+                  <span class="site-state-item-count">10</span>
                   <span class="site-state-item-name">日志</span>
                 </a>
               </div>
@@ -595,7 +629,7 @@ MYAPP.namespace = function (ns_string){
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#命名空间模式"><span class="nav-number">1.</span> <span class="nav-text">命名空间模式</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#通用命名空间函数"><span class="nav-number">1.1.</span> <span class="nav-text">通用命名空间函数</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#声明依赖关系"><span class="nav-number">2.</span> <span class="nav-text">声明依赖关系</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#私有属性和方法"><span class="nav-number">3.</span> <span class="nav-text">私有属性和方法</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#模块模式"><span class="nav-number">4.</span> <span class="nav-text">模块模式</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#沙箱模式"><span class="nav-number">5.</span> <span class="nav-text">沙箱模式</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#静态成员"><span class="nav-number">6.</span> <span class="nav-text">静态成员</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#对象常亮"><span class="nav-number">7.</span> <span class="nav-text">对象常亮</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#链模式"><span class="nav-number">8.</span> <span class="nav-text">链模式</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#method-方法"><span class="nav-number">9.</span> <span class="nav-text">method()方法</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#命名空间模式"><span class="nav-number">1.</span> <span class="nav-text">命名空间模式</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#通用命名空间函数"><span class="nav-number">1.1.</span> <span class="nav-text">通用命名空间函数</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#声明依赖关系"><span class="nav-number">2.</span> <span class="nav-text">声明依赖关系</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#私有属性和方法"><span class="nav-number">3.</span> <span class="nav-text">私有属性和方法</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#私有成员"><span class="nav-number">3.1.</span> <span class="nav-text">私有成员</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#模块模式"><span class="nav-number">4.</span> <span class="nav-text">模块模式</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#沙箱模式"><span class="nav-number">5.</span> <span class="nav-text">沙箱模式</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#静态成员"><span class="nav-number">6.</span> <span class="nav-text">静态成员</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#对象常亮"><span class="nav-number">7.</span> <span class="nav-text">对象常亮</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#链模式"><span class="nav-number">8.</span> <span class="nav-text">链模式</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#method-方法"><span class="nav-number">9.</span> <span class="nav-text">method()方法</span></a></li></ol></div>
             
 
           </div>

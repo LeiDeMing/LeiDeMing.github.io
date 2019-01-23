@@ -399,126 +399,41 @@ MYAPP.namespace = function (ns_string){
 <h2 id="私有属性和方法"><a href="#私有属性和方法" class="headerlink" title="私有属性和方法"></a>私有属性和方法</h2><blockquote>
 <p>js中并没有特殊的语法来表示私有、保护、或公共属性和方法。因为js中所有对象的成员都是公共的。</p>
 </blockquote>
-<h2 id="模块模式"><a href="#模块模式" class="headerlink" title="模块模式"></a>模块模式</h2><h2 id="沙箱模式"><a href="#沙箱模式" class="headerlink" title="沙箱模式"></a>沙箱模式</h2><h2 id="静态成员"><a href="#静态成员" class="headerlink" title="静态成员"></a>静态成员</h2><h2 id="对象常亮"><a href="#对象常亮" class="headerlink" title="对象常亮"></a>对象常亮</h2><h2 id="链模式"><a href="#链模式" class="headerlink" title="链模式"></a>链模式</h2><h2 id="method-方法"><a href="#method-方法" class="headerlink" title="method()方法"></a>method()方法</h2>
-          
-        
-      
-    </div>
-    
-    
-    
+<p>比如我们随便创建一个对象：</p>
+<pre><code>var obj{
+    name:&apos;nei&apos;,
+    run:function(){
+        console.log(&apos;Run&apos;);
+    }
+};
 
-    
+obj.name //公共的，可以随便访问的。
+</code></pre><p>即使使用构造函数同样如此：</p>
+<pre><code>function Obj(){
+    this.name=&apos;Nei&apos;;
+    this.run=function(){
+        console.log(&apos;run&apos;);
+    };
+}
 
-    
+var o1=new Obj();
 
-    
+o1.name //公共的 可以随便访问的
+</code></pre><p>但是有时我们需要私有成员，所以诞生了下面的这些生成私有成员的方法。</p>
+<h3 id="私有成员"><a href="#私有成员" class="headerlink" title="私有成员"></a>私有成员</h3><blockquote>
+<p>虽然js本身没有直接创建私有成员的方法，但是我们将变量控制在函数作用域内，保证外部访问不到它，这样一样可以创建私有成员，比如我们创建一个类，在类里面创建一个局部变量，然后用公共方法将它暴露出去，这样我们就可以创建一个私有变量，但是有个公共方法又可以访问到它。</p>
+</blockquote>
+<pre><code>function Nei(){
+    var _name=&apos;nei&apos;;
+    this.getName=function(){
+        return _name;
+    };
+}
 
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/12/28/html2pdf注意事项/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="Nei">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/images/avatar.gif">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Nei">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2018/12/28/html2pdf注意事项/" itemprop="url">html2pdf注意事项</a></h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-12-28T17:17:55+08:00">
-                2018-12-28
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <h2 id="img元素src属性不能为空，必须有一个默认图片地址，并且图片地址与项目地址必须同源，不可跨域。跨域则图片显示不出来。"><a href="#img元素src属性不能为空，必须有一个默认图片地址，并且图片地址与项目地址必须同源，不可跨域。跨域则图片显示不出来。" class="headerlink" title="img元素src属性不能为空，必须有一个默认图片地址，并且图片地址与项目地址必须同源，不可跨域。跨域则图片显示不出来。"></a>img元素src属性不能为空，必须有一个默认图片地址，并且图片地址与项目地址必须同源，不可跨域。跨域则图片显示不出来。</h2>
+var n=new Nei();
+n.name   //undefined
+n.getName() //&quot;nei&quot;
+</code></pre><h2 id="模块模式"><a href="#模块模式" class="headerlink" title="模块模式"></a>模块模式</h2><h2 id="沙箱模式"><a href="#沙箱模式" class="headerlink" title="沙箱模式"></a>沙箱模式</h2><h2 id="静态成员"><a href="#静态成员" class="headerlink" title="静态成员"></a>静态成员</h2><h2 id="对象常亮"><a href="#对象常亮" class="headerlink" title="对象常亮"></a>对象常亮</h2><h2 id="链模式"><a href="#链模式" class="headerlink" title="链模式"></a>链模式</h2><h2 id="method-方法"><a href="#method-方法" class="headerlink" title="method()方法"></a>method()方法</h2>
           
         
       
@@ -1329,11 +1244,254 @@ console.log(second.tastes;)//输出&quot;yummy&quot;
 
 
     
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/12/19/Array-prototype-reduce/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Nei">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Nei">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2018/12/19/Array-prototype-reduce/" itemprop="url">Array.prototype.reduce</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-12-19T16:58:30+08:00">
+                2018-12-19
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/javascript/" itemprop="url" rel="index">
+                    <span itemprop="name">javascript</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <blockquote>
+<p>执行相应函数，将每次的循环结果汇总并返回。</p>
+</blockquote>
+<h2 id="reducer-函数接收4个参数"><a href="#reducer-函数接收4个参数" class="headerlink" title="reducer 函数接收4个参数:"></a>reducer 函数接收4个参数:</h2><ul>
+<li>Accumulator (acc) (累计器)</li>
+<li>Current Value (cur) (当前值)</li>
+<li>Current Index (idx) (当前索引)</li>
+<li>Source Array (src) (源数组)</li>
+</ul>
+<h2 id="求和"><a href="#求和" class="headerlink" title="求和"></a>求和</h2><pre><code>var sum = [0, 1, 2, 3].reduce(function (accumulator, currentValue) {
+return accumulator + currentValue;
+}, 0);
+// 和为 6
+</code></pre><h2 id="将二维数组转变为一维数组"><a href="#将二维数组转变为一维数组" class="headerlink" title="将二维数组转变为一维数组"></a>将二维数组转变为一维数组</h2><pre><code>var flattened = [[0, 1], [2, 3], [4, 5]].reduce(
+function(a, b) {
+    return a.concat(b);
+},
+[]
+);
+// flattened is [0, 1, 2, 3, 4, 5]  
+</code></pre><h2 id="计算数组中每个元素出现的次数"><a href="#计算数组中每个元素出现的次数" class="headerlink" title="计算数组中每个元素出现的次数"></a>计算数组中每个元素出现的次数</h2><pre><code>var names = [&apos;Alice&apos;, &apos;Bob&apos;, &apos;Tiff&apos;, &apos;Bruce&apos;, &apos;Alice&apos;];
+var countedNames = names.reduce(function (allNames, name) { 
+if (name in allNames) {
+    allNames[name]++;
+}
+else {
+    allNames[name] = 1;
+}
+return allNames;
+}, {});
+// countedNames is:
+// { &apos;Alice&apos;: 2, &apos;Bob&apos;: 1, &apos;Tiff&apos;: 1, &apos;Bruce&apos;: 1 }
+</code></pre><h2 id="按属性对object分类"><a href="#按属性对object分类" class="headerlink" title="按属性对object分类"></a>按属性对object分类</h2><pre><code>var people = [
+{ name: &apos;Alice&apos;, age: 21 },
+{ name: &apos;Max&apos;, age: 20 },
+{ name: &apos;Jane&apos;, age: 20 }
+];
+
+function groupBy(objectArray, property) {
+return objectArray.reduce(function (acc, obj) {
+    var key = obj[property];
+    if (!acc[key]) {
+    acc[key] = [];
+    }
+    acc[key].push(obj);
+    return acc;
+}, {});
+}
+
+var groupedPeople = groupBy(people, &apos;age&apos;);
+// groupedPeople is:
+// { 
+//   20: [
+//     { name: &apos;Max&apos;, age: 20 }, 
+//     { name: &apos;Jane&apos;, age: 20 }
+//   ], 
+//   21: [{ name: &apos;Alice&apos;, age: 21 }] 
+// }
+</code></pre><h2 id="数组去重"><a href="#数组去重" class="headerlink" title="数组去重"></a>数组去重</h2><pre><code>let arr = [1,2,1,2,3,5,4,5,3,4,4,4,4];
+let result = arr.sort().reduce((init, current)=&gt;{
+    if(init.length===0 || init[init.length-1]!==current){
+        init.push(current);
+    }
+    return init;
+}, []);
+console.log(result); //[1,2,3,4,5]
+</code></pre><h2 id="按顺序运行Promise"><a href="#按顺序运行Promise" class="headerlink" title="按顺序运行Promise"></a>按顺序运行Promise</h2><pre><code>function runPromiseInSequence(arr, input) {
+return arr.reduce(
+    (promiseChain, currentFunction) =&gt; promiseChain.then(currentFunction),
+    Promise.resolve(input)
+);
+}
+
+// promise function 1
+function p1(a) {
+return new Promise((resolve, reject) =&gt; {
+    resolve(a * 5);
+});
+}
+
+// promise function 2
+function p2(a) {
+return new Promise((resolve, reject) =&gt; {
+    resolve(a * 2);
+});
+}
+
+// function 3  - will be wrapped in a resolved promise by .then()
+function f3(a) {
+return a * 3;
+}
+
+// promise function 4
+function p4(a) {
+return new Promise((resolve, reject) =&gt; {
+    resolve(a * 4);
+});
+}
+
+const promiseArr = [p1, p2, f3, p4];
+runPromiseInSequence(promiseArr, 10)
+.then(console.log);   // 1200
+</code></pre>
+          
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
   </section>
 
   
   <nav class="pagination">
-    <span class="page-number current">1</span><a class="page-number" href="/page/2/">2</a><a class="page-number" href="/page/3/">3</a><a class="extend next" rel="next" href="/page/2/"><i class="fa fa-angle-right"></i></a>
+    <span class="page-number current">1</span><a class="page-number" href="/page/2/">2</a><a class="extend next" rel="next" href="/page/2/"><i class="fa fa-angle-right"></i></a>
   </nav>
 
 
@@ -1379,7 +1537,7 @@ console.log(second.tastes;)//输出&quot;yummy&quot;
               
                 <a href="/archives/">
               
-                  <span class="site-state-item-count">11</span>
+                  <span class="site-state-item-count">10</span>
                   <span class="site-state-item-name">日志</span>
                 </a>
               </div>
