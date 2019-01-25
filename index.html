@@ -268,6 +268,125 @@
   
   
   <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/01/25/ECMA规范之Array-prototype-push/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Nei">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Nei">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2019/01/25/ECMA规范之Array-prototype-push/" itemprop="url">ECMA规范之Array.prototype.push</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2019-01-25T11:21:04+08:00">
+                2019-01-25
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            
+          
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
     <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/01/08/js设计模式第五章/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -1244,249 +1363,6 @@ console.log(second.tastes;)//输出&quot;yummy&quot;
 
 
     
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/12/19/Array-prototype-reduce/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="Nei">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/images/avatar.gif">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Nei">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2018/12/19/Array-prototype-reduce/" itemprop="url">Array.prototype.reduce</a></h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-12-19T16:58:30+08:00">
-                2018-12-19
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-            <span class="post-category" >
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">分类于</span>
-              
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/javascript/" itemprop="url" rel="index">
-                    <span itemprop="name">javascript</span>
-                  </a>
-                </span>
-
-                
-                
-              
-            </span>
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <blockquote>
-<p>执行相应函数，将每次的循环结果汇总并返回。</p>
-</blockquote>
-<h2 id="reducer-函数接收4个参数"><a href="#reducer-函数接收4个参数" class="headerlink" title="reducer 函数接收4个参数:"></a>reducer 函数接收4个参数:</h2><ul>
-<li>Accumulator (acc) (累计器)</li>
-<li>Current Value (cur) (当前值)</li>
-<li>Current Index (idx) (当前索引)</li>
-<li>Source Array (src) (源数组)</li>
-</ul>
-<h2 id="求和"><a href="#求和" class="headerlink" title="求和"></a>求和</h2><pre><code>var sum = [0, 1, 2, 3].reduce(function (accumulator, currentValue) {
-return accumulator + currentValue;
-}, 0);
-// 和为 6
-</code></pre><h2 id="将二维数组转变为一维数组"><a href="#将二维数组转变为一维数组" class="headerlink" title="将二维数组转变为一维数组"></a>将二维数组转变为一维数组</h2><pre><code>var flattened = [[0, 1], [2, 3], [4, 5]].reduce(
-function(a, b) {
-    return a.concat(b);
-},
-[]
-);
-// flattened is [0, 1, 2, 3, 4, 5]  
-</code></pre><h2 id="计算数组中每个元素出现的次数"><a href="#计算数组中每个元素出现的次数" class="headerlink" title="计算数组中每个元素出现的次数"></a>计算数组中每个元素出现的次数</h2><pre><code>var names = [&apos;Alice&apos;, &apos;Bob&apos;, &apos;Tiff&apos;, &apos;Bruce&apos;, &apos;Alice&apos;];
-var countedNames = names.reduce(function (allNames, name) { 
-if (name in allNames) {
-    allNames[name]++;
-}
-else {
-    allNames[name] = 1;
-}
-return allNames;
-}, {});
-// countedNames is:
-// { &apos;Alice&apos;: 2, &apos;Bob&apos;: 1, &apos;Tiff&apos;: 1, &apos;Bruce&apos;: 1 }
-</code></pre><h2 id="按属性对object分类"><a href="#按属性对object分类" class="headerlink" title="按属性对object分类"></a>按属性对object分类</h2><pre><code>var people = [
-{ name: &apos;Alice&apos;, age: 21 },
-{ name: &apos;Max&apos;, age: 20 },
-{ name: &apos;Jane&apos;, age: 20 }
-];
-
-function groupBy(objectArray, property) {
-return objectArray.reduce(function (acc, obj) {
-    var key = obj[property];
-    if (!acc[key]) {
-    acc[key] = [];
-    }
-    acc[key].push(obj);
-    return acc;
-}, {});
-}
-
-var groupedPeople = groupBy(people, &apos;age&apos;);
-// groupedPeople is:
-// { 
-//   20: [
-//     { name: &apos;Max&apos;, age: 20 }, 
-//     { name: &apos;Jane&apos;, age: 20 }
-//   ], 
-//   21: [{ name: &apos;Alice&apos;, age: 21 }] 
-// }
-</code></pre><h2 id="数组去重"><a href="#数组去重" class="headerlink" title="数组去重"></a>数组去重</h2><pre><code>let arr = [1,2,1,2,3,5,4,5,3,4,4,4,4];
-let result = arr.sort().reduce((init, current)=&gt;{
-    if(init.length===0 || init[init.length-1]!==current){
-        init.push(current);
-    }
-    return init;
-}, []);
-console.log(result); //[1,2,3,4,5]
-</code></pre><h2 id="按顺序运行Promise"><a href="#按顺序运行Promise" class="headerlink" title="按顺序运行Promise"></a>按顺序运行Promise</h2><pre><code>function runPromiseInSequence(arr, input) {
-return arr.reduce(
-    (promiseChain, currentFunction) =&gt; promiseChain.then(currentFunction),
-    Promise.resolve(input)
-);
-}
-
-// promise function 1
-function p1(a) {
-return new Promise((resolve, reject) =&gt; {
-    resolve(a * 5);
-});
-}
-
-// promise function 2
-function p2(a) {
-return new Promise((resolve, reject) =&gt; {
-    resolve(a * 2);
-});
-}
-
-// function 3  - will be wrapped in a resolved promise by .then()
-function f3(a) {
-return a * 3;
-}
-
-// promise function 4
-function p4(a) {
-return new Promise((resolve, reject) =&gt; {
-    resolve(a * 4);
-});
-}
-
-const promiseArr = [p1, p2, f3, p4];
-runPromiseInSequence(promiseArr, 10)
-.then(console.log);   // 1200
-</code></pre>
-          
-        
-      
-    </div>
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
   </section>
 
   
@@ -1537,7 +1413,7 @@ runPromiseInSequence(promiseArr, 10)
               
                 <a href="/archives/">
               
-                  <span class="site-state-item-count">8</span>
+                  <span class="site-state-item-count">9</span>
                   <span class="site-state-item-name">日志</span>
                 </a>
               </div>
