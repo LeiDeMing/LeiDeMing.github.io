@@ -339,7 +339,52 @@
       
         
           
-            
+            <blockquote>
+<p>我们几乎每天都要用到push方法，我们真的明白在调用push方法后，浏览是怎么运行这个方法？</p>
+</blockquote>
+<h2 id="其中ecma规范第三版-1999-是这样定义的："><a href="#其中ecma规范第三版-1999-是这样定义的：" class="headerlink" title="其中ecma规范第三版(1999)是这样定义的："></a>其中<a href="https://www.ecma-international.org/publications/files/ECMA-ST-ARCH/ECMA-262,%203rd%20edition,%20December%201999.pdf" target="_blank" rel="noopener">ecma规范</a>第三版(1999)是这样定义的：</h2><ul>
+<li>1 调用对象的[Get]方法获取参数列表中第一个参数长度</li>
+<li>2 将结果用ToUint32方法赋值给n</li>
+<li>3 在参数列表中获取下一个参数，如果没有，直接跳到第七步</li>
+<li>4 调用对象的[Put]方法将当前参数Tostring，put到当前对象中去</li>
+<li>5 n自增1</li>
+<li>6 回到第三步，循环</li>
+<li>7 调用对象的[Put]方法，将参数长度和n put 到当前对象中去</li>
+<li>8 返回n</li>
+</ul>
+<blockquote>
+<p>push原生方法的长度属性为1</p>
+</blockquote>
+<h2 id="到了2011年，我们push规范进行了变更，大致变更如下："><a href="#到了2011年，我们push规范进行了变更，大致变更如下：" class="headerlink" title="到了2011年，我们push规范进行了变更，大致变更如下："></a>到了2011年，我们push规范进行了变更，大致变更如下：</h2><ul>
+<li>1 调用ToObject处理this对象，将结果赋值给O</li>
+<li>2 调用O对象的内部方法[Get]将第一个参数长度赋值给lenVal</li>
+<li>3 将ToUint32(lenVal)赋值给n</li>
+<li>4 将传递给函数调用的参数从左到右，依次赋值给items</li>
+<li>5 如果items不为空，重复下列方法：<br>  a.移除items中的第一个元素，并且将移除元素的值赋给E<br>  b.调用O对象的[Put]内部方法，在O对象上设置ToString(n)，E和true属性。<br>  c.n自增1</li>
+<li>6 当items为空时，调用O对象的[Put]内部方法，设置O对象的参数长度，n和true等属性。</li>
+<li>7 返回n</li>
+</ul>
+<p>NOTE：<br>push方法被刻意设计为一种通用的方法；它并不要求this对象是一个数组对象。因此它能使用特定方法被其他对象调用。</p>
+<pre><code>var obj={
+
+    addElem : function addElem(elem){
+
+        [].push.call(this,elem);
+        //Array.prototype.push.call(this,elem);
+    }
+}
+
+obj.addElem(&apos;1&apos;);
+obj.addElem(&apos;2&apos;);
+console.log(obj.length) //result is 2
+</code></pre><h2 id="时光回到2015年，ecma规范又一次更新，push当然也是更新了"><a href="#时光回到2015年，ecma规范又一次更新，push当然也是更新了" class="headerlink" title="时光回到2015年，ecma规范又一次更新，push当然也是更新了"></a>时光回到2015年，ecma规范又一次更新，push当然也是更新了</h2><blockquote>
+<p>我们来看看具体有哪些更新：</p>
+<ul>
+<li>1 ToObject(this)并且将值赋给O</li>
+<li>2 </li>
+</ul>
+</blockquote>
+
           
         
       
