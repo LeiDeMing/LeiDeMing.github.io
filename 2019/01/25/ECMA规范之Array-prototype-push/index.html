@@ -86,7 +86,7 @@
 <meta property="og:site_name" content="Nei">
 <meta property="og:description" content="我们几乎每天都要用到push方法，我们真的明白在调用push方法后，浏览是怎么运行这个方法？  其中ecma规范第三版(1999)是这样定义的： 1 调用对象的[Get]方法获取参数列表中第一个参数长度 2 将结果用ToUint32方法赋值给n 3 在参数列表中获取下一个参数，如果没有，直接跳到第七步 4 调用对象的[Put]方法将当前参数Tostring，put到当前对象中去 5 n自增1 6">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:updated_time" content="2019-01-29T02:58:44.946Z">
+<meta property="og:updated_time" content="2019-01-30T03:08:45.907Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="ECMA规范之Array.prototype.push">
 <meta name="twitter:description" content="我们几乎每天都要用到push方法，我们真的明白在调用push方法后，浏览是怎么运行这个方法？  其中ecma规范第三版(1999)是这样定义的： 1 调用对象的[Get]方法获取参数列表中第一个参数长度 2 将结果用ToUint32方法赋值给n 3 在参数列表中获取下一个参数，如果没有，直接跳到第七步 4 调用对象的[Put]方法将当前参数Tostring，put到当前对象中去 5 n自增1 6">
@@ -385,8 +385,98 @@ console.log(obj.length) //result is 2
 <p>我们来看看具体有哪些更新：</p>
 <ul>
 <li>1 ToObject(this)并且将值赋给O</li>
-<li>2 </li>
+<li>2 调用ReturnIfAbrupt(O) ps：这个函数是啥意思？目前还没弄懂，弄懂再回来补充</li>
+<li>3 将O的长度调用ToLength()赋值给len ps：这个toLength又是什么呢？</li>
+<li>4 调用ReturnIfAbrupt(len)</li>
+<li>5 步骤还是跟第五版一样，将所有传递进函数的参数从左至右赋值给items。</li>
+<li>6 将items中的元素个数赋值给argCount</li>
+<li>7 如果len + argCount &gt; 2的53次方减一，抛出TypeError exception</li>
+<li>8 如果items不为空，重复下列行为：<br>  a.从items移除第一个元素，并且将这个元素的值赋给E<br>  b.调用Set方法设置O对象的ToString(len)，E和true属性<br>  c.ReturnIfAbrupt(setStatus)<br>  d.len自增1</li>
+<li>9 如果items为空，调用Set方法，设置O对象”length”，len和true属性</li>
+<li>10 ReturnIfAbrupt(setStatus).</li>
+<li>11 返回len</li>
 </ul>
+</blockquote>
+<p>es6内部抽象程度更高，更加规范，调用了很多方法来处理不同的过程，那让我们来了解研究这些方法到底是干什么的。</p>
+<h3 id="ToObject"><a href="#ToObject" class="headerlink" title="ToObject"></a>ToObject</h3><blockquote>
+<p>Object抽象方法它可以将参数转变为对象类型的值。</p>
+</blockquote>
+<table>
+<thead>
+<tr>
+<th>arguments type</th>
+<th>result</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Completion Record</td>
+<td>If argument is an abrupt completion, return argument. Otherwise return ToObject(argument.[[value]]).</td>
+</tr>
+<tr>
+<td>Undefined</td>
+<td>Throw a TypeError exception.</td>
+</tr>
+<tr>
+<td>Null</td>
+<td>Throw a TypeError exception.</td>
+</tr>
+<tr>
+<td>Boolean</td>
+<td>返回新的Boolean对象</td>
+</tr>
+<tr>
+<td>Number</td>
+<td>返回新的Number对象</td>
+</tr>
+<tr>
+<td>String</td>
+<td>返回新的String对象</td>
+</tr>
+<tr>
+<td>Symbol</td>
+<td>返回新的Symbol对象</td>
+</tr>
+<tr>
+<td>Object</td>
+<td>返回对象</td>
+</tr>
+</tbody>
+</table>
+<blockquote>
+<p>其中Boolean，Number，String，Symbol，参数类型为这些时，返回的新对象都是用internal slot(暂且翻译为内部插槽重新设置的对象)，但是何为internal slot，还不理解，理解再来叙说。</p>
+</blockquote>
+<h3 id="ReturnIfAbrupt"><a href="#ReturnIfAbrupt" class="headerlink" title="ReturnIfAbrupt"></a>ReturnIfAbrupt</h3><blockquote>
+<p>完成时 类型被用作记录运行时，值传递的状态，例如一些跳出局部控制的状态（break, continue, return and throw）。</p>
+</blockquote>
+<table>
+<thead>
+<tr>
+<th>Field</th>
+<th>Value</th>
+<th>Meaning</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>[[type]]</td>
+<td>One of normal, break, continue, return, or throw</td>
+<td>其中某一种状态已经被调用</td>
+</tr>
+<tr>
+<td>[[value]]</td>
+<td>Undefined, Null, Boolean, String, Symbol, Number, and Object中的一种，或者empty</td>
+<td>值已经产生</td>
+</tr>
+<tr>
+<td>[[target]]</td>
+<td>any ECMAScript string or empty</td>
+<td>The target label for directed control transfers.</td>
+</tr>
+</tbody>
+</table>
+<blockquote>
+<p>重点：abrupt completion(突然完成) 是指在[[Type]]之中除了nomral之外的状态</p>
 </blockquote>
 
       
@@ -421,6 +511,10 @@ console.log(obj.length) //result is 2
           <span class="post-nav-divider"></span>
 
           <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2019/01/30/图解http第一章/" rel="prev" title="图解http第一章">
+                图解http第一章 <i class="fa fa-chevron-right"></i>
+              </a>
             
           </div>
         </div>
@@ -497,7 +591,7 @@ console.log(obj.length) //result is 2
               
                 <a href="/archives/">
               
-                  <span class="site-state-item-count">9</span>
+                  <span class="site-state-item-count">10</span>
                   <span class="site-state-item-name">日志</span>
                 </a>
               </div>
@@ -580,7 +674,7 @@ console.log(obj.length) //result is 2
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#其中ecma规范第三版-1999-是这样定义的："><span class="nav-number">1.</span> <span class="nav-text">其中ecma规范第三版(1999)是这样定义的：</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#到了2011年，我们push规范进行了变更，大致变更如下："><span class="nav-number">2.</span> <span class="nav-text">到了2011年，我们push规范进行了变更，大致变更如下：</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#时光回到2015年，ecma规范又一次更新，push当然也是更新了"><span class="nav-number">3.</span> <span class="nav-text">时光回到2015年，ecma规范又一次更新，push当然也是更新了</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#其中ecma规范第三版-1999-是这样定义的："><span class="nav-number">1.</span> <span class="nav-text">其中ecma规范第三版(1999)是这样定义的：</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#到了2011年，我们push规范进行了变更，大致变更如下："><span class="nav-number">2.</span> <span class="nav-text">到了2011年，我们push规范进行了变更，大致变更如下：</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#时光回到2015年，ecma规范又一次更新，push当然也是更新了"><span class="nav-number">3.</span> <span class="nav-text">时光回到2015年，ecma规范又一次更新，push当然也是更新了</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#ToObject"><span class="nav-number">3.1.</span> <span class="nav-text">ToObject</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#ReturnIfAbrupt"><span class="nav-number">3.2.</span> <span class="nav-text">ReturnIfAbrupt</span></a></li></ol></li></ol></div>
             
 
           </div>

@@ -268,6 +268,156 @@
   
   
   <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/01/30/图解http第一章/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Nei">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Nei">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2019/01/30/图解http第一章/" itemprop="url">图解http第一章</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2019-01-30T11:18:17+08:00">
+                2019-01-30
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <h1 id="网络基础"><a href="#网络基础" class="headerlink" title="网络基础"></a>网络基础</h1><h2 id="tcp-ip分层管理"><a href="#tcp-ip分层管理" class="headerlink" title="tcp/ip分层管理"></a>tcp/ip分层管理</h2><blockquote>
+<p>tcp/ip协议族分为四个层次，应用层 ⟶ 传输层 ⟶ 网络层 ⟶ 数据链路层,为什么需要分层呢，难道一层不好吗？还省得麻烦事，一层有一层，，每一层都需要不同的规范，有什么好处呢？</p>
+</blockquote>
+<p>个人的理解，分层的原因在于，分层之后，某处的改动不会影响整体，将一个大的东西分成几个部分之后，设计来说相对于简单了，我们需要考虑的就是每个层次的设计，然后层次与层次之间的接口设计，而不要去设计一个巨大的整体。</p>
+<h3 id="应用层"><a href="#应用层" class="headerlink" title="应用层"></a>应用层</h3><blockquote>
+<p>应用层就是我们使用者打交道的这一层，http协议，ftp，dns服务也包括在其中。</p>
+</blockquote>
+<h3 id="传输层"><a href="#传输层" class="headerlink" title="传输层"></a>传输层</h3><blockquote>
+<p>传输层包括两种协议 tcp协议和udp协议。</p>
+</blockquote>
+<h3 id="网络层"><a href="#网络层" class="headerlink" title="网络层"></a>网络层</h3><blockquote>
+<p>网络层决定了数据包如何从一台计算机传输到另一台计算机</p>
+</blockquote>
+<h3 id="数据链路层"><a href="#数据链路层" class="headerlink" title="数据链路层"></a>数据链路层</h3><blockquote>
+<p>底层，硬件部分。包括操作系统，硬件设备，光驱，光纤等物理可见设备。</p>
+</blockquote>
+<h2 id="tcp-ip通信传输流"><a href="#tcp-ip通信传输流" class="headerlink" title="tcp/ip通信传输流"></a>tcp/ip通信传输流</h2><p>配图<br><img src="http://ww1.sinaimg.cn/large/0060ZzrAgy1fzom784p74j30er0bcdhh.jpg" alt=""></p>
+<p>某个用户在应用层发出请求，想查看某个网页时，传输层会把从应用层接收到的数据（http请求报文）进行分割，添加序号和端口号，然后再转发给网络层，网络层再会其上添加mac地址，这样数据就发送出去了。<br><img src="http://ww1.sinaimg.cn/large/0060ZzrAgy1fzomedy99sj30en0cxtbf.jpg" alt=""></p>
+<p>发送端在层与层之间传输数据时，每经过一层，必定会添加改成的首部信息。接收端则相反，每经过一层，就是去掉相对应的首部信息。这种将数据包装起来的做法叫做封装.</p>
+<h1 id="与http关系密切的协议-ip、tcp和dns"><a href="#与http关系密切的协议-ip、tcp和dns" class="headerlink" title="与http关系密切的协议:ip、tcp和dns"></a>与http关系密切的协议:ip、tcp和dns</h1><h2 id="ip协议"><a href="#ip协议" class="headerlink" title="ip协议"></a>ip协议</h2><blockquote>
+<p>ip协议属于网络层，ip协议的作用就是负责把数据包传送给对方，但是需要满足很多条件，其中比较重要是这两个条件；1 ip地址，2 mac地址。其中ip地址就是节点所分配到的地址，mac地址指的是网卡所属的固定地址，ip地址可以变换，但是mac地址一般不会更改。</p>
+</blockquote>
+<p>我们知道数据包传输时，需要进过许多的中转站，如果中转的时候我们只有下一站的ip地址，我们可以通过ARP协议拿到下一站的mac地址，ARP协议可以通过ip地址反查mac地址。</p>
+<h2 id="tcp协议"><a href="#tcp协议" class="headerlink" title="tcp协议"></a>tcp协议</h2><blockquote>
+<p>tcp协议属于传输层，它提供了字节流服务，字节流服务就是将大块数据分割成以报文段为单位的数据包。并且还是稳定可靠的。为了稳定可靠的传输，tcp协议采用了三次握手策略，即发送端将带有SYN的数据包发送给接收端，接收端接收到，再将带有SYN/ACK的数据包返回给发送端，发送端接收到，再将带有ACK的数据发送给接收端，整个过程结束。如果其中某一个过程终端，tcp协议会再次以相同顺序发送相同的数据包。</p>
+</blockquote>
+<h2 id="dns服务"><a href="#dns服务" class="headerlink" title="dns服务"></a>dns服务</h2><blockquote>
+<p>dns服务提供ip到域名的解析服务,我们一般用域名来访问主机,但是各种各样的域名对于计算机来说,全部识别起来是相当困难的,计算机还是喜欢ip地址这种纯数组组合,所以诞生了dns服务,它提供了ip到域名的映射,使得我们输入域名时,解析域名,找到该域名对应的ip。</p>
+</blockquote>
+<p><img src="http://ww1.sinaimg.cn/large/0060ZzrAgy1fzon5ugicqj30kk0d6whc.jpg" alt=""></p>
+<h2 id="各种协议与HTTP协议之间的关系"><a href="#各种协议与HTTP协议之间的关系" class="headerlink" title="各种协议与HTTP协议之间的关系"></a>各种协议与HTTP协议之间的关系</h2><p><img src="http://ww1.sinaimg.cn/large/0060ZzrAgy1fzon7ophcoj30ad0etdi9.jpg" alt=""></p>
+
+          
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
     <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/01/25/ECMA规范之Array-prototype-push/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -381,8 +531,98 @@ console.log(obj.length) //result is 2
 <p>我们来看看具体有哪些更新：</p>
 <ul>
 <li>1 ToObject(this)并且将值赋给O</li>
-<li>2 </li>
+<li>2 调用ReturnIfAbrupt(O) ps：这个函数是啥意思？目前还没弄懂，弄懂再回来补充</li>
+<li>3 将O的长度调用ToLength()赋值给len ps：这个toLength又是什么呢？</li>
+<li>4 调用ReturnIfAbrupt(len)</li>
+<li>5 步骤还是跟第五版一样，将所有传递进函数的参数从左至右赋值给items。</li>
+<li>6 将items中的元素个数赋值给argCount</li>
+<li>7 如果len + argCount &gt; 2的53次方减一，抛出TypeError exception</li>
+<li>8 如果items不为空，重复下列行为：<br>  a.从items移除第一个元素，并且将这个元素的值赋给E<br>  b.调用Set方法设置O对象的ToString(len)，E和true属性<br>  c.ReturnIfAbrupt(setStatus)<br>  d.len自增1</li>
+<li>9 如果items为空，调用Set方法，设置O对象”length”，len和true属性</li>
+<li>10 ReturnIfAbrupt(setStatus).</li>
+<li>11 返回len</li>
 </ul>
+</blockquote>
+<p>es6内部抽象程度更高，更加规范，调用了很多方法来处理不同的过程，那让我们来了解研究这些方法到底是干什么的。</p>
+<h3 id="ToObject"><a href="#ToObject" class="headerlink" title="ToObject"></a>ToObject</h3><blockquote>
+<p>Object抽象方法它可以将参数转变为对象类型的值。</p>
+</blockquote>
+<table>
+<thead>
+<tr>
+<th>arguments type</th>
+<th>result</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Completion Record</td>
+<td>If argument is an abrupt completion, return argument. Otherwise return ToObject(argument.[[value]]).</td>
+</tr>
+<tr>
+<td>Undefined</td>
+<td>Throw a TypeError exception.</td>
+</tr>
+<tr>
+<td>Null</td>
+<td>Throw a TypeError exception.</td>
+</tr>
+<tr>
+<td>Boolean</td>
+<td>返回新的Boolean对象</td>
+</tr>
+<tr>
+<td>Number</td>
+<td>返回新的Number对象</td>
+</tr>
+<tr>
+<td>String</td>
+<td>返回新的String对象</td>
+</tr>
+<tr>
+<td>Symbol</td>
+<td>返回新的Symbol对象</td>
+</tr>
+<tr>
+<td>Object</td>
+<td>返回对象</td>
+</tr>
+</tbody>
+</table>
+<blockquote>
+<p>其中Boolean，Number，String，Symbol，参数类型为这些时，返回的新对象都是用internal slot(暂且翻译为内部插槽重新设置的对象)，但是何为internal slot，还不理解，理解再来叙说。</p>
+</blockquote>
+<h3 id="ReturnIfAbrupt"><a href="#ReturnIfAbrupt" class="headerlink" title="ReturnIfAbrupt"></a>ReturnIfAbrupt</h3><blockquote>
+<p>完成时 类型被用作记录运行时，值传递的状态，例如一些跳出局部控制的状态（break, continue, return and throw）。</p>
+</blockquote>
+<table>
+<thead>
+<tr>
+<th>Field</th>
+<th>Value</th>
+<th>Meaning</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>[[type]]</td>
+<td>One of normal, break, continue, return, or throw</td>
+<td>其中某一种状态已经被调用</td>
+</tr>
+<tr>
+<td>[[value]]</td>
+<td>Undefined, Null, Boolean, String, Symbol, Number, and Object中的一种，或者empty</td>
+<td>值已经产生</td>
+</tr>
+<tr>
+<td>[[target]]</td>
+<td>any ECMAScript string or empty</td>
+<td>The target label for directed control transfers.</td>
+</tr>
+</tbody>
+</table>
+<blockquote>
+<p>重点：abrupt completion(突然完成) 是指在[[Type]]之中除了nomral之外的状态</p>
 </blockquote>
 
           
@@ -597,7 +837,7 @@ o1.name //公共的 可以随便访问的
 var n=new Nei();
 n.name   //undefined
 n.getName() //&quot;nei&quot;
-</code></pre><h2 id="模块模式"><a href="#模块模式" class="headerlink" title="模块模式"></a>模块模式</h2><h2 id="沙箱模式"><a href="#沙箱模式" class="headerlink" title="沙箱模式"></a>沙箱模式</h2><h2 id="静态成员"><a href="#静态成员" class="headerlink" title="静态成员"></a>静态成员</h2><h2 id="对象常亮"><a href="#对象常亮" class="headerlink" title="对象常亮"></a>对象常亮</h2><h2 id="链模式"><a href="#链模式" class="headerlink" title="链模式"></a>链模式</h2><h2 id="method-方法"><a href="#method-方法" class="headerlink" title="method()方法"></a>method()方法</h2>
+</code></pre><h2 id="模块模式"><a href="#模块模式" class="headerlink" title="模块模式"></a>模块模式</h2><h2 id="沙箱模式"><a href="#沙箱模式" class="headerlink" title="沙箱模式"></a>沙箱模式</h2><h2 id="静态成员"><a href="#静态成员" class="headerlink" title="静态成员"></a>静态成员</h2><h2 id="对象常量"><a href="#对象常量" class="headerlink" title="对象常量"></a>对象常量</h2><h2 id="链模式"><a href="#链模式" class="headerlink" title="链模式"></a>链模式</h2><h2 id="method-方法"><a href="#method-方法" class="headerlink" title="method()方法"></a>method()方法</h2>
           
         
       
@@ -1220,194 +1460,6 @@ Demo(conf)
 
 
     
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/12/20/js设计模式第三章/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="Nei">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/images/avatar.gif">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Nei">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2018/12/20/js设计模式第三章/" itemprop="url">js设计模式第三章</a></h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-12-20T10:38:45+08:00">
-                2018-12-20
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-            <span class="post-category" >
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">分类于</span>
-              
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/设计模式/" itemprop="url" rel="index">
-                    <span itemprop="name">设计模式</span>
-                  </a>
-                </span>
-
-                
-                
-              
-            </span>
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <h2 id="for循环"><a href="#for循环" class="headerlink" title="for循环"></a>for循环</h2><blockquote>
-<p>循环对象为dom时，保存dom对象的长度可以提高浏览器性能（现在还是的嘛？）</p>
-</blockquote>
-<h2 id="来自构造函数的对象"><a href="#来自构造函数的对象" class="headerlink" title="来自构造函数的对象"></a>来自构造函数的对象</h2><blockquote>
-<p>目前，我所说知道的两种创建对象的方法，对象字面量和new Object。其中，对象字面量方法更简单明了，另一个原因是它只是强调了该对象仅是一个可变哈希映射，而不是从对象中提取属性和方法。与new Object相比，对象字面量没有作用域解析，因为它可能创造了一个一样的局部构造函数，解析器需要从调用Object的位置一直向上查找，直到找到object的全局构造函数。</p>
-</blockquote>
-<pre><code>var car = { goes: &quot;far&quot;} // 对象字面量发
-
-//构造函数法
-var car = new Object();
-car.goes = far;
-</code></pre><blockquote>
-<p>当一操作符调用构造函数时，函数内部将会发生以下情况：</p>
-<ul>
-<li>创建一个空对象并且this变量引用了该对象，同时还继承了该函数的原型。</li>
-<li>属性和方法被加入到this引用的对象中。</li>
-<li>新创建的对象由this所引用，并且最后隐式地返回this（如果没有显式地返回其他对象）。</li>
-</ul>
-</blockquote>
-<pre><code>var Person=function(name){
-    //使用对象字面量模式创建一个新对象
-    //var this=Object.create(Person.prototype);
-
-    向对象添加属性和方法
-    this.name=name;
-    this.say=function(){
-        return &quot;Hello World!&quot;
-    }
-
-    // return this;
-}
-</code></pre><h2 id="自调用构造函数"><a href="#自调用构造函数" class="headerlink" title="自调用构造函数"></a>自调用构造函数</h2><blockquote>
-<p>为了解决实例化对象时，忘记写new的缺点，并使得原型属性可在实例对象中使用，那么可以考虑下面的方法，具体来说，可以在构造函数中检查this是否为构造函数的一个实例，如果为否，构造函数可以再次调用自身，并且在这次调用中正确地使用new操作符：</p>
-</blockquote>
-<pre><code>function Waffle(){
-    if(!(this instanceof Waffle)){
-        return new Waffle();
-    }
-    this.tastes= &quot;yummy&quot;;
-}
-Waffle.prototype.wantAnother = true;
-
-var first=new Waffle(),
-    second=Waffle();
-
-console.log(first.tastes;) //输出&quot;yummy&quot;
-console.log(second.tastes;)//输出&quot;yummy&quot;
-</code></pre>
-          
-        
-      
-    </div>
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
   </section>
 
   
@@ -1458,7 +1510,7 @@ console.log(second.tastes;)//输出&quot;yummy&quot;
               
                 <a href="/archives/">
               
-                  <span class="site-state-item-count">9</span>
+                  <span class="site-state-item-count">10</span>
                   <span class="site-state-item-name">日志</span>
                 </a>
               </div>
