@@ -268,6 +268,134 @@
   
   
   <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/01/30/Orinoco垃圾回收器/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Nei">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Nei">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2019/01/30/Orinoco垃圾回收器/" itemprop="url">Orinoco垃圾回收器</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2019-01-30T17:21:07+08:00">
+                2019-01-30
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <p>在过去的许多年，v8的垃圾回收器发生了很大的变化。这次，Orinoco项目采用了一个连续，能够并行且并发和回退功能的异常强大的收集器。</p>
+<p>垃圾收集器会周期性的执行下列几个基本的任务：</p>
+<ul>
+<li>鉴别正在运行或者已经没被调用的对象</li>
+<li>回收/再利用已经没被调用的对象的内存</li>
+<li>清理内存</li>
+</ul>
+<p>这些任务一般按顺序执行，有时也会交错执行。在主线程上一些直截了当的方法暂停js执行和按顺序执行所有的任务，这样会造成不可避免和潜在的问题，我们在之前的<a href="https://v8.dev/blog/jank-busters" target="_blank" rel="noopener">博客</a>谈论过.</p>
+<h2 id="全局GC"><a href="#全局GC" class="headerlink" title="全局GC"></a>全局GC</h2><p>GC从堆中收集垃圾<br><img src="http://ww1.sinaimg.cn/large/0060ZzrAgy1fzor82gv64j30lc06lmxb.jpg" alt=""><br>全局GC发生在三个阶段：标记，清楚，整理</p>
+<h3 id="标记"><a href="#标记" class="headerlink" title="标记"></a>标记</h3>
+          
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
     <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/01/30/图解http第一章/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -309,6 +437,28 @@
             
           </span>
 
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/图解http/" itemprop="url" rel="index">
+                    <span itemprop="name">图解http</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
           
 
           
@@ -459,6 +609,28 @@
             
           </span>
 
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/ECMA规范/" itemprop="url" rel="index">
+                    <span itemprop="name">ECMA规范</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
           
 
           
@@ -837,7 +1009,16 @@ o1.name //公共的 可以随便访问的
 var n=new Nei();
 n.name   //undefined
 n.getName() //&quot;nei&quot;
-</code></pre><h2 id="模块模式"><a href="#模块模式" class="headerlink" title="模块模式"></a>模块模式</h2><h2 id="沙箱模式"><a href="#沙箱模式" class="headerlink" title="沙箱模式"></a>沙箱模式</h2><h2 id="静态成员"><a href="#静态成员" class="headerlink" title="静态成员"></a>静态成员</h2><h2 id="对象常量"><a href="#对象常量" class="headerlink" title="对象常量"></a>对象常量</h2><h2 id="链模式"><a href="#链模式" class="headerlink" title="链模式"></a>链模式</h2><h2 id="method-方法"><a href="#method-方法" class="headerlink" title="method()方法"></a>method()方法</h2>
+</code></pre><h2 id="模块模式"><a href="#模块模式" class="headerlink" title="模块模式"></a>模块模式</h2><blockquote>
+<p>模块模式就如下几种的集合：</p>
+</blockquote>
+<ul>
+<li>命名空间</li>
+<li>即时函数</li>
+<li>私有和特权成员</li>
+<li>声明依赖</li>
+</ul>
+<h2 id="沙箱模式"><a href="#沙箱模式" class="headerlink" title="沙箱模式"></a>沙箱模式</h2><h2 id="静态成员"><a href="#静态成员" class="headerlink" title="静态成员"></a>静态成员</h2><h2 id="对象常量"><a href="#对象常量" class="headerlink" title="对象常量"></a>对象常量</h2><h2 id="链模式"><a href="#链模式" class="headerlink" title="链模式"></a>链模式</h2><h2 id="method-方法"><a href="#method-方法" class="headerlink" title="method()方法"></a>method()方法</h2>
           
         
       
@@ -1318,153 +1499,11 @@ Demo(conf)
 
 
     
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/12/21/迈向数据可视化之路之canvas/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="Nei">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/images/avatar.gif">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Nei">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2018/12/21/迈向数据可视化之路之canvas/" itemprop="url">迈向数据可视化之路之canvas</a></h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-12-21T15:53:37+08:00">
-                2018-12-21
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-            <span class="post-category" >
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">分类于</span>
-              
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/数据可视化/" itemprop="url" rel="index">
-                    <span itemprop="name">数据可视化</span>
-                  </a>
-                </span>
-
-                
-                
-              
-            </span>
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <p>## </p>
-
-          
-        
-      
-    </div>
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
   </section>
 
   
   <nav class="pagination">
-    <span class="page-number current">1</span><a class="page-number" href="/page/2/">2</a><a class="extend next" rel="next" href="/page/2/"><i class="fa fa-angle-right"></i></a>
+    <span class="page-number current">1</span><a class="page-number" href="/page/2/">2</a><a class="page-number" href="/page/3/">3</a><a class="extend next" rel="next" href="/page/2/"><i class="fa fa-angle-right"></i></a>
   </nav>
 
 
@@ -1510,7 +1549,7 @@ Demo(conf)
               
                 <a href="/archives/">
               
-                  <span class="site-state-item-count">10</span>
+                  <span class="site-state-item-count">11</span>
                   <span class="site-state-item-name">日志</span>
                 </a>
               </div>
@@ -1521,7 +1560,7 @@ Demo(conf)
               
               <div class="site-state-item site-state-categories">
                 <a href="/categories/index.html">
-                  <span class="site-state-item-count">4</span>
+                  <span class="site-state-item-count">6</span>
                   <span class="site-state-item-name">分类</span>
                 </a>
               </div>
@@ -1532,7 +1571,7 @@ Demo(conf)
               
               <div class="site-state-item site-state-tags">
                 <a href="/tags/index.html">
-                  <span class="site-state-item-count">6</span>
+                  <span class="site-state-item-count">8</span>
                   <span class="site-state-item-name">标签</span>
                 </a>
               </div>

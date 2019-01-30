@@ -68,7 +68,7 @@
 
 
 
-  <meta name="keywords" content="Hexo, NexT" />
+  <meta name="keywords" content="Array," />
 
 
 
@@ -80,13 +80,14 @@
 
 
 <meta name="description" content="我们几乎每天都要用到push方法，我们真的明白在调用push方法后，浏览是怎么运行这个方法？  其中ecma规范第三版(1999)是这样定义的： 1 调用对象的[Get]方法获取参数列表中第一个参数长度 2 将结果用ToUint32方法赋值给n 3 在参数列表中获取下一个参数，如果没有，直接跳到第七步 4 调用对象的[Put]方法将当前参数Tostring，put到当前对象中去 5 n自增1 6">
+<meta name="keywords" content="Array">
 <meta property="og:type" content="article">
 <meta property="og:title" content="ECMA规范之Array.prototype.push">
 <meta property="og:url" content="http://yoursite.com/2019/01/25/ECMA规范之Array-prototype-push/index.html">
 <meta property="og:site_name" content="Nei">
 <meta property="og:description" content="我们几乎每天都要用到push方法，我们真的明白在调用push方法后，浏览是怎么运行这个方法？  其中ecma规范第三版(1999)是这样定义的： 1 调用对象的[Get]方法获取参数列表中第一个参数长度 2 将结果用ToUint32方法赋值给n 3 在参数列表中获取下一个参数，如果没有，直接跳到第七步 4 调用对象的[Put]方法将当前参数Tostring，put到当前对象中去 5 n自增1 6">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:updated_time" content="2019-01-30T03:08:45.907Z">
+<meta property="og:updated_time" content="2019-01-30T08:36:30.932Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="ECMA规范之Array.prototype.push">
 <meta name="twitter:description" content="我们几乎每天都要用到push方法，我们真的明白在调用push方法后，浏览是怎么运行这个方法？  其中ecma规范第三版(1999)是这样定义的： 1 调用对象的[Get]方法获取参数列表中第一个参数长度 2 将结果用ToUint32方法赋值给n 3 在参数列表中获取下一个参数，如果没有，直接跳到第七步 4 调用对象的[Put]方法将当前参数Tostring，put到当前对象中去 5 n自增1 6">
@@ -311,6 +312,28 @@
           </span>
 
           
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/ECMA规范/" itemprop="url" rel="index">
+                    <span itemprop="name">ECMA规范</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
 
           
             
@@ -493,6 +516,12 @@ console.log(obj.length) //result is 2
 
     <footer class="post-footer">
       
+        <div class="post-tags">
+          
+            <a href="/tags/Array/" rel="tag"># Array</a>
+          
+        </div>
+      
 
       
       
@@ -591,7 +620,7 @@ console.log(obj.length) //result is 2
               
                 <a href="/archives/">
               
-                  <span class="site-state-item-count">10</span>
+                  <span class="site-state-item-count">11</span>
                   <span class="site-state-item-name">日志</span>
                 </a>
               </div>
@@ -602,7 +631,7 @@ console.log(obj.length) //result is 2
               
               <div class="site-state-item site-state-categories">
                 <a href="/categories/index.html">
-                  <span class="site-state-item-count">4</span>
+                  <span class="site-state-item-count">6</span>
                   <span class="site-state-item-name">分类</span>
                 </a>
               </div>
@@ -613,7 +642,7 @@ console.log(obj.length) //result is 2
               
               <div class="site-state-item site-state-tags">
                 <a href="/tags/index.html">
-                  <span class="site-state-item-count">6</span>
+                  <span class="site-state-item-count">8</span>
                   <span class="site-state-item-name">标签</span>
                 </a>
               </div>
