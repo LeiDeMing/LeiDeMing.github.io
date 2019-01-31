@@ -87,7 +87,8 @@
 <meta property="og:description" content="在过去的许多年，v8的垃圾回收器发生了很大的变化。这次，Orinoco项目采用了一个连续，能够并行且并发和回退功能的异常强大的收集器。 垃圾收集器会周期性的执行下列几个基本的任务：  鉴别正在运行或者已经没被调用的对象 回收/再利用已经没被调用的对象的内存 清理内存  这些任务一般按顺序执行，有时也会交错执行。在主线程上一些直截了当的方法暂停js执行和按顺序执行所有的任务，这样会造成不可避免和潜在">
 <meta property="og:locale" content="zh-Hans">
 <meta property="og:image" content="http://ww1.sinaimg.cn/large/0060ZzrAgy1fzor82gv64j30lc06lmxb.jpg">
-<meta property="og:updated_time" content="2019-01-30T09:58:28.961Z">
+<meta property="og:image" content="http://ww1.sinaimg.cn/large/0060ZzrAgy1fzpl9t0v1tj30lb07fmx6.jpg">
+<meta property="og:updated_time" content="2019-01-31T03:22:37.791Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Orinoco垃圾回收器">
 <meta name="twitter:description" content="在过去的许多年，v8的垃圾回收器发生了很大的变化。这次，Orinoco项目采用了一个连续，能够并行且并发和回退功能的异常强大的收集器。 垃圾收集器会周期性的执行下列几个基本的任务：  鉴别正在运行或者已经没被调用的对象 回收/再利用已经没被调用的对象的内存 清理内存  这些任务一般按顺序执行，有时也会交错执行。在主线程上一些直截了当的方法暂停js执行和按顺序执行所有的任务，这样会造成不可避免和潜在">
@@ -354,7 +355,15 @@
 </ul>
 <p>这些任务一般按顺序执行，有时也会交错执行。在主线程上一些直截了当的方法暂停js执行和按顺序执行所有的任务，这样会造成不可避免和潜在的问题，我们在之前的<a href="https://v8.dev/blog/jank-busters" target="_blank" rel="noopener">博客</a>谈论过.</p>
 <h2 id="全局GC"><a href="#全局GC" class="headerlink" title="全局GC"></a>全局GC</h2><p>GC从堆中收集垃圾<br><img src="http://ww1.sinaimg.cn/large/0060ZzrAgy1fzor82gv64j30lc06lmxb.jpg" alt=""><br>全局GC发生在三个阶段：标记，清楚，整理</p>
-<h3 id="标记"><a href="#标记" class="headerlink" title="标记"></a>标记</h3>
+<h3 id="标记"><a href="#标记" class="headerlink" title="标记"></a>标记</h3><p> 垃圾收集器必不可少的就是找出哪些对象能被收集。收集器使用可达性(reachability)代理活跃度(liveness).这意味着在运行时当前一些可访问(reachable)的对象将保留，而那些不可访问对象将被收集起来。</p>
+<p>标记就是可访问对象被找到的过程，GC就是在一系列一直被称为根集(root set)的对象指针开始的。这其中包括执行栈和全局对象。遵循一个指针对应一个对象，然后将这个对象标记为可访问的。GC持续递归的跟踪这些对象的指针，直到每个可访问对象被找到和标记。</p>
+<h3 id="清除"><a href="#清除" class="headerlink" title="清除"></a>清除</h3><p>清除就是非活动对象被添加到空闲列表，所处的那块内存被清理的过程。一旦标记完成，GC会找到不可访问对象的那块连续内存，然后将它们添加到适当的空闲列表里。所谓的空闲列表就是由可以快速查找的内存块分出来的。在未来，当我们想要分配内存时，我们仅仅只需要考虑空闲列表，并且找到一块大小合适的内存块。</p>
+<h3 id="整理"><a href="#整理" class="headerlink" title="整理"></a>整理</h3><p>全局GC会选择evacuate/整理这些碎片化的内存区域。你可以把整理当做是在pc上的硬盘碎片化整理。我们把活动对象复制进当前没被整理的内存区域。通过这种方式，我们就能够充分利用非活动对象它们分散的内存区域了。</p>
+<p>一种潜在的缺点就是当我们分配长时间运行的活动对象时，我们需要很高的代价去复制这些对象，这就是为什么我们选择仅仅整理高度碎片化的区域，且在其他的地方只执行清除，而并不会去复制这些对象。</p>
+<h2 id="分代布局"><a href="#分代布局" class="headerlink" title="分代布局"></a>分代布局</h2><p>在v8中堆被分割进被称为代（<a href="https://v8.dev/blog/orinoco-parallel-scavenger" target="_blank" rel="noopener">generations</a>）的区域.<br>下面是初代(进一步被分割成 ‘nursery’ and ‘intermediate’ sub-generations)和老生代。对象首先被分配进nursery。如果它们还活跃在下一个GC，它们会被送入初代的intermediate中。如果它们还活跃在另一个GC，它们将会被移到老生代中。<br><img src="http://ww1.sinaimg.cn/large/0060ZzrAgy1fzpl9t0v1tj30lb07fmx6.jpg" alt=""></p>
+<p>在垃圾收集器有这样一个术语：“多代假设”.大部分对象基本上在初代就会被清除。我们以GC的角度，换句话说，大部分对象它们在分配后，立即就会变成不可访问的。这种情况不仅仅是在v8和js语言上，它同样发生在大部分的动态语言上。</p>
+<p>v8的多代堆布局就是为了揭露对象运行时的事实情况而设计的。GC本身就是一个整理/活动的GC，这就意味着它能复制活跃在垃圾收集器中的对象。这似乎不合常理：因为在GC运行时，复制对象是非常昂贵的。但是根据多代假设，我们所了解是仅仅只有一部分对象活跃在垃圾收集器中。仅仅是移动这些活跃的对象，</p>
+
       
     </div>
     
@@ -546,7 +555,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#全局GC"><span class="nav-number">1.</span> <span class="nav-text">全局GC</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#标记"><span class="nav-number">1.1.</span> <span class="nav-text">标记</span></a></li></ol></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#全局GC"><span class="nav-number">1.</span> <span class="nav-text">全局GC</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#标记"><span class="nav-number">1.1.</span> <span class="nav-text">标记</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#清除"><span class="nav-number">1.2.</span> <span class="nav-text">清除</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#整理"><span class="nav-number">1.3.</span> <span class="nav-text">整理</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#分代布局"><span class="nav-number">2.</span> <span class="nav-text">分代布局</span></a></li></ol></div>
             
 
           </div>
