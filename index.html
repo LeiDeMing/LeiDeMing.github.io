@@ -268,6 +268,147 @@
   
   
   <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/02/14/js模式第六章/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Nei">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Nei">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2019/02/14/js模式第六章/" itemprop="url">js模式第六章</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2019-02-14T16:01:54+08:00">
+                2019-02-14
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/设计模式/" itemprop="url" rel="index">
+                    <span itemprop="name">设计模式</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <h2 id="传统与现代继承模式的比较"><a href="#传统与现代继承模式的比较" class="headerlink" title="传统与现代继承模式的比较"></a>传统与现代继承模式的比较</h2><h2 id="使用类式继承时的预期结果"><a href="#使用类式继承时的预期结果" class="headerlink" title="使用类式继承时的预期结果"></a>使用类式继承时的预期结果</h2><h2 id="类式继承模式-1——默认模式"><a href="#类式继承模式-1——默认模式" class="headerlink" title="类式继承模式#1——默认模式"></a>类式继承模式#1——默认模式</h2><h2 id="类式继承模式-2——借用构造函数"><a href="#类式继承模式-2——借用构造函数" class="headerlink" title="类式继承模式#2——借用构造函数"></a>类式继承模式#2——借用构造函数</h2><h2 id="类式继承模式-3——借用和设置原型"><a href="#类式继承模式-3——借用和设置原型" class="headerlink" title="类式继承模式#3——借用和设置原型"></a>类式继承模式#3——借用和设置原型</h2><h2 id="类式继承模式-2——共享原型"><a href="#类式继承模式-2——共享原型" class="headerlink" title="类式继承模式#2——共享原型"></a>类式继承模式#2——共享原型</h2><h2 id="类式继承模式-2——临时构造函数"><a href="#类式继承模式-2——临时构造函数" class="headerlink" title="类式继承模式#2——临时构造函数"></a>类式继承模式#2——临时构造函数</h2><h2 id="Klass"><a href="#Klass" class="headerlink" title="Klass"></a>Klass</h2><h2 id="原型继承"><a href="#原型继承" class="headerlink" title="原型继承"></a>原型继承</h2><h2 id="通过赋值属性实现继承"><a href="#通过赋值属性实现继承" class="headerlink" title="通过赋值属性实现继承"></a>通过赋值属性实现继承</h2><h2 id="借用方法"><a href="#借用方法" class="headerlink" title="借用方法"></a>借用方法</h2>
+          
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
     <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/01/30/Orinoco垃圾回收器/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -347,7 +488,7 @@
 <li>清理内存</li>
 </ul>
 <p>这些任务一般按顺序执行，有时也会交错执行。在主线程上一些直截了当的方法暂停js执行和按顺序执行所有的任务，这样会造成不可避免和潜在的问题，我们在之前的<a href="https://v8.dev/blog/jank-busters" target="_blank" rel="noopener">博客</a>谈论过.</p>
-<h2 id="全局GC"><a href="#全局GC" class="headerlink" title="全局GC"></a>全局GC</h2><p>GC从堆中收集垃圾<br><img src="http://ww1.sinaimg.cn/large/0060ZzrAgy1fzor82gv64j30lc06lmxb.jpg" alt=""><br>全局GC发生在三个阶段：标记，清楚，整理</p>
+<h2 id="主要GC"><a href="#主要GC" class="headerlink" title="主要GC"></a>主要GC</h2><p>GC从堆中收集垃圾<br><img src="http://ww1.sinaimg.cn/large/0060ZzrAgy1fzor82gv64j30lc06lmxb.jpg" alt=""><br>全局GC发生在三个阶段：标记，清楚，整理</p>
 <h3 id="标记"><a href="#标记" class="headerlink" title="标记"></a>标记</h3><p> 垃圾收集器必不可少的就是找出哪些对象能被收集。收集器使用可达性(reachability)代理活跃度(liveness).这意味着在运行时当前一些可访问(reachable)的对象将保留，而那些不可访问对象将被收集起来。</p>
 <p>标记就是可访问对象被找到的过程，GC就是在一系列一直被称为根集(root set)的对象指针开始的。这其中包括执行栈和全局对象。遵循一个指针对应一个对象，然后将这个对象标记为可访问的。GC持续递归的跟踪这些对象的指针，直到每个可访问对象被找到和标记。</p>
 <h3 id="清除"><a href="#清除" class="headerlink" title="清除"></a>清除</h3><p>清除就是非活动对象被添加到空闲列表，所处的那块内存被清理的过程。一旦标记完成，GC会找到不可访问对象的那块连续内存，然后将它们添加到适当的空闲列表里。所谓的空闲列表就是由可以快速查找的内存块分出来的。在未来，当我们想要分配内存时，我们仅仅只需要考虑空闲列表，并且找到一块大小合适的内存块。</p>
@@ -355,7 +496,9 @@
 <p>一种潜在的缺点就是当我们分配长时间运行的活动对象时，我们需要很高的代价去复制这些对象，这就是为什么我们选择仅仅整理高度碎片化的区域，且在其他的地方只执行清除，而并不会去复制这些对象。</p>
 <h2 id="分代布局"><a href="#分代布局" class="headerlink" title="分代布局"></a>分代布局</h2><p>在v8中堆被分割进被称为代（<a href="https://v8.dev/blog/orinoco-parallel-scavenger" target="_blank" rel="noopener">generations</a>）的区域.<br>下面是初代(进一步被分割成 ‘nursery’ and ‘intermediate’ sub-generations)和老生代。对象首先被分配进nursery。如果它们还活跃在下一个GC，它们会被送入初代的intermediate中。如果它们还活跃在另一个GC，它们将会被移到老生代中。<br><img src="http://ww1.sinaimg.cn/large/0060ZzrAgy1fzpl9t0v1tj30lb07fmx6.jpg" alt=""></p>
 <p>在垃圾收集器有这样一个术语：“多代假设”.大部分对象基本上在初代就会被清除。我们以GC的角度，换句话说，大部分对象它们在分配后，立即就会变成不可访问的。这种情况不仅仅是在v8和js语言上，它同样发生在大部分的动态语言上。</p>
-<p>v8的多代堆布局就是为了揭露对象运行时的事实情况而设计的。GC本身就是一个整理/活动的GC，这就意味着它能复制活跃在垃圾收集器中的对象。这似乎不合常理：因为在GC运行时，复制对象是非常昂贵的。但是根据多代假设，我们所了解是仅仅只有一部分对象活跃在垃圾收集器中。仅仅是移动这些活跃的对象，</p>
+<p>v8的多代堆布局就是为了揭露对象运行时的事实情况而设计的。GC本身就是一个整理/活动的GC，这就意味着它能复制活跃在垃圾收集器中的对象。这似乎不合常理：因为在GC运行时，复制对象是非常昂贵的。但是根据多代假设，我们所了解是仅仅只有一部分对象活跃在垃圾收集器中。仅仅是移动这些活跃的对象，所有其他的收集的对象都会变成隐式垃圾。这意味着我们仅仅只需要关注这些活跃对象，而不是所有的收集对象。</p>
+<h2 id="次要GC-Scavenger"><a href="#次要GC-Scavenger" class="headerlink" title="次要GC(Scavenger)"></a>次要GC(Scavenger)</h2><p>在v8中有两个垃圾收集器。来自于堆的<a href="https://v8.dev/blog/trash-talk#major-gc" target="_blank" rel="noopener">主要垃圾收集器</a>.来自于初生代的次要垃圾收集器主要GC在堆中起作用，但是多代假设告诉我们，新声明的对象非常可能需要被收集。</p>
+<p>在次要GC中，活跃在初生代的被收集的对象总是被转移到一个新的区域。v8在初生代有一个名为’semi-space’的设计。它意味着为了满足转移的需要，在全部空间中，有过半的空间总是空着的。在整个清除期间最初的空的空间被称为 ‘To-Space’。那些我们复制对象所在的空间被称为 ‘From-Space’。有一个最糟糕的情况就是当每个对象活跃在清除阶段时，我们必须复制整个对象。</p>
 
           
         
@@ -404,7 +547,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/01/30/图解http第一章/">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/01/30/图解http/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="Nei">
@@ -423,7 +566,7 @@
         
           <h1 class="post-title" itemprop="name headline">
                 
-                <a class="post-title-link" href="/2019/01/30/图解http第一章/" itemprop="url">图解http第一章</a></h1>
+                <a class="post-title-link" href="/2019/01/30/图解http/" itemprop="url">图解http</a></h1>
         
 
         <div class="post-meta">
@@ -497,7 +640,7 @@
       
         
           
-            <h1 id="网络基础"><a href="#网络基础" class="headerlink" title="网络基础"></a>网络基础</h1><h2 id="tcp-ip分层管理"><a href="#tcp-ip分层管理" class="headerlink" title="tcp/ip分层管理"></a>tcp/ip分层管理</h2><blockquote>
+            <h1 id="第一章"><a href="#第一章" class="headerlink" title="第一章"></a>第一章</h1><h2 id="tcp-ip分层管理"><a href="#tcp-ip分层管理" class="headerlink" title="tcp/ip分层管理"></a>tcp/ip分层管理</h2><blockquote>
 <p>tcp/ip协议族分为四个层次，应用层 ⟶ 传输层 ⟶ 网络层 ⟶ 数据链路层,为什么需要分层呢，难道一层不好吗？还省得麻烦事，一层有一层，，每一层都需要不同的规范，有什么好处呢？</p>
 </blockquote>
 <p>个人的理解，分层的原因在于，分层之后，某处的改动不会影响整体，将一个大的东西分成几个部分之后，设计来说相对于简单了，我们需要考虑的就是每个层次的设计，然后层次与层次之间的接口设计，而不要去设计一个巨大的整体。</p>
@@ -516,18 +659,19 @@
 <h2 id="tcp-ip通信传输流"><a href="#tcp-ip通信传输流" class="headerlink" title="tcp/ip通信传输流"></a>tcp/ip通信传输流</h2><p>配图<br><img src="http://ww1.sinaimg.cn/large/0060ZzrAgy1fzom784p74j30er0bcdhh.jpg" alt=""></p>
 <p>某个用户在应用层发出请求，想查看某个网页时，传输层会把从应用层接收到的数据（http请求报文）进行分割，添加序号和端口号，然后再转发给网络层，网络层再会其上添加mac地址，这样数据就发送出去了。<br><img src="http://ww1.sinaimg.cn/large/0060ZzrAgy1fzomedy99sj30en0cxtbf.jpg" alt=""></p>
 <p>发送端在层与层之间传输数据时，每经过一层，必定会添加改成的首部信息。接收端则相反，每经过一层，就是去掉相对应的首部信息。这种将数据包装起来的做法叫做封装.</p>
-<h1 id="与http关系密切的协议-ip、tcp和dns"><a href="#与http关系密切的协议-ip、tcp和dns" class="headerlink" title="与http关系密切的协议:ip、tcp和dns"></a>与http关系密切的协议:ip、tcp和dns</h1><h2 id="ip协议"><a href="#ip协议" class="headerlink" title="ip协议"></a>ip协议</h2><blockquote>
+<h2 id="与http关系密切的协议-ip、tcp和dns"><a href="#与http关系密切的协议-ip、tcp和dns" class="headerlink" title="与http关系密切的协议:ip、tcp和dns"></a>与http关系密切的协议:ip、tcp和dns</h2><h3 id="ip协议"><a href="#ip协议" class="headerlink" title="ip协议"></a>ip协议</h3><blockquote>
 <p>ip协议属于网络层，ip协议的作用就是负责把数据包传送给对方，但是需要满足很多条件，其中比较重要是这两个条件；1 ip地址，2 mac地址。其中ip地址就是节点所分配到的地址，mac地址指的是网卡所属的固定地址，ip地址可以变换，但是mac地址一般不会更改。</p>
 </blockquote>
 <p>我们知道数据包传输时，需要进过许多的中转站，如果中转的时候我们只有下一站的ip地址，我们可以通过ARP协议拿到下一站的mac地址，ARP协议可以通过ip地址反查mac地址。</p>
-<h2 id="tcp协议"><a href="#tcp协议" class="headerlink" title="tcp协议"></a>tcp协议</h2><blockquote>
+<h3 id="tcp协议"><a href="#tcp协议" class="headerlink" title="tcp协议"></a>tcp协议</h3><blockquote>
 <p>tcp协议属于传输层，它提供了字节流服务，字节流服务就是将大块数据分割成以报文段为单位的数据包。并且还是稳定可靠的。为了稳定可靠的传输，tcp协议采用了三次握手策略，即发送端将带有SYN的数据包发送给接收端，接收端接收到，再将带有SYN/ACK的数据包返回给发送端，发送端接收到，再将带有ACK的数据发送给接收端，整个过程结束。如果其中某一个过程终端，tcp协议会再次以相同顺序发送相同的数据包。</p>
 </blockquote>
-<h2 id="dns服务"><a href="#dns服务" class="headerlink" title="dns服务"></a>dns服务</h2><blockquote>
+<h3 id="dns服务"><a href="#dns服务" class="headerlink" title="dns服务"></a>dns服务</h3><blockquote>
 <p>dns服务提供ip到域名的解析服务,我们一般用域名来访问主机,但是各种各样的域名对于计算机来说,全部识别起来是相当困难的,计算机还是喜欢ip地址这种纯数组组合,所以诞生了dns服务,它提供了ip到域名的映射,使得我们输入域名时,解析域名,找到该域名对应的ip。</p>
 </blockquote>
 <p><img src="http://ww1.sinaimg.cn/large/0060ZzrAgy1fzon5ugicqj30kk0d6whc.jpg" alt=""></p>
 <h2 id="各种协议与HTTP协议之间的关系"><a href="#各种协议与HTTP协议之间的关系" class="headerlink" title="各种协议与HTTP协议之间的关系"></a>各种协议与HTTP协议之间的关系</h2><p><img src="http://ww1.sinaimg.cn/large/0060ZzrAgy1fzon7ophcoj30ad0etdi9.jpg" alt=""></p>
+<p>暂停更新，转读http权威指南</p>
 
           
         
@@ -894,6 +1038,28 @@ console.log(obj.length) //result is 2
           </span>
 
           
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/设计模式/" itemprop="url" rel="index">
+                    <span itemprop="name">设计模式</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
 
           
             
@@ -1174,452 +1340,6 @@ d3.getLastId(); // 3
 
 
     
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/12/24/js模式第四章/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="Nei">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/images/avatar.gif">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Nei">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2018/12/24/js模式第四章/" itemprop="url">js模式第四章</a></h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-12-24T15:30:07+08:00">
-                2018-12-24
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-            <span class="post-category" >
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">分类于</span>
-              
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/设计模式/" itemprop="url" rel="index">
-                    <span itemprop="name">设计模式</span>
-                  </a>
-                </span>
-
-                
-                
-              
-            </span>
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <h2 id="第四章-函数"><a href="#第四章-函数" class="headerlink" title="第四章 函数"></a>第四章 函数</h2><blockquote>
-<p>函数表达式和函数声明式：</p>
-</blockquote>
-<pre><code>//命名函数表达式
-var demo=funtion d(){
-    console.log(&quot;Hello World!&quot;);
-};
-
-//函数表达式
-var demo=function(){
-    console.log(&quot;Hello World!&quot;);
-};
-
-//函数声明式
-function demo(){
-    console.log(&quot;Hello World!&quot;)
-}
-</code></pre><h3 id="区别："><a href="#区别：" class="headerlink" title="区别："></a>区别：</h3><ul>
-<li>函数表达式又分为<strong>命令函数表达式</strong>和<strong>函数表达式</strong>（匿名函数）,并且<strong>函数表达式</strong>结尾需要加上分号,而函数声明式则不需要。</li>
-<li><p><strong>函数声明式</strong>会进行<strong>变量提升</strong>，<strong>而函数表达式</strong>则不会。</p>
-<p>  //全局函数<br>  function foo(){</p>
-<pre><code>alert(&apos;global foo&apos;);
-</code></pre><p>  }</p>
-<p>  function bar(){</p>
-<pre><code>alert(&apos;global bar&apos;)
-</code></pre><p>  }</p>
-<p>  function hoistMe(){</p>
-<pre><code>console.log(typeof foo); //输出 &quot;function&quot;
-console.log(typeof bar); //输出 &quot;undefined&quot;
-
-foo();//输出&quot;local foo&quot;
-bar();//输出TypeError: bar is not function
-
-//函数声明
-//变量&apos;foo&apos;以及其实现着2被提升
-function foo(){
-    alert(&apos;local foo&apos;);
-}
-
-//函数表达式
-//仅变量 &apos;bar&apos; 提升
-//函数实现并未提升
-var bar = function () {
-    alert(&apos;local bar&apos;)
-}
-</code></pre><p>  }</p>
-</li>
-</ul>
-<h2 id="回调模式"><a href="#回调模式" class="headerlink" title="回调模式"></a>回调模式</h2><blockquote>
-<p>函数都是对象，函数可以被当做参数传递给其他函数，当一个函数被当做参数传递给另一个函数，且执行，这叫回调。</p>
-</blockquote>
-<p>Code：</p>
-<pre><code>function writeCode(callback){
-    //do something
-    callback();
-}
-
-function introduce(){
-    // do something
-}
-
-//传递函数，执行回调
-writeCode(introduce);
-</code></pre><h3 id="回调与作用域"><a href="#回调与作用域" class="headerlink" title="回调与作用域"></a>回调与作用域</h3><blockquote>
-<p>如果传递的对象不是一个函数，而是一个对象的方法，并且这个方法用this来引用所属的对象，那可能会导致意想不到的后果。</p>
-</blockquote>
-<p>假设一个方法paint(),它是一个名为myapp的对象的方法：</p>
-<pre><code>var myapp={};
-myapp.color=&quot;red&quot;;
-myapp.paint=function(node){
-    node.style.color=this.color;
-};
-</code></pre><p>函数findNodes()执行以下语句：</p>
-<pre><code>var findNodes=function(callback){
-    // ...
-    if(typeof callback === &quot;function&quot;){
-        callback(found);
-    }
-};
-</code></pre><p>如果执行findNodes(myapp.paint)并不会得到如期的结果，因为此时this的引用的对象发生了改变，变成了findNodes，而findNodes并没有color这个属性。那我们怎么得到预期的结果呢？</p>
-<p>一个解决方法，我们传递回调函数，并且也传递回调函数所属的对象：</p>
-<pre><code>var findNodes = function(callback,callback_obj){
-    // ...
-    if(typeof callback === &quot;function&quot;){
-        callback(callback_obj,found);
-    }
-};
-</code></pre><p>那我们的写法将变成findNodes(myapp.paint,myapp)，我们也可以将第一个参数写成字符串的形式，这样无需写两遍对象名，<br>findNodes(“paint”,myapp),Code：</p>
-<pre><code>var findNodes = function(callback,callback_obj){
-    // ...  
-    if(typeof callback === &quot;string&quot; ){
-        callback = callback_obj[callback]
-    }
-
-    if(typeof callback === &quot;function&quot;){
-        callback.call(callback_obj,found)
-    }
-};
-</code></pre><h2 id="返回函数"><a href="#返回函数" class="headerlink" title="返回函数"></a>返回函数</h2><blockquote>
-<p>函数也是对象，因此它们也可以用作为返回值。<br>下面有个demo：</p>
-</blockquote>
-<pre><code>var setup=function(){
-    alert(1);
-    return function(){
-        alert(2);
-    };
-};
-var my=setup(); //alert 1
-my(); // alert 2
-</code></pre><blockquote>
-<p>由于setup()包装了返回函数，它创建了一个闭包(粗俗的理解就是函数中的函数)，可以用这个闭包存储一些私有数据，这些数据仅可以被该返回函数访问，但外部代码却无法访问。<br>Code：</p>
-</blockquote>
-<pre><code>var setup=function(){
-    var count = 0;
-    return function(){
-        return (count+=1);
-    };
-};
-
-var next=setup();
-next(); //result is 1
-next(); //result is 2
-next(); //result is 3
-</code></pre><h2 id="自定义函数"><a href="#自定义函数" class="headerlink" title="自定义函数"></a>自定义函数</h2><blockquote>
-<p>如果创建了一个新函数并且将其分配给保存另外函数的同一个变量，那么就以一个新函数覆盖了旧函数。在某种程度上，回收了旧函数指针以指向一个新函数。而这一切发生在旧函数体的内部。在这种情况下，该函数以一个新的实现覆盖并重新定义了自身，这可能听起来比实际上更复杂，Code：</p>
-</blockquote>
-<pre><code>var scareMe=function(){
-    alert(&quot;Boo!&quot;);
-    scareMe=function(){
-        alert(&quot;Double boo!&quot;);
-    };
-};
-
-scareMe(); //输出 Boo
-scareMe(); //输出 Double boo!
-</code></pre><blockquote>
-<p> 当函数有且执行一次时，这种模式非常有效。<br>但是这种模式有个缺点，就是定义在自身时，已添加的属性和方法都会丢失，此外，如果该函数使用了不同的名称，比如重新分配给了另外一个变量或者以对象的方法来使用，那么重定义的部分将永远不会发生。并且将会执行原函数体。<br>Code：</p>
-</blockquote>
-<pre><code>//1 添加一个新属性
-scareMe.property=&quot;property&quot;;
-
-//2 赋值给另一个不同名称的变量
-var prank=scareMe;
-
-//3 作为一个方法使用
-var spooky = {
-    boo:scareMe
-};
-
-// 
-prank(); //输出 &quot;bool&quot;
-prank(); //输出 &quot;bool&quot;
-console.log(prank.property) //输出 &quot;property&quot;
-
-spooky.boo(); //输出 &quot;bool&quot;
-spooky.boo(); //输出 &quot;bool&quot;
-console.log(spooky.boo.property); //输出 &quot;property&quot;
-
-scareMe(); //输出 &quot;Double boo!&quot;
-scareMe(); //输出 &quot;Double boo!&quot;
-console.log(scareMe.property); // 输出 &quot;undefined&quot;
-</code></pre><p>当我们以新名称和作为一个方法使用时，scareMe指针一直被重写，至此scareMe函数自定义的部分一直没有执行。直到当我们直接执行scareMe时，指针没有被重写，自定义部分才得以执行。</p>
-<h2 id="即时函数"><a href="#即时函数" class="headerlink" title="即时函数"></a>即时函数</h2><blockquote>
-<p>即时函数模式，该模式有一下几部分组成：</p>
-</blockquote>
-<ul>
-<li>可以使用函数表达式定义一个函数（函数声明则无法达到这个效果）</li>
-<li>在末尾添加一组括号，这将导致该函数立即执行。</li>
-<li>将整个函数包括在括号中（只有不将该函数分配给变量才需要这样做）。</li>
-</ul>
-<blockquote>
-<p>这种模式的好处就是形成了作用域沙箱。避免了全局污染，并且可以执行一些一次新函数，而不必去创建复用函数。</p>
-</blockquote>
-<pre><code>(function(){
-    var days=[&apos;Sun&apos;,&apos;Mon&apos;,&apos;Tue&apos;,&apos;Wed&apos;,&apos;Thu&apos;,&apos;Fri&apos;,&apos;Sat&apos;],
-        today=new Date(),
-        msg=&apos;Today is &apos; + days[today.getDay()] + &apos;, &apos; + today.getDate();
-    alert(msg);
-}())
-</code></pre><h3 id="即时函数的参数"><a href="#即时函数的参数" class="headerlink" title="即时函数的参数"></a>即时函数的参数</h3><blockquote>
-<p>即时函数同样可以传递参数，Code：</p>
-</blockquote>
-<pre><code>;(function(who,when){
-    console.log(&quot;I met &quot; + who + &quot; on &quot; + when)
-})(&quot;Nei&quot;,new Date());
-</code></pre><h3 id="即时函数的返回值"><a href="#即时函数的返回值" class="headerlink" title="即时函数的返回值"></a>即时函数的返回值</h3><blockquote>
-<p>当然即时函数同样可以返回值，Code：</p>
-</blockquote>
-<pre><code>var result=(function(){
-    return 2+2;
-})();
-</code></pre><blockquote>
-<p>赋值给一个变量时，即时函数可以不需要最外层括号，Code：</p>
-</blockquote>
-<pre><code>var result=function(){
-    return 2+2;
-}();
-</code></pre><blockquote>
-<p>即时函数不单单可以返回整数值，同样还可以返回其他类型，例如返回函数。形成一个闭包，在一个函数作用域中保留变量。Code：</p>
-</blockquote>
-<pre><code>var getResult=(function(){
-    var res = 2 + 2;
-    return function(){
-        return res;
-    };
-})();
-</code></pre><blockquote>
-<p>于是我们可以借用即时函数，在创建对象时，可以将对象的属性永久保留在内存中。Code：</p>
-</blockquote>
-<pre><code>var o = {
-    message: (function(){
-        var who = &quot;me&quot;,
-            what = &quot;call&quot;;
-        return who + &quot; &quot; + what;
-    })(),
-    getMsg:function(){
-        return this.message;
-    }
-};
-</code></pre><h3 id="优点"><a href="#优点" class="headerlink" title="优点"></a>优点</h3><ul>
-<li>即时函数模式创建了自调用的函数局部变量，避免了全局空间被临时变量污染。</li>
-</ul>
-<!-- ## 即时对象初始化 -->
-<h2 id="初始化时分支"><a href="#初始化时分支" class="headerlink" title="初始化时分支"></a>初始化时分支</h2><blockquote>
-<p>初始化时分支时一种优化模式，当知道某个条件在整个程序生命周期内都不会发生改变的时候，仅对该条件测试一次时很有意义的。浏览器嗅探（功能检测）就是一个典型的例子。Code：</p>
-</blockquote>
-<pre><code>var utils = {
-    addListener:function(el,type,fn){
-        if(typeof window.addEvenListener === &quot;function&quot;){
-            el.addEventListener(type,fn,false);
-        }else if(typeof document.attachEvent === &quot;function&quot;){
-            el.attachEven(&apos;on&apos;+type,fn);
-        }
-    },
-    removeListener:function(el,type,fn){
-        //......
-    }
-};
-// 当我们每次调用utils.addListener 或 utils.removeListener时，都会重复执行检测代码。但是对于这样不会变的特性时，我们可以执行一次性检查代码。
-</code></pre><p>一次性检查Code：</p>
-<pre><code>var utils = {
-    addListener:null,
-    removeListener:null
-};
-
-if(typeof window.addEventListener===&quot;function&quot;{
-    utils.addListener = function(el,type,fn){
-        el.addEventListener(type,fn,false);
-    };
-    utils.removeListener = function (el,type,fn) {
-        el.removeEventListener(type,fn,false);
-    }
-}else if(){
-    // ie......
-}else{
-    // 更早浏览器兼容模式
-}
-</code></pre><h2 id="备忘模式"><a href="#备忘模式" class="headerlink" title="备忘模式"></a>备忘模式</h2><blockquote>
-<p>函数也是对象，我们可以添加属性上去，例如我们在大量计算的时候，就可以将结果缓存在函数对象上，Code：</p>
-</blockquote>
-<pre><code>var myFunc = function (param){
-    if(!myFunc.cache[param]){
-        var result = {};
-        //...大计算
-        myFunc.cache[param]=result;
-    }
-    return myFunc.cache[param]
-};
-myFunc.cache={};
-</code></pre><p>当然我们的参数一般都不只一个，这时怎么办呢？看Code：</p>
-<pre><code>var myFunc = function (){
-    var cachekey = JSON.stringfy(Array.prototype.slice.call(arguments)),
-        result;
-    if(!myFunc.cache[cachekey]){
-        result = {};
-        //...大计算
-        myFunc.cache[cachekey]=result;
-    }
-    return myFunc.cache[cachekey]
-};
-myFunc.cache={};
-</code></pre><h2 id="配置对象"><a href="#配置对象" class="headerlink" title="配置对象"></a>配置对象</h2><blockquote>
-<p>调用函数，传入参数时，一种传参方式是多少个参数传递多少个参数，Code：</p>
-</blockquote>
-<pre><code>Demo(one,two,three,four,five,...);
-</code></pre><p>但是这样传参，参数一旦很多，函数将变得难看和难以维护。<br>所以我们传参时，将参数写进一个对象中，这样传参就是只有传递一个对象。</p>
-<pre><code>var conf={
-    username:&apos;Nei&apos;,
-    first:&apos;N&apos;,
-    last:&apos;de&apos;
-};
-
-Demo(conf)
-</code></pre><p>配置对象的优点在于：</p>
-<ul>
-<li>不需要记住众多的参数以及其顺序。</li>
-<li>可以安全忽略可选参数。</li>
-<li>更加易于阅读和维护。</li>
-<li>更加易于添加和删除参数。</li>
-</ul>
-<p>而缺点在于：</p>
-<ul>
-<li>需要记住参数名称。</li>
-<li>属性名称无法被压缩。？<!-- ## curry --></li>
-</ul>
-
-          
-        
-      
-    </div>
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
   </section>
 
   
@@ -1670,7 +1390,7 @@ Demo(conf)
               
                 <a href="/archives/">
               
-                  <span class="site-state-item-count">11</span>
+                  <span class="site-state-item-count">12</span>
                   <span class="site-state-item-name">日志</span>
                 </a>
               </div>
