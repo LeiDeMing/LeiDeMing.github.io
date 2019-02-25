@@ -68,7 +68,7 @@
 
 
 
-  <meta name="keywords" content="Hexo, NexT" />
+  <meta name="keywords" content="web性能," />
 
 
 
@@ -79,13 +79,18 @@
 
 
 
-<meta property="og:type" content="website">
-<meta property="og:title" content="Nei">
-<meta property="og:url" content="http://yoursite.com/categories/图解http/index.html">
+<meta name="description" content="加载和运行 浏览器以单线程处理ui和js任务，处理方式为串行，一次执行一个任务。（如果浏览器为多线程，浏览器整个设计复杂程度会提高很多。） 浏览器在碰到script标签时，停止其他任务，然后下载script，解析，执行里面的代码。script标签具有阻塞作用。（浏览器遇到href不会阻塞页面，会并行下载，执行其中代码，href为在页面和目标文件之间一种联系，而src则是指向一个资源，相当于插入一段">
+<meta name="keywords" content="web性能">
+<meta property="og:type" content="article">
+<meta property="og:title" content="高性能javascript">
+<meta property="og:url" content="http://yoursite.com/2019/02/25/高性能javascript/index.html">
 <meta property="og:site_name" content="Nei">
+<meta property="og:description" content="加载和运行 浏览器以单线程处理ui和js任务，处理方式为串行，一次执行一个任务。（如果浏览器为多线程，浏览器整个设计复杂程度会提高很多。） 浏览器在碰到script标签时，停止其他任务，然后下载script，解析，执行里面的代码。script标签具有阻塞作用。（浏览器遇到href不会阻塞页面，会并行下载，执行其中代码，href为在页面和目标文件之间一种联系，而src则是指向一个资源，相当于插入一段">
 <meta property="og:locale" content="zh-Hans">
+<meta property="og:updated_time" content="2019-02-25T13:30:51.313Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="Nei">
+<meta name="twitter:title" content="高性能javascript">
+<meta name="twitter:description" content="加载和运行 浏览器以单线程处理ui和js任务，处理方式为串行，一次执行一个任务。（如果浏览器为多线程，浏览器整个设计复杂程度会提高很多。） 浏览器在碰到script标签时，停止其他任务，然后下载script，解析，执行里面的代码。script标签具有阻塞作用。（浏览器遇到href不会阻塞页面，会并行下载，执行其中代码，href为在页面和目标文件之间一种联系，而src则是指向一个资源，相当于插入一段">
 
 
 
@@ -115,13 +120,13 @@
 
 
 
-  <link rel="canonical" href="http://yoursite.com/categories/图解http/"/>
+  <link rel="canonical" href="http://yoursite.com/2019/02/25/高性能javascript/"/>
 
 
 
 
 
-  <title>分类: 图解http | Nei</title>
+  <title>高性能javascript | Nei</title>
   
 
 
@@ -149,7 +154,7 @@
     
   
 
-  <div class="container sidebar-position-left ">
+  <div class="container sidebar-position-left page-post-detail">
     <div class="headband"></div>
 
     <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
@@ -253,55 +258,182 @@
           <div id="content" class="content">
             
 
-  
-  
-  
-  <div class="post-block category">
+  <div id="posts" class="posts-expand">
+    
 
-    <div id="posts" class="posts-collapse">
-      <div class="collection-title">
-        <h1>图解http<small>分类</small>
-        </h1>
-      </div>
+  
 
-      
-        
+  
+  
+  
 
   <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-    <header class="post-header">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/02/25/高性能javascript/">
 
-      <h2 class="post-title">
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Nei">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Nei">
+    </span>
+
+    
+      <header class="post-header">
+
         
-            <a class="post-title-link" href="/2019/01/30/图解http/" itemprop="url">
-              
-                <span itemprop="name">图解http</span>
-              
-            </a>
         
-      </h2>
+          <h1 class="post-title" itemprop="name headline">高性能javascript</h1>
+        
 
-      <div class="post-meta">
-        <time class="post-time" itemprop="dateCreated"
-              datetime="2019-01-30T11:18:17+08:00"
-              content="2019-01-30" >
-          01-30
-        </time>
-      </div>
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2019-02-25T20:49:21+08:00">
+                2019-02-25
+              </time>
+            
 
-    </header>
-  </article>
+            
 
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/性能/" itemprop="url" rel="index">
+                    <span itemprop="name">性能</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+            <span class="post-meta-divider">|</span>
+            <span class="page-pv"><i class="fa fa-file-o"></i>
+            <span class="busuanzi-value" id="busuanzi_value_page_pv" ></span>
+            </span>
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
 
       
-    </div>
+      
 
+      
+        <h1 id="加载和运行"><a href="#加载和运行" class="headerlink" title="加载和运行"></a>加载和运行</h1><ul>
+<li>浏览器以单线程处理ui和js任务，处理方式为串行，一次执行一个任务。（如果浏览器为多线程，浏览器整个设计复杂程度会提高很多。）</li>
+<li>浏览器在碰到script标签时，停止其他任务，然后下载script，解析，执行里面的代码。script标签具有阻塞作用。（浏览器遇到href不会阻塞页面，会并行下载，执行其中代码，href为在页面和目标文件之间一种联系，而src则是指向一个资源，相当于插入一段资源，会阻塞页面。所以一般将script标签放在前一行。link标签放在head中，优先加载基本样式。当然script标签放在head中䦹可以的，可以添加async标签，进行异步加载。chrome稳定版中，同一域名下并发请求数为6，<a href="https://chromium.googlesource.com/chromium/src/" target="_blank" rel="noopener">chrome相关源码</a>）</li>
+<li>下载一个100k的script比四个25k的script要快，所以尽可能将小的script合并在一个文件中。</li>
+<li>利用cdn网络，加速下载。（内容分发网络。CDN是构建在网络之上的内容分发网络，依靠部署在各地的边缘服务器，通过中心平台的负载均衡、内容分发、调度等功能模块，使用户就近获取所需内容，降低网络拥塞，提高用户访问响应速度和命中率。）</li>
+<li>利用script的defer，延迟加载属性，在页面dom完成之后，onload方法调用之前加载脚本。</li>
+<li>多数浏览器在下载动态script时，并不会按照顺序下载。</li>
+<li>利用XHR下载脚本，并动态插入到页面中.xhr请求涉及到跨域问题,只能请求不跨域的资源.</li>
+</ul>
+<h1 id="数据访问"><a href="#数据访问" class="headerlink" title="数据访问"></a>数据访问</h1>
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/web性能/" rel="tag"># web性能</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2019/02/22/js模式第七章/" rel="next" title="js模式第七章">
+                <i class="fa fa-chevron-left"></i> js模式第七章
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
   </div>
   
   
   
+  </article>
 
-  
 
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
 
 
           </div>
@@ -309,6 +441,10 @@
 
 
           
+
+  
+
+
 
         </div>
         
@@ -329,8 +465,17 @@
       
 
       
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
 
-      <section class="site-overview-wrap sidebar-panel sidebar-panel-active">
+      <section class="site-overview-wrap sidebar-panel">
         <div class="site-overview">
           <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
             
@@ -418,6 +563,22 @@
         </div>
       </section>
 
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#加载和运行"><span class="nav-number">1.</span> <span class="nav-text">加载和运行</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#数据访问"><span class="nav-number">2.</span> <span class="nav-text">数据访问</span></a></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
       
 
       
@@ -578,6 +739,10 @@
 
 
   
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.4"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.4"></script>
+
+
 
   
 

@@ -81,16 +81,16 @@
 
 <meta name="description" content="在过去的许多年，v8的垃圾回收器发生了很大的变化。这次，Orinoco项目采用了一个连续，能够并行且并发和回退功能的异常强大的收集器。 垃圾收集器会周期性的执行下列几个基本的任务：  鉴别正在运行或者已经没被调用的对象 回收/再利用已经没被调用的对象的内存 清理内存  这些任务一般按顺序执行，有时也会交错执行。在主线程上一些直截了当的方法暂停js执行和按顺序执行所有的任务，这样会造成不可避免和潜在">
 <meta property="og:type" content="article">
-<meta property="og:title" content="Orinoco垃圾回收器">
+<meta property="og:title" content="Orinoco垃圾回收器[译]">
 <meta property="og:url" content="http://yoursite.com/2019/01/30/Orinoco垃圾回收器/index.html">
 <meta property="og:site_name" content="Nei">
 <meta property="og:description" content="在过去的许多年，v8的垃圾回收器发生了很大的变化。这次，Orinoco项目采用了一个连续，能够并行且并发和回退功能的异常强大的收集器。 垃圾收集器会周期性的执行下列几个基本的任务：  鉴别正在运行或者已经没被调用的对象 回收/再利用已经没被调用的对象的内存 清理内存  这些任务一般按顺序执行，有时也会交错执行。在主线程上一些直截了当的方法暂停js执行和按顺序执行所有的任务，这样会造成不可避免和潜在">
 <meta property="og:locale" content="zh-Hans">
 <meta property="og:image" content="http://ww1.sinaimg.cn/large/0060ZzrAgy1fzor82gv64j30lc06lmxb.jpg">
 <meta property="og:image" content="http://ww1.sinaimg.cn/large/0060ZzrAgy1fzpl9t0v1tj30lb07fmx6.jpg">
-<meta property="og:updated_time" content="2019-02-14T09:04:33.353Z">
+<meta property="og:updated_time" content="2019-02-15T09:09:17.914Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="Orinoco垃圾回收器">
+<meta name="twitter:title" content="Orinoco垃圾回收器[译]">
 <meta name="twitter:description" content="在过去的许多年，v8的垃圾回收器发生了很大的变化。这次，Orinoco项目采用了一个连续，能够并行且并发和回退功能的异常强大的收集器。 垃圾收集器会周期性的执行下列几个基本的任务：  鉴别正在运行或者已经没被调用的对象 回收/再利用已经没被调用的对象的内存 清理内存  这些任务一般按顺序执行，有时也会交错执行。在主线程上一些直截了当的方法暂停js执行和按顺序执行所有的任务，这样会造成不可避免和潜在">
 <meta name="twitter:image" content="http://ww1.sinaimg.cn/large/0060ZzrAgy1fzor82gv64j30lc06lmxb.jpg">
 
@@ -128,7 +128,7 @@
 
 
 
-  <title>Orinoco垃圾回收器 | Nei</title>
+  <title>Orinoco垃圾回收器[译] | Nei</title>
   
 
 
@@ -291,7 +291,7 @@
 
         
         
-          <h1 class="post-title" itemprop="name headline">Orinoco垃圾回收器</h1>
+          <h1 class="post-title" itemprop="name headline">Orinoco垃圾回收器[译]</h1>
         
 
         <div class="post-meta">
@@ -478,7 +478,7 @@
               
                 <a href="/archives/">
               
-                  <span class="site-state-item-count">12</span>
+                  <span class="site-state-item-count">14</span>
                   <span class="site-state-item-name">日志</span>
                 </a>
               </div>
@@ -489,7 +489,7 @@
               
               <div class="site-state-item site-state-categories">
                 <a href="/categories/index.html">
-                  <span class="site-state-item-count">6</span>
+                  <span class="site-state-item-count">7</span>
                   <span class="site-state-item-name">分类</span>
                 </a>
               </div>
@@ -500,7 +500,7 @@
               
               <div class="site-state-item site-state-tags">
                 <a href="/tags/index.html">
-                  <span class="site-state-item-count">8</span>
+                  <span class="site-state-item-count">9</span>
                   <span class="site-state-item-name">标签</span>
                 </a>
               </div>

@@ -268,6 +268,399 @@
   
   
   <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/12/19/Array-prototype-reduce/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Nei">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Nei">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2018/12/19/Array-prototype-reduce/" itemprop="url">Array.prototype.reduce</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-12-19T16:58:30+08:00">
+                2018-12-19
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/javascript/" itemprop="url" rel="index">
+                    <span itemprop="name">javascript</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <blockquote>
+<p>执行相应函数，将每次的循环结果汇总并返回。</p>
+</blockquote>
+<h2 id="reducer-函数接收4个参数"><a href="#reducer-函数接收4个参数" class="headerlink" title="reducer 函数接收4个参数:"></a>reducer 函数接收4个参数:</h2><ul>
+<li>Accumulator (acc) (累计器)</li>
+<li>Current Value (cur) (当前值)</li>
+<li>Current Index (idx) (当前索引)</li>
+<li>Source Array (src) (源数组)</li>
+</ul>
+<h2 id="求和"><a href="#求和" class="headerlink" title="求和"></a>求和</h2><pre><code>var sum = [0, 1, 2, 3].reduce(function (accumulator, currentValue) {
+return accumulator + currentValue;
+}, 0);
+// 和为 6
+</code></pre><h2 id="将二维数组转变为一维数组"><a href="#将二维数组转变为一维数组" class="headerlink" title="将二维数组转变为一维数组"></a>将二维数组转变为一维数组</h2><pre><code>var flattened = [[0, 1], [2, 3], [4, 5]].reduce(
+function(a, b) {
+    return a.concat(b);
+},
+[]
+);
+// flattened is [0, 1, 2, 3, 4, 5]  
+</code></pre><h2 id="计算数组中每个元素出现的次数"><a href="#计算数组中每个元素出现的次数" class="headerlink" title="计算数组中每个元素出现的次数"></a>计算数组中每个元素出现的次数</h2><pre><code>var names = [&apos;Alice&apos;, &apos;Bob&apos;, &apos;Tiff&apos;, &apos;Bruce&apos;, &apos;Alice&apos;];
+var countedNames = names.reduce(function (allNames, name) { 
+if (name in allNames) {
+    allNames[name]++;
+}
+else {
+    allNames[name] = 1;
+}
+return allNames;
+}, {});
+// countedNames is:
+// { &apos;Alice&apos;: 2, &apos;Bob&apos;: 1, &apos;Tiff&apos;: 1, &apos;Bruce&apos;: 1 }
+</code></pre><h2 id="按属性对object分类"><a href="#按属性对object分类" class="headerlink" title="按属性对object分类"></a>按属性对object分类</h2><pre><code>var people = [
+{ name: &apos;Alice&apos;, age: 21 },
+{ name: &apos;Max&apos;, age: 20 },
+{ name: &apos;Jane&apos;, age: 20 }
+];
+
+function groupBy(objectArray, property) {
+return objectArray.reduce(function (acc, obj) {
+    var key = obj[property];
+    if (!acc[key]) {
+    acc[key] = [];
+    }
+    acc[key].push(obj);
+    return acc;
+}, {});
+}
+
+var groupedPeople = groupBy(people, &apos;age&apos;);
+// groupedPeople is:
+// { 
+//   20: [
+//     { name: &apos;Max&apos;, age: 20 }, 
+//     { name: &apos;Jane&apos;, age: 20 }
+//   ], 
+//   21: [{ name: &apos;Alice&apos;, age: 21 }] 
+// }
+</code></pre><h2 id="数组去重"><a href="#数组去重" class="headerlink" title="数组去重"></a>数组去重</h2><pre><code>let arr = [1,2,1,2,3,5,4,5,3,4,4,4,4];
+let result = arr.sort().reduce((init, current)=&gt;{
+    if(init.length===0 || init[init.length-1]!==current){
+        init.push(current);
+    }
+    return init;
+}, []);
+console.log(result); //[1,2,3,4,5]
+</code></pre><h2 id="按顺序运行Promise"><a href="#按顺序运行Promise" class="headerlink" title="按顺序运行Promise"></a>按顺序运行Promise</h2><pre><code>function runPromiseInSequence(arr, input) {
+return arr.reduce(
+    (promiseChain, currentFunction) =&gt; promiseChain.then(currentFunction),
+    Promise.resolve(input)
+);
+}
+
+// promise function 1
+function p1(a) {
+return new Promise((resolve, reject) =&gt; {
+    resolve(a * 5);
+});
+}
+
+// promise function 2
+function p2(a) {
+return new Promise((resolve, reject) =&gt; {
+    resolve(a * 2);
+});
+}
+
+// function 3  - will be wrapped in a resolved promise by .then()
+function f3(a) {
+return a * 3;
+}
+
+// promise function 4
+function p4(a) {
+return new Promise((resolve, reject) =&gt; {
+    resolve(a * 4);
+});
+}
+
+const promiseArr = [p1, p2, f3, p4];
+runPromiseInSequence(promiseArr, 10)
+.then(console.log);   // 1200
+</code></pre>
+          
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/12/19/export/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Nei">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Nei">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2018/12/19/export/" itemprop="url">export const VS default export</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-12-19T16:10:43+08:00">
+                2018-12-19
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/javascript/" itemprop="url" rel="index">
+                    <span itemprop="name">javascript</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <h2 id="声明式export对比default-export。"><a href="#声明式export对比default-export。" class="headerlink" title="声明式export对比default export。"></a>声明式export对比default export。</h2><p>　　export const 是用const关键字命名的export。那什么是default export呢，每个文件，你都能有一个default export。当你导入时，你必须明确的写出文件的名字，就像这样：import MyDefaultExport from “./MyFileWithADefaultExport”;但是你在导入的时候不局限于一种命名。</p>
+<h2 id="声明export（export-const）"><a href="#声明export（export-const）" class="headerlink" title="声明export（export const）"></a>声明export（export const）</h2><p>　　当你使用这种规则的时候，你能够在每个文件有多种声明的导入。当你导入明确的export时，你得这样准备。</p>
+<ul>
+<li>导入多重声明exports：import {MyClass, MyOtherClass} from “./MyClass”;</li>
+<li>当有多个文件声明，但是你如果只想要一个声明的时候，你可以使用as：import {MyClass2 as MyClass2Alias} from “./MyClass2”;</li>
+<li>当你想要把一个文件里面的所有的模块都导入出来时，你可以使用as，把它们映射到一个对象上：import * as MyClasses from “./MyClass”;</li>
+</ul>
+<p>　　当你想导入MyClasses.MyClass and MyClass.MyOtherClass时，你能使用default export 或者声明式export，再或者在同时你可以使用这两种规则。句法规则上的优势，default export 更轻量更加的简约，这是为什么它被大量使用的原因。<br>　　note：default export 实际上也是声明式export，只不过是用default 声明，这也是为什么你能够这样导入模块：import {default as MyDefaultExport} from “./MyFileWithADefaultExport”;</p>
+<p>附原文链接：<a href="https://stackoverflow.com/questions/33611812/javascript-es6-export-const-vs-export-default" target="_blank" rel="noopener">https://stackoverflow.com/questions/33611812/javascript-es6-export-const-vs-export-default</a></p>
+
+          
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
     <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/12/19/什么是normalize/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -652,7 +1045,7 @@ input[type=&quot;search&quot;]::-webkit-search-cancel-button {
               
                 <a href="/archives/">
               
-                  <span class="site-state-item-count">12</span>
+                  <span class="site-state-item-count">14</span>
                   <span class="site-state-item-name">日志</span>
                 </a>
               </div>
@@ -663,7 +1056,7 @@ input[type=&quot;search&quot;]::-webkit-search-cancel-button {
               
               <div class="site-state-item site-state-categories">
                 <a href="/categories/index.html">
-                  <span class="site-state-item-count">6</span>
+                  <span class="site-state-item-count">7</span>
                   <span class="site-state-item-name">分类</span>
                 </a>
               </div>
@@ -674,7 +1067,7 @@ input[type=&quot;search&quot;]::-webkit-search-cancel-button {
               
               <div class="site-state-item site-state-tags">
                 <a href="/tags/index.html">
-                  <span class="site-state-item-count">8</span>
+                  <span class="site-state-item-count">9</span>
                   <span class="site-state-item-name">标签</span>
                 </a>
               </div>
