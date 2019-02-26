@@ -90,7 +90,7 @@
 <meta property="og:image" content="http://ww1.sinaimg.cn/large/0060ZzrAgy1g0jtzpwzakj30gn04ggms.jpg">
 <meta property="og:image" content="http://ww1.sinaimg.cn/large/0060ZzrAgy1g0ju0bg80nj30gk09qacx.jpg">
 <meta property="og:image" content="http://ww1.sinaimg.cn/large/0060ZzrAgy1g0jwabtp10j30hh09vtae.jpg">
-<meta property="og:updated_time" content="2019-02-26T08:39:37.099Z">
+<meta property="og:updated_time" content="2019-02-26T08:58:51.123Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="高性能javascript">
 <meta name="twitter:description" content="加载和运行 浏览器以单线程处理ui和js任务，处理方式为串行，一次执行一个任务。（如果浏览器为多线程，浏览器整个设计复杂程度会提高很多。） 浏览器在碰到script标签时，停止其他任务，然后下载script，解析，执行里面的代码。script标签具有阻塞作用。（浏览器遇到href不会阻塞页面，会并行下载，执行其中代码，href为在页面和目标文件之间一种联系，而src则是指向一个资源，相当于插入一段">
@@ -407,7 +407,12 @@
 <li>触发回流的原生api：offsetTop offsetLeft offsetWidth offsetHeight scrollTop scrollLeft scrollWidth scrollHeight clientTop clientLeft clientWidth clientHeight getComputedStyle</li>
 <li>使用cssText 合并dom修改，使用预先定义的className修改dom</li>
 <li>对一个dom元素要进行多次修改时，进行一下操作<br>  a 从文档中去除该元素（display none）/ 使用createDocumentFragment(因为文档片段存在于内存中，并不在DOM树中，所以将子元素插入到文档片段时不会引起页面回流（对元素位置和几何上的计算）。因此，使用文档片段通常会带来更好的性能。过多的插入元素，会使得内存暴涨，同样影响性能。) / 拷贝元素，应用修改，覆盖原始元素<br>  b 对其应用改变<br>  c 从文档中恢复该元素</li>
+<li>避免进行页面大部分区域的回流，使用绝对定位的元素，使其脱离文档流。不影响真个页面。避免推移整个页面。</li>
+<li>每个子元素调用事件api，访问和修改子元素dom浪费了内存和性能，利用代理技术，由子元素的父元素代理子元素处理事件api。（利用事件api的内部对象event）</li>
 </ul>
+<h2 id="算法和流程控制"><a href="#算法和流程控制" class="headerlink" title="算法和流程控制"></a>算法和流程控制</h2><blockquote>
+<p>代码量少不一定运行速度快，代码量多不一定运行速度慢。</p>
+</blockquote>
 
       
     </div>
@@ -606,7 +611,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#加载和运行"><span class="nav-number">1.</span> <span class="nav-text">加载和运行</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#数据访问"><span class="nav-number">2.</span> <span class="nav-text">数据访问</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#dom编程"><span class="nav-number">3.</span> <span class="nav-text">dom编程</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#加载和运行"><span class="nav-number">1.</span> <span class="nav-text">加载和运行</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#数据访问"><span class="nav-number">2.</span> <span class="nav-text">数据访问</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#dom编程"><span class="nav-number">3.</span> <span class="nav-text">dom编程</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#算法和流程控制"><span class="nav-number">4.</span> <span class="nav-text">算法和流程控制</span></a></li></ol></div>
             
 
           </div>

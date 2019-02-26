@@ -398,7 +398,12 @@
 <li>触发回流的原生api：offsetTop offsetLeft offsetWidth offsetHeight scrollTop scrollLeft scrollWidth scrollHeight clientTop clientLeft clientWidth clientHeight getComputedStyle</li>
 <li>使用cssText 合并dom修改，使用预先定义的className修改dom</li>
 <li>对一个dom元素要进行多次修改时，进行一下操作<br>  a 从文档中去除该元素（display none）/ 使用createDocumentFragment(因为文档片段存在于内存中，并不在DOM树中，所以将子元素插入到文档片段时不会引起页面回流（对元素位置和几何上的计算）。因此，使用文档片段通常会带来更好的性能。过多的插入元素，会使得内存暴涨，同样影响性能。) / 拷贝元素，应用修改，覆盖原始元素<br>  b 对其应用改变<br>  c 从文档中恢复该元素</li>
+<li>避免进行页面大部分区域的回流，使用绝对定位的元素，使其脱离文档流。不影响真个页面。避免推移整个页面。</li>
+<li>每个子元素调用事件api，访问和修改子元素dom浪费了内存和性能，利用代理技术，由子元素的父元素代理子元素处理事件api。（利用事件api的内部对象event）</li>
 </ul>
+<h2 id="算法和流程控制"><a href="#算法和流程控制" class="headerlink" title="算法和流程控制"></a>算法和流程控制</h2><blockquote>
+<p>代码量少不一定运行速度快，代码量多不一定运行速度慢。</p>
+</blockquote>
 
           
         
