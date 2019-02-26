@@ -87,10 +87,14 @@
 <meta property="og:site_name" content="Nei">
 <meta property="og:description" content="加载和运行 浏览器以单线程处理ui和js任务，处理方式为串行，一次执行一个任务。（如果浏览器为多线程，浏览器整个设计复杂程度会提高很多。） 浏览器在碰到script标签时，停止其他任务，然后下载script，解析，执行里面的代码。script标签具有阻塞作用。（浏览器遇到href不会阻塞页面，会并行下载，执行其中代码，href为在页面和目标文件之间一种联系，而src则是指向一个资源，相当于插入一段">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:updated_time" content="2019-02-25T13:30:51.313Z">
+<meta property="og:image" content="http://ww1.sinaimg.cn/large/0060ZzrAgy1g0jtzpwzakj30gn04ggms.jpg">
+<meta property="og:image" content="http://ww1.sinaimg.cn/large/0060ZzrAgy1g0ju0bg80nj30gk09qacx.jpg">
+<meta property="og:image" content="http://ww1.sinaimg.cn/large/0060ZzrAgy1g0jwabtp10j30hh09vtae.jpg">
+<meta property="og:updated_time" content="2019-02-26T08:39:37.099Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="高性能javascript">
 <meta name="twitter:description" content="加载和运行 浏览器以单线程处理ui和js任务，处理方式为串行，一次执行一个任务。（如果浏览器为多线程，浏览器整个设计复杂程度会提高很多。） 浏览器在碰到script标签时，停止其他任务，然后下载script，解析，执行里面的代码。script标签具有阻塞作用。（浏览器遇到href不会阻塞页面，会并行下载，执行其中代码，href为在页面和目标文件之间一种联系，而src则是指向一个资源，相当于插入一段">
+<meta name="twitter:image" content="http://ww1.sinaimg.cn/large/0060ZzrAgy1g0jtzpwzakj30gn04ggms.jpg">
 
 
 
@@ -366,7 +370,7 @@
       
 
       
-        <h1 id="加载和运行"><a href="#加载和运行" class="headerlink" title="加载和运行"></a>加载和运行</h1><ul>
+        <h2 id="加载和运行"><a href="#加载和运行" class="headerlink" title="加载和运行"></a>加载和运行</h2><ul>
 <li>浏览器以单线程处理ui和js任务，处理方式为串行，一次执行一个任务。（如果浏览器为多线程，浏览器整个设计复杂程度会提高很多。）</li>
 <li>浏览器在碰到script标签时，停止其他任务，然后下载script，解析，执行里面的代码。script标签具有阻塞作用。（浏览器遇到href不会阻塞页面，会并行下载，执行其中代码，href为在页面和目标文件之间一种联系，而src则是指向一个资源，相当于插入一段资源，会阻塞页面。所以一般将script标签放在前一行。link标签放在head中，优先加载基本样式。当然script标签放在head中䦹可以的，可以添加async标签，进行异步加载。chrome稳定版中，同一域名下并发请求数为6，<a href="https://chromium.googlesource.com/chromium/src/" target="_blank" rel="noopener">chrome相关源码</a>）</li>
 <li>下载一个100k的script比四个25k的script要快，所以尽可能将小的script合并在一个文件中。</li>
@@ -375,7 +379,36 @@
 <li>多数浏览器在下载动态script时，并不会按照顺序下载。</li>
 <li>利用XHR下载脚本，并动态插入到页面中.xhr请求涉及到跨域问题,只能请求不跨域的资源.</li>
 </ul>
-<h1 id="数据访问"><a href="#数据访问" class="headerlink" title="数据访问"></a>数据访问</h1>
+<h2 id="数据访问"><a href="#数据访问" class="headerlink" title="数据访问"></a>数据访问</h2><ul>
+<li>数据存储在哪里，关系到代码运行期间数据被检索到的速度，在javascript中有四种基本的数据访问的位置（1直接量，2变量，3数组项，4对象成员）。</li>
+<li>javascript内部属性[[Scope]]包含一个函数被创建的作用域中对象的集合。此集合被称为函数的作用域链，它决定哪些数据可由函数访问。此函数作用域链中的每个对象被称为一个可变对象，每个可变对象都以“键值对”的形式存在。</li>
+<li>运行一个函数时，就会建立一个内部对象，称为“运行期上下文”。一个运行期上下文定义了一个函数运行时的环境。它是独一无二的。多次调用函数，会多次创建运行期上下文。函数执行完毕，运行期上下文就销毁。</li>
+<li>创建函数时，会填入一个单独的全局对象到被创建的作用域链(用于标识符解析)中，此全局对象包括访问this对象，window对象，document对象，本身的接口。同时也是创建一个被称为“激活对象”填入到作用域链中，此对象包括可访问this，函数参数，函数内部局部变量的接口。<br><img src="http://ww1.sinaimg.cn/large/0060ZzrAgy1g0jtzpwzakj30gn04ggms.jpg" alt=""> <img src="http://ww1.sinaimg.cn/large/0060ZzrAgy1g0ju0bg80nj30gk09qacx.jpg" alt=""></li>
+<li>函数运行中，每遇到变量，标识符识别过程就要决定从哪里获取或存储数据。就会在作用域链中查找相同的标识符，从作用域链的最前端开始，没找到，就往下一个对象查找，直到找到为止。一个标识符的所处的位置越深，读写速度就越慢，全局对象位置最深，出于作用域链中的最后一个位置，通常来说速度最慢。局部变量速度最快。而采用优化的js引擎的浏览器没有此问题。</li>
+<li>在局部作用域中，如果全局变量使用次数多于一次，可以使用局部变量保存全局变量。再调用局部变量。</li>
+<li><p>可以改变运行期上下文的作用域链的方法：with和try catch。</p>
+<!-- + 动态作用域：with，try catch和函数中包含() Code:
+
+   function execute(code){
+       (code);
+       function subroutine(){
+           return window;
+       }
+       var w=subroutine
+       //w值一定是window吗？  当code为 “var window={}”
+   } --></li>
+<li>对象成员中，多次访问的属性，可以用局部变量保存。避免过深的对象属性嵌套</li>
+</ul>
+<h2 id="dom编程"><a href="#dom编程" class="headerlink" title="dom编程"></a>dom编程</h2><ul>
+<li>避免多次读写dom对象</li>
+<li>在使用传统循环时，可以将length用变量保存，避免每次都需要查询length。<br><img src="http://ww1.sinaimg.cn/large/0060ZzrAgy1g0jwabtp10j30hh09vtae.jpg" alt=""></li>
+<li>使用 querySelectorAll比其他获取dom的api更快，且参数类似css选择器。</li>
+<li>触发回流的行为:1添加或删除可见的DOM元素 2元素位置改变 3元素尺寸改变（边距，填充，边框宽度，高度等属性改变） 4内容改变（被更大或更小的尺寸替代） 5最初的页面渲染 6浏览器窗口尺寸改变</li>
+<li>触发回流的原生api：offsetTop offsetLeft offsetWidth offsetHeight scrollTop scrollLeft scrollWidth scrollHeight clientTop clientLeft clientWidth clientHeight getComputedStyle</li>
+<li>使用cssText 合并dom修改，使用预先定义的className修改dom</li>
+<li>对一个dom元素要进行多次修改时，进行一下操作<br>  a 从文档中去除该元素（display none）/ 使用createDocumentFragment(因为文档片段存在于内存中，并不在DOM树中，所以将子元素插入到文档片段时不会引起页面回流（对元素位置和几何上的计算）。因此，使用文档片段通常会带来更好的性能。过多的插入元素，会使得内存暴涨，同样影响性能。) / 拷贝元素，应用修改，覆盖原始元素<br>  b 对其应用改变<br>  c 从文档中恢复该元素</li>
+</ul>
+
       
     </div>
     
@@ -573,7 +606,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#加载和运行"><span class="nav-number">1.</span> <span class="nav-text">加载和运行</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#数据访问"><span class="nav-number">2.</span> <span class="nav-text">数据访问</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#加载和运行"><span class="nav-number">1.</span> <span class="nav-text">加载和运行</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#数据访问"><span class="nav-number">2.</span> <span class="nav-text">数据访问</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#dom编程"><span class="nav-number">3.</span> <span class="nav-text">dom编程</span></a></li></ol></div>
             
 
           </div>
