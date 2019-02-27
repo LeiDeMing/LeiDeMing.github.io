@@ -268,6 +268,147 @@
   
   
   <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/02/26/Web性能权威指南/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Nei">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Nei">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2019/02/26/Web性能权威指南/" itemprop="url">Web性能权威指南</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2019-02-26T17:16:18+08:00">
+                2019-02-26
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/性能/" itemprop="url" rel="index">
+                    <span itemprop="name">性能</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            
+          
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
     <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/02/25/高性能javascript/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -403,7 +544,35 @@
 </ul>
 <h2 id="算法和流程控制"><a href="#算法和流程控制" class="headerlink" title="算法和流程控制"></a>算法和流程控制</h2><blockquote>
 <p>代码量少不一定运行速度快，代码量多不一定运行速度慢。</p>
+<ul>
+<li>es3规定了四种循环（for循环，while循环，do-while循环，for-in循环）。</li>
+<li>倒序循环时性能优化中最常用的手段，能微微提高性能,较少循环迭代次数，能大大的提高循环性能。</li>
+<li>达夫设备循环法。</li>
+<li>使用if-else和switch时，条件数量大，倾向于使用switch，这样会使代码逻辑更加清晰，易于阅读。使用嵌套的if-else比单独使用if-else性能更加好（单独的if-else，每条都需要计算，增加了计算量）if-else更加倾向于连续的数据，而switch倾向于离散的数据。</li>
+<li>在大量数据需要判断时，查表法比if-else，switch性能更加好。查表法需要去除所有判断条件，操作转换成数组或者对象。Code：</li>
+</ul>
 </blockquote>
+<pre><code>var results = [result0, result1, result2, result3, result4, result5, result6, result7, result8, result9, result10] 
+return results[value];
+</code></pre><ul>
+<li>递归和迭代</li>
+</ul>
+<!-- 感觉这一章知识落后了，不发表 -->
+<!-- ## 字符串和正则表达式
++ 首先是一串字符拼接 str += "one" + "two",这里浏览器大概做了四个步骤：
+    a 创建一个临时字符
+    b 将 “onetwo”的 赋值给临时字符
+    c 临时字符与str拼接
+    d 最后结果赋值给str -->
+<h2 id="响应接口"><a href="#响应接口" class="headerlink" title="响应接口"></a>响应接口</h2><ul>
+<li>大多数浏览器有一个单独的处理进程，它由两个任务所共享：JavaScript 任务和用户界面更新任务。JavaScript 和 UI 更新共享的进程通常被称作浏览器 UI 线程。</li>
+<li>大多数浏览器在 JavaScript 运行时停止 UI 线程队列中的任务，主线程任务串行完成。容易阻塞。</li>
+<li>接口应该最好在100ms内对用户做出反应，超过该时间，用户体验差（比如，点击折叠栏，响应时间超过200ms，用户就会觉得延迟特别严重）。</li>
+<li>利用setTineout和setInterval将长脚本分割成多个短片段，利用定时器异步处理分割出来的片段。定时器填入的时间参数，意思为调用setTimeout和setInterval函数开始，经过这个时间参数的时间后，加入UI线程。</li>
+<li>数组循环中，如无需必要，在循环中可以利用定时器异步处理数组元素。</li>
+<li>限制定时器的数量，避免在一定时间内，出现大量定时器，最好控制只有一个定时器对象，意思是创建第二个定时器时，应该销毁前一个。</li>
+<li>web worker 拥有独立的线程，适合大计算,其对象能使用的标准javascript特性。<br>  1 <a href="https://developer.mozilla.org/zh-CN/docs/Web/API/Navigator" target="_blank" rel="noopener">Navigator</a><br>  2 <a href="https://developer.mozilla.org/zh-CN/docs/Web/API/XMLHttpRequest" target="_blank" rel="noopener">XMLHttpRequest</a><br>  3 <a href="https://developer.mozilla.org/zh-CN/docs/Web/JavaScript/Reference/Global_Objects/Array" target="_blank" rel="noopener">Array</a>, <a href="https://developer.mozilla.org/zh-CN/docs/Web/JavaScript/Reference/Global_Objects/Date" target="_blank" rel="noopener">Date</a>, <a href="https://developer.mozilla.org/zh-CN/docs/Web/JavaScript/Reference/Global_Objects/Math" target="_blank" rel="noopener">Math</a>, and <a href="https://developer.mozilla.org/zh-CN/docs/Web/JavaScript/Reference/Global_Objects/String" target="_blank" rel="noopener">String</a><br>  4 <a href="https://developer.mozilla.org/zh-CN/docs/Web/API/WindowTimers/setTimeout" target="_blank" rel="noopener">WindowTimers.setTimeout</a> and <a href="https://developer.mozilla.org/zh-CN/docs/Web/API/WindowTimers/setInterval" target="_blank" rel="noopener">WindowTimers.setInterval</a></li>
+</ul>
 
           
         
@@ -1029,179 +1198,6 @@ Child.prototype=new Parent();
 
 
     
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/01/30/图解http/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="Nei">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/images/avatar.gif">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Nei">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2019/01/30/图解http/" itemprop="url">图解http</a></h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2019-01-30T11:18:17+08:00">
-                2019-01-30
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-            <span class="post-category" >
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">分类于</span>
-              
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/图解http/" itemprop="url" rel="index">
-                    <span itemprop="name">图解http</span>
-                  </a>
-                </span>
-
-                
-                
-              
-            </span>
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <h1 id="第一章"><a href="#第一章" class="headerlink" title="第一章"></a>第一章</h1><h2 id="tcp-ip分层管理"><a href="#tcp-ip分层管理" class="headerlink" title="tcp/ip分层管理"></a>tcp/ip分层管理</h2><blockquote>
-<p>tcp/ip协议族分为四个层次，应用层 ⟶ 传输层 ⟶ 网络层 ⟶ 数据链路层,为什么需要分层呢，难道一层不好吗？还省得麻烦事，一层有一层，，每一层都需要不同的规范，有什么好处呢？</p>
-</blockquote>
-<p>个人的理解，分层的原因在于，分层之后，某处的改动不会影响整体，将一个大的东西分成几个部分之后，设计来说相对于简单了，我们需要考虑的就是每个层次的设计，然后层次与层次之间的接口设计，而不要去设计一个巨大的整体。</p>
-<h3 id="应用层"><a href="#应用层" class="headerlink" title="应用层"></a>应用层</h3><blockquote>
-<p>应用层就是我们使用者打交道的这一层，http协议，ftp，dns服务也包括在其中。</p>
-</blockquote>
-<h3 id="传输层"><a href="#传输层" class="headerlink" title="传输层"></a>传输层</h3><blockquote>
-<p>传输层包括两种协议 tcp协议和udp协议。</p>
-</blockquote>
-<h3 id="网络层"><a href="#网络层" class="headerlink" title="网络层"></a>网络层</h3><blockquote>
-<p>网络层决定了数据包如何从一台计算机传输到另一台计算机</p>
-</blockquote>
-<h3 id="数据链路层"><a href="#数据链路层" class="headerlink" title="数据链路层"></a>数据链路层</h3><blockquote>
-<p>底层，硬件部分。包括操作系统，硬件设备，光驱，光纤等物理可见设备。</p>
-</blockquote>
-<h2 id="tcp-ip通信传输流"><a href="#tcp-ip通信传输流" class="headerlink" title="tcp/ip通信传输流"></a>tcp/ip通信传输流</h2><p>配图<br><img src="http://ww1.sinaimg.cn/large/0060ZzrAgy1fzom784p74j30er0bcdhh.jpg" alt=""></p>
-<p>某个用户在应用层发出请求，想查看某个网页时，传输层会把从应用层接收到的数据（http请求报文）进行分割，添加序号和端口号，然后再转发给网络层，网络层再会其上添加mac地址，这样数据就发送出去了。<br><img src="http://ww1.sinaimg.cn/large/0060ZzrAgy1fzomedy99sj30en0cxtbf.jpg" alt=""></p>
-<p>发送端在层与层之间传输数据时，每经过一层，必定会添加改成的首部信息。接收端则相反，每经过一层，就是去掉相对应的首部信息。这种将数据包装起来的做法叫做封装.</p>
-<h2 id="与http关系密切的协议-ip、tcp和dns"><a href="#与http关系密切的协议-ip、tcp和dns" class="headerlink" title="与http关系密切的协议:ip、tcp和dns"></a>与http关系密切的协议:ip、tcp和dns</h2><h3 id="ip协议"><a href="#ip协议" class="headerlink" title="ip协议"></a>ip协议</h3><blockquote>
-<p>ip协议属于网络层，ip协议的作用就是负责把数据包传送给对方，但是需要满足很多条件，其中比较重要是这两个条件；1 ip地址，2 mac地址。其中ip地址就是节点所分配到的地址，mac地址指的是网卡所属的固定地址，ip地址可以变换，但是mac地址一般不会更改。</p>
-</blockquote>
-<p>我们知道数据包传输时，需要进过许多的中转站，如果中转的时候我们只有下一站的ip地址，我们可以通过ARP协议拿到下一站的mac地址，ARP协议可以通过ip地址反查mac地址。</p>
-<h3 id="tcp协议"><a href="#tcp协议" class="headerlink" title="tcp协议"></a>tcp协议</h3><blockquote>
-<p>tcp协议属于传输层，它提供了字节流服务，字节流服务就是将大块数据分割成以报文段为单位的数据包。并且还是稳定可靠的。为了稳定可靠的传输，tcp协议采用了三次握手策略，即发送端将带有SYN的数据包发送给接收端，接收端接收到，再将带有SYN/ACK的数据包返回给发送端，发送端接收到，再将带有ACK的数据发送给接收端，整个过程结束。如果其中某一个过程终端，tcp协议会再次以相同顺序发送相同的数据包。</p>
-</blockquote>
-<h3 id="dns服务"><a href="#dns服务" class="headerlink" title="dns服务"></a>dns服务</h3><blockquote>
-<p>dns服务提供ip到域名的解析服务,我们一般用域名来访问主机,但是各种各样的域名对于计算机来说,全部识别起来是相当困难的,计算机还是喜欢ip地址这种纯数组组合,所以诞生了dns服务,它提供了ip到域名的映射,使得我们输入域名时,解析域名,找到该域名对应的ip。</p>
-</blockquote>
-<p><img src="http://ww1.sinaimg.cn/large/0060ZzrAgy1fzon5ugicqj30kk0d6whc.jpg" alt=""></p>
-<h2 id="各种协议与HTTP协议之间的关系"><a href="#各种协议与HTTP协议之间的关系" class="headerlink" title="各种协议与HTTP协议之间的关系"></a>各种协议与HTTP协议之间的关系</h2><p><img src="http://ww1.sinaimg.cn/large/0060ZzrAgy1fzon7ophcoj30ad0etdi9.jpg" alt=""></p>
-<p>暂停更新，入坑http权威指南</p>
-
-          
-        
-      
-    </div>
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
   </section>
 
   
@@ -1252,7 +1248,7 @@ Child.prototype=new Parent();
               
                 <a href="/archives/">
               
-                  <span class="site-state-item-count">14</span>
+                  <span class="site-state-item-count">15</span>
                   <span class="site-state-item-name">日志</span>
                 </a>
               </div>

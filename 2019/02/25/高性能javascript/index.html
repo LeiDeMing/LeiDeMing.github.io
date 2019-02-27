@@ -90,7 +90,7 @@
 <meta property="og:image" content="http://ww1.sinaimg.cn/large/0060ZzrAgy1g0jtzpwzakj30gn04ggms.jpg">
 <meta property="og:image" content="http://ww1.sinaimg.cn/large/0060ZzrAgy1g0ju0bg80nj30gk09qacx.jpg">
 <meta property="og:image" content="http://ww1.sinaimg.cn/large/0060ZzrAgy1g0jwabtp10j30hh09vtae.jpg">
-<meta property="og:updated_time" content="2019-02-26T08:58:51.123Z">
+<meta property="og:updated_time" content="2019-02-27T03:27:22.156Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="高性能javascript">
 <meta name="twitter:description" content="加载和运行 浏览器以单线程处理ui和js任务，处理方式为串行，一次执行一个任务。（如果浏览器为多线程，浏览器整个设计复杂程度会提高很多。） 浏览器在碰到script标签时，停止其他任务，然后下载script，解析，执行里面的代码。script标签具有阻塞作用。（浏览器遇到href不会阻塞页面，会并行下载，执行其中代码，href为在页面和目标文件之间一种联系，而src则是指向一个资源，相当于插入一段">
@@ -412,7 +412,35 @@
 </ul>
 <h2 id="算法和流程控制"><a href="#算法和流程控制" class="headerlink" title="算法和流程控制"></a>算法和流程控制</h2><blockquote>
 <p>代码量少不一定运行速度快，代码量多不一定运行速度慢。</p>
+<ul>
+<li>es3规定了四种循环（for循环，while循环，do-while循环，for-in循环）。</li>
+<li>倒序循环时性能优化中最常用的手段，能微微提高性能,较少循环迭代次数，能大大的提高循环性能。</li>
+<li>达夫设备循环法。</li>
+<li>使用if-else和switch时，条件数量大，倾向于使用switch，这样会使代码逻辑更加清晰，易于阅读。使用嵌套的if-else比单独使用if-else性能更加好（单独的if-else，每条都需要计算，增加了计算量）if-else更加倾向于连续的数据，而switch倾向于离散的数据。</li>
+<li>在大量数据需要判断时，查表法比if-else，switch性能更加好。查表法需要去除所有判断条件，操作转换成数组或者对象。Code：</li>
+</ul>
 </blockquote>
+<pre><code>var results = [result0, result1, result2, result3, result4, result5, result6, result7, result8, result9, result10] 
+return results[value];
+</code></pre><ul>
+<li>递归和迭代</li>
+</ul>
+<!-- 感觉这一章知识落后了，不发表 -->
+<!-- ## 字符串和正则表达式
++ 首先是一串字符拼接 str += "one" + "two",这里浏览器大概做了四个步骤：
+    a 创建一个临时字符
+    b 将 “onetwo”的 赋值给临时字符
+    c 临时字符与str拼接
+    d 最后结果赋值给str -->
+<h2 id="响应接口"><a href="#响应接口" class="headerlink" title="响应接口"></a>响应接口</h2><ul>
+<li>大多数浏览器有一个单独的处理进程，它由两个任务所共享：JavaScript 任务和用户界面更新任务。JavaScript 和 UI 更新共享的进程通常被称作浏览器 UI 线程。</li>
+<li>大多数浏览器在 JavaScript 运行时停止 UI 线程队列中的任务，主线程任务串行完成。容易阻塞。</li>
+<li>接口应该最好在100ms内对用户做出反应，超过该时间，用户体验差（比如，点击折叠栏，响应时间超过200ms，用户就会觉得延迟特别严重）。</li>
+<li>利用setTineout和setInterval将长脚本分割成多个短片段，利用定时器异步处理分割出来的片段。定时器填入的时间参数，意思为调用setTimeout和setInterval函数开始，经过这个时间参数的时间后，加入UI线程。</li>
+<li>数组循环中，如无需必要，在循环中可以利用定时器异步处理数组元素。</li>
+<li>限制定时器的数量，避免在一定时间内，出现大量定时器，最好控制只有一个定时器对象，意思是创建第二个定时器时，应该销毁前一个。</li>
+<li>web worker 拥有独立的线程，适合大计算,其对象能使用的标准javascript特性。<br>  1 <a href="https://developer.mozilla.org/zh-CN/docs/Web/API/Navigator" target="_blank" rel="noopener">Navigator</a><br>  2 <a href="https://developer.mozilla.org/zh-CN/docs/Web/API/XMLHttpRequest" target="_blank" rel="noopener">XMLHttpRequest</a><br>  3 <a href="https://developer.mozilla.org/zh-CN/docs/Web/JavaScript/Reference/Global_Objects/Array" target="_blank" rel="noopener">Array</a>, <a href="https://developer.mozilla.org/zh-CN/docs/Web/JavaScript/Reference/Global_Objects/Date" target="_blank" rel="noopener">Date</a>, <a href="https://developer.mozilla.org/zh-CN/docs/Web/JavaScript/Reference/Global_Objects/Math" target="_blank" rel="noopener">Math</a>, and <a href="https://developer.mozilla.org/zh-CN/docs/Web/JavaScript/Reference/Global_Objects/String" target="_blank" rel="noopener">String</a><br>  4 <a href="https://developer.mozilla.org/zh-CN/docs/Web/API/WindowTimers/setTimeout" target="_blank" rel="noopener">WindowTimers.setTimeout</a> and <a href="https://developer.mozilla.org/zh-CN/docs/Web/API/WindowTimers/setInterval" target="_blank" rel="noopener">WindowTimers.setInterval</a></li>
+</ul>
 
       
     </div>
@@ -452,6 +480,10 @@
           <span class="post-nav-divider"></span>
 
           <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2019/02/26/Web性能权威指南/" rel="prev" title="Web性能权威指南">
+                Web性能权威指南 <i class="fa fa-chevron-right"></i>
+              </a>
             
           </div>
         </div>
@@ -528,7 +560,7 @@
               
                 <a href="/archives/">
               
-                  <span class="site-state-item-count">14</span>
+                  <span class="site-state-item-count">15</span>
                   <span class="site-state-item-name">日志</span>
                 </a>
               </div>
@@ -611,7 +643,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#加载和运行"><span class="nav-number">1.</span> <span class="nav-text">加载和运行</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#数据访问"><span class="nav-number">2.</span> <span class="nav-text">数据访问</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#dom编程"><span class="nav-number">3.</span> <span class="nav-text">dom编程</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#算法和流程控制"><span class="nav-number">4.</span> <span class="nav-text">算法和流程控制</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#加载和运行"><span class="nav-number">1.</span> <span class="nav-text">加载和运行</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#数据访问"><span class="nav-number">2.</span> <span class="nav-text">数据访问</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#dom编程"><span class="nav-number">3.</span> <span class="nav-text">dom编程</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#算法和流程控制"><span class="nav-number">4.</span> <span class="nav-text">算法和流程控制</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#响应接口"><span class="nav-number">5.</span> <span class="nav-text">响应接口</span></a></li></ol></div>
             
 
           </div>
