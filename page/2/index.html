@@ -371,7 +371,8 @@
       
         
           
-            <h1 id="第一章"><a href="#第一章" class="headerlink" title="第一章"></a>第一章</h1><h2 id="tcp-ip分层管理"><a href="#tcp-ip分层管理" class="headerlink" title="tcp/ip分层管理"></a>tcp/ip分层管理</h2><blockquote>
+            <p>暂停更新，入坑http权威指南</p>
+<h1 id="第一章"><a href="#第一章" class="headerlink" title="第一章"></a>第一章</h1><h2 id="tcp-ip分层管理"><a href="#tcp-ip分层管理" class="headerlink" title="tcp/ip分层管理"></a>tcp/ip分层管理</h2><blockquote>
 <p>tcp/ip协议族分为四个层次，应用层 ⟶ 传输层 ⟶ 网络层 ⟶ 数据链路层,为什么需要分层呢，难道一层不好吗？还省得麻烦事，一层有一层，，每一层都需要不同的规范，有什么好处呢？</p>
 </blockquote>
 <p>个人的理解，分层的原因在于，分层之后，某处的改动不会影响整体，将一个大的东西分成几个部分之后，设计来说相对于简单了，我们需要考虑的就是每个层次的设计，然后层次与层次之间的接口设计，而不要去设计一个巨大的整体。</p>
@@ -402,7 +403,6 @@
 </blockquote>
 <p><img src="http://ww1.sinaimg.cn/large/0060ZzrAgy1fzon5ugicqj30kk0d6whc.jpg" alt=""></p>
 <h2 id="各种协议与HTTP协议之间的关系"><a href="#各种协议与HTTP协议之间的关系" class="headerlink" title="各种协议与HTTP协议之间的关系"></a>各种协议与HTTP协议之间的关系</h2><p><img src="http://ww1.sinaimg.cn/large/0060ZzrAgy1fzon7ophcoj30ad0etdi9.jpg" alt=""></p>
-<p>暂停更新，入坑http权威指南</p>
 
           
         
@@ -1560,7 +1560,7 @@ Demo(conf)
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/12/21/迈向数据可视化之路之canvas/">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/12/20/js模式第三章/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="Nei">
@@ -1579,7 +1579,7 @@ Demo(conf)
         
           <h1 class="post-title" itemprop="name headline">
                 
-                <a class="post-title-link" href="/2018/12/21/迈向数据可视化之路之canvas/" itemprop="url">迈向数据可视化之路之canvas</a></h1>
+                <a class="post-title-link" href="/2018/12/20/js模式第三章/" itemprop="url">js模式第三章</a></h1>
         
 
         <div class="post-meta">
@@ -1591,8 +1591,8 @@ Demo(conf)
               
                 <span class="post-meta-item-text">发表于</span>
               
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-12-21T15:53:37+08:00">
-                2018-12-21
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-12-20T10:38:45+08:00">
+                2018-12-20
               </time>
             
 
@@ -1614,8 +1614,8 @@ Demo(conf)
               
               
                 <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/数据可视化/" itemprop="url" rel="index">
-                    <span itemprop="name">数据可视化</span>
+                  <a href="/categories/设计模式/" itemprop="url" rel="index">
+                    <span itemprop="name">设计模式</span>
                   </a>
                 </span>
 
@@ -1632,8 +1632,8 @@ Demo(conf)
                 <span class="post-meta-item-icon">
                   <i class="fa fa-comment-o"></i>
                 </span>
-                <a href="/2018/12/21/迈向数据可视化之路之canvas/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count valine-comment-count" data-xid="/2018/12/21/迈向数据可视化之路之canvas/" itemprop="commentCount"></span>
+                <a href="/2018/12/20/js模式第三章/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count valine-comment-count" data-xid="/2018/12/20/js模式第三章/" itemprop="commentCount"></span>
                 </a>
               </span>
             
@@ -1663,8 +1663,54 @@ Demo(conf)
       
         
           
-            <p>## </p>
+            <h2 id="for循环"><a href="#for循环" class="headerlink" title="for循环"></a>for循环</h2><blockquote>
+<p>循环对象为dom时，保存dom对象的长度可以提高浏览器性能（现在还是的嘛？）</p>
+</blockquote>
+<h2 id="来自构造函数的对象"><a href="#来自构造函数的对象" class="headerlink" title="来自构造函数的对象"></a>来自构造函数的对象</h2><blockquote>
+<p>目前，我所说知道的两种创建对象的方法，对象字面量和new Object。其中，对象字面量方法更简单明了，另一个原因是它只是强调了该对象仅是一个可变哈希映射，而不是从对象中提取属性和方法。与new Object相比，对象字面量没有作用域解析，因为它可能创造了一个一样的局部构造函数，解析器需要从调用Object的位置一直向上查找，直到找到object的全局构造函数。</p>
+</blockquote>
+<pre><code>var car = { goes: &quot;far&quot;} // 对象字面量发
 
+//构造函数法
+var car = new Object();
+car.goes = far;
+</code></pre><blockquote>
+<p>当一操作符调用构造函数时，函数内部将会发生以下情况：</p>
+<ul>
+<li>创建一个空对象并且this变量引用了该对象，同时还继承了该函数的原型。</li>
+<li>属性和方法被加入到this引用的对象中。</li>
+<li>新创建的对象由this所引用，并且最后隐式地返回this（如果没有显式地返回其他对象）。</li>
+</ul>
+</blockquote>
+<pre><code>var Person=function(name){
+    //使用对象字面量模式创建一个新对象
+    //var this=Object.create(Person.prototype);
+
+    向对象添加属性和方法
+    this.name=name;
+    this.say=function(){
+        return &quot;Hello World!&quot;
+    }
+
+    // return this;
+}
+</code></pre><h2 id="自调用构造函数"><a href="#自调用构造函数" class="headerlink" title="自调用构造函数"></a>自调用构造函数</h2><blockquote>
+<p>为了解决实例化对象时，忘记写new的缺点，并使得原型属性可在实例对象中使用，那么可以考虑下面的方法，具体来说，可以在构造函数中检查this是否为构造函数的一个实例，如果为否，构造函数可以再次调用自身，并且在这次调用中正确地使用new操作符：</p>
+</blockquote>
+<pre><code>function Waffle(){
+    if(!(this instanceof Waffle)){
+        return new Waffle();
+    }
+    this.tastes= &quot;yummy&quot;;
+}
+Waffle.prototype.wantAnother = true;
+
+var first=new Waffle(),
+    second=Waffle();
+
+console.log(first.tastes;) //输出&quot;yummy&quot;
+console.log(second.tastes;)//输出&quot;yummy&quot;
+</code></pre>
           
         
       
@@ -1749,7 +1795,7 @@ Demo(conf)
               
                 <a href="/archives/">
               
-                  <span class="site-state-item-count">15</span>
+                  <span class="site-state-item-count">14</span>
                   <span class="site-state-item-name">日志</span>
                 </a>
               </div>
@@ -1760,7 +1806,7 @@ Demo(conf)
               
               <div class="site-state-item site-state-categories">
                 <a href="/categories/index.html">
-                  <span class="site-state-item-count">7</span>
+                  <span class="site-state-item-count">6</span>
                   <span class="site-state-item-name">分类</span>
                 </a>
               </div>
@@ -1771,7 +1817,7 @@ Demo(conf)
               
               <div class="site-state-item site-state-tags">
                 <a href="/tags/index.html">
-                  <span class="site-state-item-count">9</span>
+                  <span class="site-state-item-count">8</span>
                   <span class="site-state-item-name">标签</span>
                 </a>
               </div>
