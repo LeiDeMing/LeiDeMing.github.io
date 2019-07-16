@@ -268,6 +268,660 @@
   
   
   <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/12/24/js模式第四章/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Nei">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Nei">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2018/12/24/js模式第四章/" itemprop="url">js模式第四章</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-12-24T15:30:07+08:00">
+                2018-12-24
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/设计模式/" itemprop="url" rel="index">
+                    <span itemprop="name">设计模式</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+              <span class="post-comments-count">
+                <span class="post-meta-divider">|</span>
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-comment-o"></i>
+                </span>
+                <a href="/2018/12/24/js模式第四章/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count valine-comment-count" data-xid="/2018/12/24/js模式第四章/" itemprop="commentCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <h2 id="第四章-函数"><a href="#第四章-函数" class="headerlink" title="第四章 函数"></a>第四章 函数</h2><blockquote>
+<p>函数表达式和函数声明式：</p>
+</blockquote>
+<pre><code>//命名函数表达式
+var demo=funtion d(){
+    console.log(&quot;Hello World!&quot;);
+};
+
+//函数表达式
+var demo=function(){
+    console.log(&quot;Hello World!&quot;);
+};
+
+//函数声明式
+function demo(){
+    console.log(&quot;Hello World!&quot;)
+}
+</code></pre><h3 id="区别："><a href="#区别：" class="headerlink" title="区别："></a>区别：</h3><ul>
+<li>函数表达式又分为<strong>命令函数表达式</strong>和<strong>函数表达式</strong>（匿名函数）,并且<strong>函数表达式</strong>结尾需要加上分号,而函数声明式则不需要。</li>
+<li><p><strong>函数声明式</strong>会进行<strong>变量提升</strong>，<strong>而函数表达式</strong>则不会。</p>
+<p>  //全局函数<br>  function foo(){</p>
+<pre><code>alert(&apos;global foo&apos;);
+</code></pre><p>  }</p>
+<p>  function bar(){</p>
+<pre><code>alert(&apos;global bar&apos;)
+</code></pre><p>  }</p>
+<p>  function hoistMe(){</p>
+<pre><code>console.log(typeof foo); //输出 &quot;function&quot;
+console.log(typeof bar); //输出 &quot;undefined&quot;
+
+foo();//输出&quot;local foo&quot;
+bar();//输出TypeError: bar is not function
+
+//函数声明
+//变量&apos;foo&apos;以及其实现着2被提升
+function foo(){
+    alert(&apos;local foo&apos;);
+}
+
+//函数表达式
+//仅变量 &apos;bar&apos; 提升
+//函数实现并未提升
+var bar = function () {
+    alert(&apos;local bar&apos;)
+}
+</code></pre><p>  }</p>
+</li>
+</ul>
+<h2 id="回调模式"><a href="#回调模式" class="headerlink" title="回调模式"></a>回调模式</h2><blockquote>
+<p>函数都是对象，函数可以被当做参数传递给其他函数，当一个函数被当做参数传递给另一个函数，且执行，这叫回调。</p>
+</blockquote>
+<p>Code：</p>
+<pre><code>function writeCode(callback){
+    //do something
+    callback();
+}
+
+function introduce(){
+    // do something
+}
+
+//传递函数，执行回调
+writeCode(introduce);
+</code></pre><h3 id="回调与作用域"><a href="#回调与作用域" class="headerlink" title="回调与作用域"></a>回调与作用域</h3><blockquote>
+<p>如果传递的对象不是一个函数，而是一个对象的方法，并且这个方法用this来引用所属的对象，那可能会导致意想不到的后果。</p>
+</blockquote>
+<p>假设一个方法paint(),它是一个名为myapp的对象的方法：</p>
+<pre><code>var myapp={};
+myapp.color=&quot;red&quot;;
+myapp.paint=function(node){
+    node.style.color=this.color;
+};
+</code></pre><p>函数findNodes()执行以下语句：</p>
+<pre><code>var findNodes=function(callback){
+    // ...
+    if(typeof callback === &quot;function&quot;){
+        callback(found);
+    }
+};
+</code></pre><p>如果执行findNodes(myapp.paint)并不会得到如期的结果，因为此时this的引用的对象发生了改变，变成了findNodes，而findNodes并没有color这个属性。那我们怎么得到预期的结果呢？</p>
+<p>一个解决方法，我们传递回调函数，并且也传递回调函数所属的对象：</p>
+<pre><code>var findNodes = function(callback,callback_obj){
+    // ...
+    if(typeof callback === &quot;function&quot;){
+        callback(callback_obj,found);
+    }
+};
+</code></pre><p>那我们的写法将变成findNodes(myapp.paint,myapp)，我们也可以将第一个参数写成字符串的形式，这样无需写两遍对象名，<br>findNodes(“paint”,myapp),Code：</p>
+<pre><code>var findNodes = function(callback,callback_obj){
+    // ...  
+    if(typeof callback === &quot;string&quot; ){
+        callback = callback_obj[callback]
+    }
+
+    if(typeof callback === &quot;function&quot;){
+        callback.call(callback_obj,found)
+    }
+};
+</code></pre><h2 id="返回函数"><a href="#返回函数" class="headerlink" title="返回函数"></a>返回函数</h2><blockquote>
+<p>函数也是对象，因此它们也可以用作为返回值。<br>下面有个demo：</p>
+</blockquote>
+<pre><code>var setup=function(){
+    alert(1);
+    return function(){
+        alert(2);
+    };
+};
+var my=setup(); //alert 1
+my(); // alert 2
+</code></pre><blockquote>
+<p>由于setup()包装了返回函数，它创建了一个闭包(粗俗的理解就是函数中的函数)，可以用这个闭包存储一些私有数据，这些数据仅可以被该返回函数访问，但外部代码却无法访问。<br>Code：</p>
+</blockquote>
+<pre><code>var setup=function(){
+    var count = 0;
+    return function(){
+        return (count+=1);
+    };
+};
+
+var next=setup();
+next(); //result is 1
+next(); //result is 2
+next(); //result is 3
+</code></pre><h2 id="自定义函数"><a href="#自定义函数" class="headerlink" title="自定义函数"></a>自定义函数</h2><blockquote>
+<p>如果创建了一个新函数并且将其分配给保存另外函数的同一个变量，那么就以一个新函数覆盖了旧函数。在某种程度上，回收了旧函数指针以指向一个新函数。而这一切发生在旧函数体的内部。在这种情况下，该函数以一个新的实现覆盖并重新定义了自身，这可能听起来比实际上更复杂，Code：</p>
+</blockquote>
+<pre><code>var scareMe=function(){
+    alert(&quot;Boo!&quot;);
+    scareMe=function(){
+        alert(&quot;Double boo!&quot;);
+    };
+};
+
+scareMe(); //输出 Boo
+scareMe(); //输出 Double boo!
+</code></pre><blockquote>
+<p> 当函数有且执行一次时，这种模式非常有效。<br>但是这种模式有个缺点，就是定义在自身时，已添加的属性和方法都会丢失，此外，如果该函数使用了不同的名称，比如重新分配给了另外一个变量或者以对象的方法来使用，那么重定义的部分将永远不会发生。并且将会执行原函数体。<br>Code：</p>
+</blockquote>
+<pre><code>//1 添加一个新属性
+scareMe.property=&quot;property&quot;;
+
+//2 赋值给另一个不同名称的变量
+var prank=scareMe;
+
+//3 作为一个方法使用
+var spooky = {
+    boo:scareMe
+};
+
+// 
+prank(); //输出 &quot;bool&quot;
+prank(); //输出 &quot;bool&quot;
+console.log(prank.property) //输出 &quot;property&quot;
+
+spooky.boo(); //输出 &quot;bool&quot;
+spooky.boo(); //输出 &quot;bool&quot;
+console.log(spooky.boo.property); //输出 &quot;property&quot;
+
+scareMe(); //输出 &quot;Double boo!&quot;
+scareMe(); //输出 &quot;Double boo!&quot;
+console.log(scareMe.property); // 输出 &quot;undefined&quot;
+</code></pre><p>当我们以新名称和作为一个方法使用时，scareMe指针一直被重写，至此scareMe函数自定义的部分一直没有执行。直到当我们直接执行scareMe时，指针没有被重写，自定义部分才得以执行。</p>
+<h2 id="即时函数"><a href="#即时函数" class="headerlink" title="即时函数"></a>即时函数</h2><blockquote>
+<p>即时函数模式，该模式有一下几部分组成：</p>
+</blockquote>
+<ul>
+<li>可以使用函数表达式定义一个函数（函数声明则无法达到这个效果）</li>
+<li>在末尾添加一组括号，这将导致该函数立即执行。</li>
+<li>将整个函数包括在括号中（只有不将该函数分配给变量才需要这样做）。</li>
+</ul>
+<blockquote>
+<p>这种模式的好处就是形成了作用域沙箱。避免了全局污染，并且可以执行一些一次新函数，而不必去创建复用函数。</p>
+</blockquote>
+<pre><code>(function(){
+    var days=[&apos;Sun&apos;,&apos;Mon&apos;,&apos;Tue&apos;,&apos;Wed&apos;,&apos;Thu&apos;,&apos;Fri&apos;,&apos;Sat&apos;],
+        today=new Date(),
+        msg=&apos;Today is &apos; + days[today.getDay()] + &apos;, &apos; + today.getDate();
+    alert(msg);
+}())
+</code></pre><h3 id="即时函数的参数"><a href="#即时函数的参数" class="headerlink" title="即时函数的参数"></a>即时函数的参数</h3><blockquote>
+<p>即时函数同样可以传递参数，Code：</p>
+</blockquote>
+<pre><code>;(function(who,when){
+    console.log(&quot;I met &quot; + who + &quot; on &quot; + when)
+})(&quot;Nei&quot;,new Date());
+</code></pre><h3 id="即时函数的返回值"><a href="#即时函数的返回值" class="headerlink" title="即时函数的返回值"></a>即时函数的返回值</h3><blockquote>
+<p>当然即时函数同样可以返回值，Code：</p>
+</blockquote>
+<pre><code>var result=(function(){
+    return 2+2;
+})();
+</code></pre><blockquote>
+<p>赋值给一个变量时，即时函数可以不需要最外层括号，Code：</p>
+</blockquote>
+<pre><code>var result=function(){
+    return 2+2;
+}();
+</code></pre><blockquote>
+<p>即时函数不单单可以返回整数值，同样还可以返回其他类型，例如返回函数。形成一个闭包，在一个函数作用域中保留变量。Code：</p>
+</blockquote>
+<pre><code>var getResult=(function(){
+    var res = 2 + 2;
+    return function(){
+        return res;
+    };
+})();
+</code></pre><blockquote>
+<p>于是我们可以借用即时函数，在创建对象时，可以将对象的属性永久保留在内存中。Code：</p>
+</blockquote>
+<pre><code>var o = {
+    message: (function(){
+        var who = &quot;me&quot;,
+            what = &quot;call&quot;;
+        return who + &quot; &quot; + what;
+    })(),
+    getMsg:function(){
+        return this.message;
+    }
+};
+</code></pre><h3 id="优点"><a href="#优点" class="headerlink" title="优点"></a>优点</h3><ul>
+<li>即时函数模式创建了自调用的函数局部变量，避免了全局空间被临时变量污染。</li>
+</ul>
+<!-- ## 即时对象初始化 -->
+<h2 id="初始化时分支"><a href="#初始化时分支" class="headerlink" title="初始化时分支"></a>初始化时分支</h2><blockquote>
+<p>初始化时分支时一种优化模式，当知道某个条件在整个程序生命周期内都不会发生改变的时候，仅对该条件测试一次时很有意义的。浏览器嗅探（功能检测）就是一个典型的例子。Code：</p>
+</blockquote>
+<pre><code>var utils = {
+    addListener:function(el,type,fn){
+        if(typeof window.addEvenListener === &quot;function&quot;){
+            el.addEventListener(type,fn,false);
+        }else if(typeof document.attachEvent === &quot;function&quot;){
+            el.attachEven(&apos;on&apos;+type,fn);
+        }
+    },
+    removeListener:function(el,type,fn){
+        //......
+    }
+};
+// 当我们每次调用utils.addListener 或 utils.removeListener时，都会重复执行检测代码。但是对于这样不会变的特性时，我们可以执行一次性检查代码。
+</code></pre><p>一次性检查Code：</p>
+<pre><code>var utils = {
+    addListener:null,
+    removeListener:null
+};
+
+if(typeof window.addEventListener===&quot;function&quot;{
+    utils.addListener = function(el,type,fn){
+        el.addEventListener(type,fn,false);
+    };
+    utils.removeListener = function (el,type,fn) {
+        el.removeEventListener(type,fn,false);
+    }
+}else if(){
+    // ie......
+}else{
+    // 更早浏览器兼容模式
+}
+</code></pre><h2 id="备忘模式"><a href="#备忘模式" class="headerlink" title="备忘模式"></a>备忘模式</h2><blockquote>
+<p>函数也是对象，我们可以添加属性上去，例如我们在大量计算的时候，就可以将结果缓存在函数对象上，Code：</p>
+</blockquote>
+<pre><code>var myFunc = function (param){
+    if(!myFunc.cache[param]){
+        var result = {};
+        //...大计算
+        myFunc.cache[param]=result;
+    }
+    return myFunc.cache[param]
+};
+myFunc.cache={};
+</code></pre><p>当然我们的参数一般都不只一个，这时怎么办呢？看Code：</p>
+<pre><code>var myFunc = function (){
+    var cachekey = JSON.stringfy(Array.prototype.slice.call(arguments)),
+        result;
+    if(!myFunc.cache[cachekey]){
+        result = {};
+        //...大计算
+        myFunc.cache[cachekey]=result;
+    }
+    return myFunc.cache[cachekey]
+};
+myFunc.cache={};
+</code></pre><h2 id="配置对象"><a href="#配置对象" class="headerlink" title="配置对象"></a>配置对象</h2><blockquote>
+<p>调用函数，传入参数时，一种传参方式是多少个参数传递多少个参数，Code：</p>
+</blockquote>
+<pre><code>Demo(one,two,three,four,five,...);
+</code></pre><p>但是这样传参，参数一旦很多，函数将变得难看和难以维护。<br>所以我们传参时，将参数写进一个对象中，这样传参就是只有传递一个对象。</p>
+<pre><code>var conf={
+    username:&apos;Nei&apos;,
+    first:&apos;N&apos;,
+    last:&apos;de&apos;
+};
+
+Demo(conf)
+</code></pre><p>配置对象的优点在于：</p>
+<ul>
+<li>不需要记住众多的参数以及其顺序。</li>
+<li>可以安全忽略可选参数。</li>
+<li>更加易于阅读和维护。</li>
+<li>更加易于添加和删除参数。</li>
+</ul>
+<p>而缺点在于：</p>
+<ul>
+<li>需要记住参数名称。</li>
+<li>属性名称无法被压缩。？<!-- ## curry --></li>
+</ul>
+
+          
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/12/20/js模式第三章/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Nei">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Nei">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2018/12/20/js模式第三章/" itemprop="url">js模式第三章</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-12-20T10:38:45+08:00">
+                2018-12-20
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/设计模式/" itemprop="url" rel="index">
+                    <span itemprop="name">设计模式</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+              <span class="post-comments-count">
+                <span class="post-meta-divider">|</span>
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-comment-o"></i>
+                </span>
+                <a href="/2018/12/20/js模式第三章/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count valine-comment-count" data-xid="/2018/12/20/js模式第三章/" itemprop="commentCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <h2 id="for循环"><a href="#for循环" class="headerlink" title="for循环"></a>for循环</h2><blockquote>
+<p>循环对象为dom时，保存dom对象的长度可以提高浏览器性能（现在还是的嘛？）</p>
+</blockquote>
+<h2 id="来自构造函数的对象"><a href="#来自构造函数的对象" class="headerlink" title="来自构造函数的对象"></a>来自构造函数的对象</h2><blockquote>
+<p>目前，我所说知道的两种创建对象的方法，对象字面量和new Object。其中，对象字面量方法更简单明了，另一个原因是它只是强调了该对象仅是一个可变哈希映射，而不是从对象中提取属性和方法。与new Object相比，对象字面量没有作用域解析，因为它可能创造了一个一样的局部构造函数，解析器需要从调用Object的位置一直向上查找，直到找到object的全局构造函数。</p>
+</blockquote>
+<pre><code>var car = { goes: &quot;far&quot;} // 对象字面量发
+
+//构造函数法
+var car = new Object();
+car.goes = far;
+</code></pre><blockquote>
+<p>当一操作符调用构造函数时，函数内部将会发生以下情况：</p>
+<ul>
+<li>创建一个空对象并且this变量引用了该对象，同时还继承了该函数的原型。</li>
+<li>属性和方法被加入到this引用的对象中。</li>
+<li>新创建的对象由this所引用，并且最后隐式地返回this（如果没有显式地返回其他对象）。</li>
+</ul>
+</blockquote>
+<pre><code>var Person=function(name){
+    //使用对象字面量模式创建一个新对象
+    //var this=Object.create(Person.prototype);
+
+    向对象添加属性和方法
+    this.name=name;
+    this.say=function(){
+        return &quot;Hello World!&quot;
+    }
+
+    // return this;
+}
+</code></pre><h2 id="自调用构造函数"><a href="#自调用构造函数" class="headerlink" title="自调用构造函数"></a>自调用构造函数</h2><blockquote>
+<p>为了解决实例化对象时，忘记写new的缺点，并使得原型属性可在实例对象中使用，那么可以考虑下面的方法，具体来说，可以在构造函数中检查this是否为构造函数的一个实例，如果为否，构造函数可以再次调用自身，并且在这次调用中正确地使用new操作符：</p>
+</blockquote>
+<pre><code>function Waffle(){
+    if(!(this instanceof Waffle)){
+        return new Waffle();
+    }
+    this.tastes= &quot;yummy&quot;;
+}
+Waffle.prototype.wantAnother = true;
+
+var first=new Waffle(),
+    second=Waffle();
+
+console.log(first.tastes;) //输出&quot;yummy&quot;
+console.log(second.tastes;)//输出&quot;yummy&quot;
+</code></pre>
+          
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
     <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/12/19/Array-prototype-reduce/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -862,184 +1516,11 @@ input[type=&quot;search&quot;]::-webkit-search-cancel-button {
 
 
     
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/12/13/touch相关/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="Nei">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/images/avatar.gif">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Nei">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2018/12/13/touch相关/" itemprop="url">touch相关</a></h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-12-13T16:51:04+08:00">
-                2018-12-13
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-            <span class="post-category" >
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">分类于</span>
-              
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/javascript/" itemprop="url" rel="index">
-                    <span itemprop="name">javascript</span>
-                  </a>
-                </span>
-
-                
-                
-              
-            </span>
-          
-
-          
-            
-              <span class="post-comments-count">
-                <span class="post-meta-divider">|</span>
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-comment-o"></i>
-                </span>
-                <a href="/2018/12/13/touch相关/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count valine-comment-count" data-xid="/2018/12/13/touch相关/" itemprop="commentCount"></span>
-                </a>
-              </span>
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <h1 id="H5-touch相关"><a href="#H5-touch相关" class="headerlink" title="H5 touch相关"></a>H5 touch相关</h1><h2 id="touchEvent"><a href="#touchEvent" class="headerlink" title="touchEvent"></a>touchEvent</h2><blockquote>
-<p>TouchEvent 是一类描述手指在触摸平面（触摸屏、触摸板等）的状态变化的事件。这类事件用于描述一个或多个触点，使开发者可以检测触点的移动，触点的增加和减少，等等。</p>
-</blockquote>
-<blockquote>
-<p>每 个 Touch 对象代表一个触点; 每个触点都由其位置，大小，形状，压力大小，和目标 element 描述。 TouchList 对象代表多个触点的一个列表.</p>
-</blockquote>
-<h2 id="属性列表"><a href="#属性列表" class="headerlink" title="属性列表"></a>属性列表</h2><ul>
-<li>TouchEvent的属性继承了 UIEvent 和 Event。<br>TouchEvent.altKey 只读。</li>
-<li>布尔值，指明触摸事件触发时，键盘 alt 键是否被按下。<br>TouchEvent.changedTouches 只读。</li>
-<li>一个 TouchList 对象，包含了代表所有从上一次触摸事件到此次事件过程中，状态发生了改变的触点的 Touch 对象。<br>TouchEvent.ctrlKey 只读。</li>
-<li>布尔值，指明触摸事件触发时，键盘 ctrl 键是否被按下。<br>TouchEvent.metaKey 只读。</li>
-<li>布尔值，指明触摸事件触发时，键盘 meta 键 （Wikipedia - meta Key）是否被按下。<br>TouchEvent.shiftKey 只读。</li>
-<li>布尔值，指明触摸事件触发时，键盘 shift 键是否被按下。<br>TouchEvent.targetTouches 只读。</li>
-<li>一个 TouchList 对象，是包含了如下触点的 Touch 对象：触摸起始于当前事件的目标 element 上，并且仍然没有离开触摸平面的触点。<br>TouchEvent.touches 只读。</li>
-<li>一 个 TouchList 对象，包含了所有当前接触触摸平面的触点的 Touch 对象，无论它们的起始于哪个 element 上，也无论它们状态是否发生了变化。</li>
-</ul>
-<h2 id="触摸事件的类型"><a href="#触摸事件的类型" class="headerlink" title="触摸事件的类型"></a>触摸事件的类型</h2><blockquote>
-<p>为了区别触摸相关的状态改变，存在多种类型的触摸事件。可以通过检查触摸事件的 TouchEvent.type 属性来确定当前事件属于哪种类型 </p>
-</blockquote>
-<h3 id="touchstart"><a href="#touchstart" class="headerlink" title="touchstart"></a>touchstart</h3><p>当用户在触摸平面上放置了一个触点时触发。事件的目标 element 将是触点位置上的那个目标 element</p>
-<h3 id="touchend"><a href="#touchend" class="headerlink" title="touchend"></a>touchend</h3><p>当一个触点被用户从触摸平面上移除（当用户将一个手指离开触摸平面）时触发。当触点移出触摸平面的边界时也将触发。例如用户将手指划出屏幕边缘。<br>事件的目标 element 和这个 touchend 事件对应的 touchstart 事件的目标 element 相同，哪怕 touchend 事件触发时，触点已经移出了该 element 。<br>已经被从触摸平面上移除的触点，可以在 changedTouches 属性定义的 TouchList 中找到。</p>
-<h3 id="touchmove"><a href="#touchmove" class="headerlink" title="touchmove"></a>touchmove</h3><p>当用户在触摸平面上移动触点时触发。事件的目标 element 和这个 touchmove 事件对应的 touchstart 事件的目标 element 相同，哪怕当 touchmove 事件触发时，触点已经移出了该 element 。<br>当触点的半径、旋转角度以及压力大小发生变化时，也将触发此事件。<br>touchcancel<br>当触点由于某些原因被中断时触发。有几种可能的原因如下（具体的原因根据不同的设备和浏览器有所不同）：<br>由于某个事件取消了触摸：例如触摸过程被一个模态的弹出框打断。<br>触点离开了文档窗口，而进入了浏览器的界面元素、插件或者其他外部内容区域。<br>当用户产生的触点个数超过了设备支持的个数，从而导致 TouchList 中最早的 Touch 对象被取消。<br>以上内容均来源于MDN。</p>
-
-          
-        
-      
-    </div>
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
   </section>
 
   
   <nav class="pagination">
-    <a class="extend prev" rel="prev" href="/page/2/"><i class="fa fa-angle-left"></i></a><a class="page-number" href="/">1</a><a class="page-number" href="/page/2/">2</a><span class="page-number current">3</span>
+    <a class="extend prev" rel="prev" href="/page/2/"><i class="fa fa-angle-left"></i></a><a class="page-number" href="/">1</a><a class="page-number" href="/page/2/">2</a><span class="page-number current">3</span><a class="page-number" href="/page/4/">4</a><a class="extend next" rel="next" href="/page/4/"><i class="fa fa-angle-right"></i></a>
   </nav>
 
 
@@ -1085,7 +1566,7 @@ input[type=&quot;search&quot;]::-webkit-search-cancel-button {
               
                 <a href="/archives/">
               
-                  <span class="site-state-item-count">14</span>
+                  <span class="site-state-item-count">16</span>
                   <span class="site-state-item-name">日志</span>
                 </a>
               </div>
