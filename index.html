@@ -268,6 +268,254 @@
   
   
   <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/09/23/MDN/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Nei">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Nei">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2019/09/23/MDN/" itemprop="url">MDN</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2019-09-23T12:01:23+08:00">
+                2019-09-23
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/MDN/" itemprop="url" rel="index">
+                    <span itemprop="name">MDN</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+              <span class="post-comments-count">
+                <span class="post-meta-divider">|</span>
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-comment-o"></i>
+                </span>
+                <a href="/2019/09/23/MDN/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count valine-comment-count" data-xid="/2019/09/23/MDN/" itemprop="commentCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <blockquote>
+<p>ES1~N版目前都基于ECMA-262</p>
+</blockquote>
+<h2 id="Array"><a href="#Array" class="headerlink" title="Array"></a>Array</h2><h3 id="Proposal"><a href="#Proposal" class="headerlink" title="Proposal"></a>Proposal</h3><ul>
+<li><p><a href="https://developer.mozilla.org/zh-CN/docs/Web/JavaScript/Reference/Global_Objects/Array/flat" target="_blank" rel="noopener">Array.prototype.flat()</a></p>
+<blockquote>
+<p>方法会按照一个可指定的深度递归遍历数组，并将所有元素与遍历到的子数组中的元素合并为一个新数组返回</p>
+</blockquote>
+</li>
+<li><p><a href="https://developer.mozilla.org/zh-CN/docs/Web/JavaScript/Reference/Global_Objects/Array/flatMap" target="_blank" rel="noopener">Array.prototype.flatMap()</a></p>
+<blockquote>
+<p>方法首先使用映射函数映射每个元素，然后将结果压缩成一个新数组。它与 map 和 深度值1的 flat 几乎相同，但 flatMap 通常在合并成一种方法的效率稍微高一些</p>
+</blockquote>
+</li>
+</ul>
+<h3 id="ES1"><a href="#ES1" class="headerlink" title="ES1"></a>ES1</h3><ul>
+<li><a href="https://developer.mozilla.org/zh-CN/docs/Web/JavaScript/Reference/Global_Objects/Array/join" target="_blank" rel="noopener">Array.prototype.join()</a><blockquote>
+<p>方法将一个数组（或一个类数组对象）的所有元素连接成一个字符串并返回这个字符串。如果数组只有一个项目，那么将返回该项目而不使用分隔符</p>
+</blockquote>
+</li>
+</ul>
+<h3 id="ES3-Standard"><a href="#ES3-Standard" class="headerlink" title="ES3 Standard"></a>ES3 Standard</h3><ul>
+<li><a href="https://developer.mozilla.org/zh-CN/docs/Web/JavaScript/Reference/Global_Objects/Array/concat" target="_blank" rel="noopener">Array.prototype.concat()</a><blockquote>
+<p>方法用于合并两个或多个数组。此方法不会更改现有数组，而是返回一个新数组</p>
+</blockquote>
+</li>
+</ul>
+<h3 id="ES5-Standard"><a href="#ES5-Standard" class="headerlink" title="ES5+ Standard"></a>ES5+ Standard</h3><ul>
+<li><p><a href="https://developer.mozilla.org/zh-CN/docs/Web/JavaScript/Reference/Global_Objects/Array/isArray" target="_blank" rel="noopener">Array.isArray()  ES5.1</a></p>
+<blockquote>
+<p>用于确定传递的值是否是一个 Array</p>
+</blockquote>
+</li>
+<li><p><a href="https://developer.mozilla.org/zh-CN/docs/Web/JavaScript/Reference/Global_Objects/Array/every" target="_blank" rel="noopener">Array.prototype.every()  ES5.1</a></p>
+<blockquote>
+<p>方法测试一个数组内的所有元素是否都能通过某个指定函数的测试。它返回一个布尔值</p>
+</blockquote>
+</li>
+<li><p><a href="https://developer.mozilla.org/zh-CN/docs/Web/JavaScript/Reference/Global_Objects/Array/filter" target="_blank" rel="noopener">Array.prototype.filter()  ES5.1</a></p>
+<blockquote>
+<p>方法创建一个新数组, 其包含通过所提供函数实现的测试的所有元素</p>
+</blockquote>
+</li>
+<li><p><a href="https://developer.mozilla.org/zh-CN/docs/Web/JavaScript/Reference/Global_Objects/Array/forEach" target="_blank" rel="noopener">Array.prototype.forEach()  ES5.1</a></p>
+<blockquote>
+<p>方法对数组的每个元素执行一次提供的函数</p>
+</blockquote>
+</li>
+<li><p><a href="https://developer.mozilla.org/zh-CN/docs/Web/JavaScript/Reference/Global_Objects/Array/indexOf" target="_blank" rel="noopener">Array.prototype.indexOf()  ES5.1</a></p>
+<blockquote>
+<p>方法返回在数组中可以找到一个给定元素的第一个索引，如果不存在，则返回-1</p>
+</blockquote>
+</li>
+</ul>
+<h3 id="ES6-Standard"><a href="#ES6-Standard" class="headerlink" title="ES6 Standard"></a>ES6 Standard</h3><ul>
+<li><p><a href="https://developer.mozilla.org/zh-CN/docs/Web/JavaScript/Reference/Global_Objects/Array/from" target="_blank" rel="noopener">Array.from()</a></p>
+<blockquote>
+<p>方法从一个类似数组或可迭代对象中创建一个新的，浅拷贝的数组实例</p>
+</blockquote>
+</li>
+<li><p><a href="https://developer.mozilla.org/zh-CN/docs/Web/JavaScript/Reference/Global_Objects/Array/of" target="_blank" rel="noopener">Array.of()</a></p>
+<blockquote>
+<p>方法创建一个具有可变数量参数的新数组实例，而不考虑参数的数量或类型</p>
+</blockquote>
+</li>
+<li><p><a href="https://developer.mozilla.org/zh-CN/docs/Web/JavaScript/Reference/Global_Objects/Array/copyWithin" target="_blank" rel="noopener">Array.prototype.copyWithin()</a></p>
+<blockquote>
+<p>方法浅复制数组的一部分到同一数组中的另一个位置，并返回它，不会改变原数组的长度</p>
+</blockquote>
+</li>
+<li><p><a href="https://developer.mozilla.org/zh-CN/docs/Web/JavaScript/Reference/Global_Objects/Array/entries" target="_blank" rel="noopener">Array.prototype.entries()</a></p>
+<blockquote>
+<p>方法返回一个新的Array Iterator对象，该对象包含数组中每个索引的键/值对</p>
+</blockquote>
+</li>
+<li><p><a href="https://developer.mozilla.org/zh-CN/docs/Web/JavaScript/Reference/Global_Objects/Array/fill" target="_blank" rel="noopener">Array.prototype.fill()</a></p>
+<blockquote>
+<p>方法用一个固定值填充一个数组中从起始索引到终止索引内的全部元素。不包括终止索引</p>
+</blockquote>
+</li>
+<li><p><a href="https://developer.mozilla.org/zh-CN/docs/Web/JavaScript/Reference/Global_Objects/Array/find" target="_blank" rel="noopener">Array.prototype.find()</a></p>
+<blockquote>
+<p>方法返回数组中满足提供的测试函数的第一个元素的值。否则返回 undefined</p>
+</blockquote>
+</li>
+<li><p><a href="https://developer.mozilla.org/zh-CN/docs/Web/JavaScript/Reference/Global_Objects/Array/findIndex" target="_blank" rel="noopener">Array.prototype.findIndex()</a></p>
+<blockquote>
+<p>方法返回数组中满足提供的测试函数的第一个元素的索引。否则返回-1</p>
+</blockquote>
+</li>
+</ul>
+<h3 id="ES7-Standard"><a href="#ES7-Standard" class="headerlink" title="ES7 Standard"></a>ES7 Standard</h3><ul>
+<li><a href="https://developer.mozilla.org/zh-CN/docs/Web/JavaScript/Reference/Global_Objects/Array/includes" target="_blank" rel="noopener">Array.prototype.includes()</a><blockquote>
+<p>方法用来判断一个数组是否包含一个指定的值，根据情况，如果包含则返回 true，否则返回false</p>
+</blockquote>
+</li>
+</ul>
+<h3 id="ES8-Standard"><a href="#ES8-Standard" class="headerlink" title="ES8 Standard"></a>ES8 Standard</h3><h3 id="ES9-Standard"><a href="#ES9-Standard" class="headerlink" title="ES9 Standard"></a>ES9 Standard</h3>
+          
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
     <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/09/22/es6-11/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -990,289 +1238,11 @@ uni === uni2; //结果true
 
 
     
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/02/14/js模式第六章/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="Nei">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/images/avatar.gif">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Nei">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2019/02/14/js模式第六章/" itemprop="url">js模式第六章</a></h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2019-02-14T16:01:54+08:00">
-                2019-02-14
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-            <span class="post-category" >
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">分类于</span>
-              
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/设计模式/" itemprop="url" rel="index">
-                    <span itemprop="name">设计模式</span>
-                  </a>
-                </span>
-
-                
-                
-              
-            </span>
-          
-
-          
-            
-              <span class="post-comments-count">
-                <span class="post-meta-divider">|</span>
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-comment-o"></i>
-                </span>
-                <a href="/2019/02/14/js模式第六章/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count valine-comment-count" data-xid="/2019/02/14/js模式第六章/" itemprop="commentCount"></span>
-                </a>
-              </span>
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <h2 id="传统与现代继承模式的比较"><a href="#传统与现代继承模式的比较" class="headerlink" title="传统与现代继承模式的比较"></a>传统与现代继承模式的比较</h2><blockquote>
-<p>“传统”这个术语只是单词”class(类)”的一种表现形式。“现代”模式表述为：其他任何不需要以类的方式考虑的模式。</p>
-</blockquote>
-<h2 id="使用类式继承时的预期结果"><a href="#使用类式继承时的预期结果" class="headerlink" title="使用类式继承时的预期结果"></a>使用类式继承时的预期结果</h2><blockquote>
-<p>实现类式继承的目标是通过构造函数Child()获取来自另外一个构造函数Parent()的属性，从而创建对象。</p>
-</blockquote>
-<pre><code>//父类
-function Parent(name){
-    this.name=name || &quot;Nei&quot;;
-};
-
-// 添加功能
-Parent.prototype.say=function(){
-    return this.name;
-};
-
-//子类
-function Child(){};
-
-inherit(Child,Parent);
-</code></pre><p>inherit函数非原生api，需要自行实现。现在我们来看看怎么实现它。</p>
-<h2 id="类式继承模式-1——默认模式"><a href="#类式继承模式-1——默认模式" class="headerlink" title="类式继承模式#1——默认模式"></a>类式继承模式#1——默认模式</h2><blockquote>
-<p>一种默认模式就是使用Parent构造函数创建一个对象，然后将该对象赋值给子类Child的原型。下面是inherit函数第一种实现：</p>
-</blockquote>
-<pre><code>function inherit(C,P){
-    C.prototype=new P();
-};
-</code></pre><p>牢记一点，原型属性应该指向一个对象，而不是函数。所以它必须指向一个有父构造函数所创建的对象，而不是父构造函数本身。换句话说，要使用new操作符来创建的对象。</p>
-<h3 id="追溯原型链"><a href="#追溯原型链" class="headerlink" title="追溯原型链"></a>追溯原型链</h3><blockquote>
-<p>使用这种模式时，同时继承了自身的属性（name），以及原型链上的属性和方法。那原型链是怎么样工作的呢？当new Parent()时，会创建一个块，保存这个对象，同时保存了name属性。但是当我们调用say方法时，say方法并不在这个块中，但是通过<strong>proto</strong>属性（指向Parent的prototype属性），我们找到了say方法。<br><img src="http://ww1.sinaimg.cn/large/0060ZzrAgy1g074rdjw0kj30rt08fwg7.jpg" alt=""></p>
-</blockquote>
-<p>当我们使用了inherit函数之后，又发生了什么呢？如图：<br><img src="http://ww1.sinaimg.cn/large/0060ZzrAgy1g074t4nqhkj30rr0cs0vn.jpg" alt=""><br>图中可以看到Child构造函数内部什么都没有，只有Parent实例的对象属性和方法被指向到Child的prototype上，Child的prototype上本身是什么都没有。当new Child()时，所创建的对象的<strong>proto</strong>指向Child类的prototype。所以当调用say方法时，在#3上并没有找到该方法，它会向#2上去寻找，在#2上也没有找到该方法，但是因为new Parent()的<strong>proto</strong>指向Parent的prototype，所以我们能在#1上找到该方法。</p>
-<p>还有一个解释this指向的问题。如图：</p>
-<pre><code>var kid=new Child();
-kid.name=&quot;De&quot;;
-kid.say(); //输出 De
-</code></pre><p><img src="http://ww1.sinaimg.cn/large/0060ZzrAgy1g075jkpsv0j30rs0eq770.jpg" alt=""><br>在kid对象上生成了name属性，调用say时，此时的this指向kid。</p>
-<h3 id="此模式缺点"><a href="#此模式缺点" class="headerlink" title="此模式缺点"></a>此模式缺点</h3><p>在继承时，我们将自身属性和原型链上的属性和方法都继承了，但是有时并不需要这些自身属性。在实例化时，并不支持子构造函数传参。Code：</p>
-<pre><code>var s=new Child(&apos;Seth&apos;);
-s.say(); // 输出 &quot;Nei&quot;;
-</code></pre><h2 id="类式继承模式-2——借用构造函数"><a href="#类式继承模式-2——借用构造函数" class="headerlink" title="类式继承模式#2——借用构造函数"></a>类式继承模式#2——借用构造函数</h2><p>此模式解决了默认模式自构造函数不能传参的问题。通过一些方法借用父类构造函数，传递子对象以绑定到this，并且转发任意的参数。Code：</p>
-<pre><code>function Child(a,c,b){
-    Parent.apply(this,arguments);
-};
-</code></pre><p>当时这种方法只能继承Parent自身的属性和方法，不能继承原型链上的属性和方法。</p>
-<pre><code>//父构造函数
-function Article(){
-    this.tags=[&apos;js&apos;,&apos;css&apos;];
-};
-var article=new Article();
-
-function BlogPost(){};
-BlogPost.prototype=article; //默认模式继承
-var blog=new BlogPost();
-
-function StaticPage(){
-    Article.call(this);
-};
-var page=new StaticPage();
-
-console.log(article.hasOwnProperty(&apos;tags&apos;)); //true
-console.log(blog.hasOwnProperty(&apos;tags&apos;)); //false
-console.log(page.hasOwnProperty(&apos;tags&apos;)); //true
-</code></pre><p>2返回了false，因为tags属性并没有在blog对象上，而是在原型链上，而page对象上的tags是借用了构造函数时，获取父类的副本，而不是引用。</p>
-<p>当我们修改tags，看看差异：</p>
-<pre><code>blog.tags.push(&apos;html&apos;);
-page.tags.push(&apos;php&apos;);
-console.log(article.tags.join(&apos;,&apos;));输出 js,css,html
-</code></pre><p>因为blog和article的tags指向了同一个数组，而page的targs时重新创建的的一个副本。</p>
-<h3 id="原型链"><a href="#原型链" class="headerlink" title="原型链"></a>原型链</h3><p>当使用本模式时，原型链时如何工作的呢？Code：</p>
-<pre><code>function Parent(name){
-    this.name=name | &quot;Adam&quot;;
-};
-
-Parent.prototype.say=function(){
-    return this.name;
-};
-
-function Child(name){
-    Parent.apply(this,arguments);
-};
-
-var kid=new Child(&apos;Nei&apos;);
-kid.name; //输出 Nei
-typeof kid.say //输出 undefined
-</code></pre><p>最后为什么会输出undefined呢？因为借用继承只会继承父类的自身属性和方法。并没有继承到父类的prototype属性和方法。所以也就找不到say方法。<img src="http://ww1.sinaimg.cn/large/0060ZzrAgy1g076mso0t6j30l20ce763.jpg" alt=""></p>
-<h3 id="通过借用构造函数实现多重继承"><a href="#通过借用构造函数实现多重继承" class="headerlink" title="通过借用构造函数实现多重继承"></a>通过借用构造函数实现多重继承</h3><p>借用多个构造函数实现多重继承。Code：</p>
-<pre><code>function Cat(){
-    this.legs=5;
-    this.say=function(){
-        return &apos;miao&apos;
-    };
-};
-
-function Bird(){
-    this.wings=3;
-    this.fly=function(){
-        return true;
-    };
-};
-
-function Child(){
-    Cat.apply(this);
-    Bird.apply(this);
-}
-</code></pre><h3 id="优缺点"><a href="#优缺点" class="headerlink" title="优缺点"></a>优缺点</h3><p>缺点：</p>
-<ul>
-<li>无法继承父类原型链上的属性和方法，并且原型也仅是添加可重用方法以及属性的位置，它并不会为每个实例重新创建原型。<br>优点：</li>
-<li>可以获得父类的自身成员的真实副本，也不会存在子对象意外覆盖父对象舒心的风险。</li>
-</ul>
-<h2 id="类式继承模式-3——借用和设置原型"><a href="#类式继承模式-3——借用和设置原型" class="headerlink" title="类式继承模式#3——借用和设置原型"></a>类式继承模式#3——借用和设置原型</h2><p>顾名思义就是先借用父类构造函数，然后再设置原型。Code：</p>
-<pre><code>function Child(a,b,c,d){
-    Parent.apply(this,arguments);
-};
-Child.prototype=new Parent();
-</code></pre><p>此模式优点：</p>
-<ul>
-<li>继承了父类的自身成员和原型链上的成员。</li>
-</ul>
-<p>缺点：</p>
-<ul>
-<li>自身成员被继承了两次。</li>
-<li>constructor紊乱。子类构造函数应该指向本身，但是却指向了父类构造函数。</li>
-</ul>
-<h2 id="类式继承模式-4——共享原型"><a href="#类式继承模式-4——共享原型" class="headerlink" title="类式继承模式#4——共享原型"></a>类式继承模式#4——共享原型</h2><p>共享原型就是父类原型被指向给子类原型。如图：<img src="http://ww1.sinaimg.cn/large/0060ZzrAgy1g0773aieinj30kv0agtai.jpg" alt=""></p>
-<p>Code:<br>    function inherit(C,P){<br>        C.prototype=P.prototype;<br>    };</p>
-<p>但是并不会继承父类自身成员，且如果子类prototype修改，会影响到父类prototype。如图：<img src="http://ww1.sinaimg.cn/large/0060ZzrAgy1g07795ejyhj30rq08fdhz.jpg" alt=""></p>
-<h2 id="类式继承模式-5——临时构造函数"><a href="#类式继承模式-5——临时构造函数" class="headerlink" title="类式继承模式#5——临时构造函数"></a>类式继承模式#5——临时构造函数</h2><h2 id="Klass"><a href="#Klass" class="headerlink" title="Klass"></a>Klass</h2><h2 id="原型继承"><a href="#原型继承" class="headerlink" title="原型继承"></a>原型继承</h2><h2 id="通过赋值属性实现继承"><a href="#通过赋值属性实现继承" class="headerlink" title="通过赋值属性实现继承"></a>通过赋值属性实现继承</h2><h2 id="借用方法"><a href="#借用方法" class="headerlink" title="借用方法"></a>借用方法</h2>
-          
-        
-      
-    </div>
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
   </section>
 
   
   <nav class="pagination">
-    <span class="page-number current">1</span><a class="page-number" href="/page/2/">2</a><a class="page-number" href="/page/3/">3</a><a class="extend next" rel="next" href="/page/2/"><i class="fa fa-angle-right"></i></a>
+    <span class="page-number current">1</span><a class="page-number" href="/page/2/">2</a><span class="space">&hellip;</span><a class="page-number" href="/page/4/">4</a><a class="extend next" rel="next" href="/page/2/"><i class="fa fa-angle-right"></i></a>
   </nav>
 
 
@@ -1318,7 +1288,7 @@ Child.prototype=new Parent();
               
                 <a href="/archives/">
               
-                  <span class="site-state-item-count">15</span>
+                  <span class="site-state-item-count">16</span>
                   <span class="site-state-item-name">日志</span>
                 </a>
               </div>
@@ -1329,7 +1299,7 @@ Child.prototype=new Parent();
               
               <div class="site-state-item site-state-categories">
                 <a href="/categories/index.html">
-                  <span class="site-state-item-count">7</span>
+                  <span class="site-state-item-count">8</span>
                   <span class="site-state-item-name">分类</span>
                 </a>
               </div>
@@ -1340,7 +1310,7 @@ Child.prototype=new Parent();
               
               <div class="site-state-item site-state-tags">
                 <a href="/tags/index.html">
-                  <span class="site-state-item-count">9</span>
+                  <span class="site-state-item-count">10</span>
                   <span class="site-state-item-name">标签</span>
                 </a>
               </div>
