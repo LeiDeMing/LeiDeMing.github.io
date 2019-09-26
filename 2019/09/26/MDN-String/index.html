@@ -79,18 +79,18 @@
 
 
 
-<meta name="description" content="ES1~N版目前都基于ECMA-262  StringDraftProposal String.prototype.matchAll() matchAll() 方法返回一个包含所有匹配正则表达式及分组捕获结果的迭代器    ES1 String.fromCharCode()  静态 String.fromCharCode() 方法返回由指定的UTF-16代码单元序列创建的字符串   String">
+<meta name="description" content="ES1~N版目前都基于ECMA-262  StringDraftProposal String.prototype.matchAll()  matchAll() 方法返回一个包含所有匹配正则表达式及分组捕获结果的迭代器   String.prototype.trimRight()  trimRight() 方法从一个字符串的右端移除空白字符   String.prototype.trimLeft">
 <meta name="keywords" content="MDN-String">
 <meta property="og:type" content="article">
 <meta property="og:title" content="MDN-String">
 <meta property="og:url" content="http://yoursite.com/2019/09/26/MDN-String/index.html">
 <meta property="og:site_name" content="Nei">
-<meta property="og:description" content="ES1~N版目前都基于ECMA-262  StringDraftProposal String.prototype.matchAll() matchAll() 方法返回一个包含所有匹配正则表达式及分组捕获结果的迭代器    ES1 String.fromCharCode()  静态 String.fromCharCode() 方法返回由指定的UTF-16代码单元序列创建的字符串   String">
+<meta property="og:description" content="ES1~N版目前都基于ECMA-262  StringDraftProposal String.prototype.matchAll()  matchAll() 方法返回一个包含所有匹配正则表达式及分组捕获结果的迭代器   String.prototype.trimRight()  trimRight() 方法从一个字符串的右端移除空白字符   String.prototype.trimLeft">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:updated_time" content="2019-09-26T06:58:51.252Z">
+<meta property="og:updated_time" content="2019-09-26T07:12:41.254Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="MDN-String">
-<meta name="twitter:description" content="ES1~N版目前都基于ECMA-262  StringDraftProposal String.prototype.matchAll() matchAll() 方法返回一个包含所有匹配正则表达式及分组捕获结果的迭代器    ES1 String.fromCharCode()  静态 String.fromCharCode() 方法返回由指定的UTF-16代码单元序列创建的字符串   String">
+<meta name="twitter:description" content="ES1~N版目前都基于ECMA-262  StringDraftProposal String.prototype.matchAll()  matchAll() 方法返回一个包含所有匹配正则表达式及分组捕获结果的迭代器   String.prototype.trimRight()  trimRight() 方法从一个字符串的右端移除空白字符   String.prototype.trimLeft">
 
 
 
@@ -380,8 +380,19 @@
 <p>ES1~N版目前都基于ECMA-262</p>
 </blockquote>
 <h2 id="String"><a href="#String" class="headerlink" title="String"></a>String</h2><h3 id="Draft"><a href="#Draft" class="headerlink" title="Draft"></a>Draft</h3><h3 id="Proposal"><a href="#Proposal" class="headerlink" title="Proposal"></a>Proposal</h3><ul>
-<li><a href="https://developer.mozilla.org/zh-CN/docs/Web/JavaScript/Reference/Global_Objects/String/matchAll" target="_blank" rel="noopener">String.prototype.matchAll()</a><blockquote>
+<li><p><a href="https://developer.mozilla.org/zh-CN/docs/Web/JavaScript/Reference/Global_Objects/String/matchAll" target="_blank" rel="noopener">String.prototype.matchAll()</a></p>
+<blockquote>
 <p>matchAll() 方法返回一个包含所有匹配正则表达式及分组捕获结果的迭代器</p>
+</blockquote>
+</li>
+<li><p><a href="https://developer.mozilla.org/zh-CN/docs/Web/JavaScript/Reference/Global_Objects/String/TrimRight" target="_blank" rel="noopener">String.prototype.trimRight()</a></p>
+<blockquote>
+<p>trimRight() 方法从一个字符串的右端移除空白字符</p>
+</blockquote>
+</li>
+<li><p><a href="https://developer.mozilla.org/zh-CN/docs/Web/JavaScript/Reference/Global_Objects/String/TrimLeft" target="_blank" rel="noopener">String.prototype.trimLeft()</a></p>
+<blockquote>
+<p>trimStart() 方法从字符串的开头删除空格。trimLeft()是此方法的别名</p>
 </blockquote>
 </li>
 </ul>
@@ -424,6 +435,21 @@
 <li><p><a href="https://developer.mozilla.org/zh-CN/docs/Web/JavaScript/Reference/Global_Objects/String/toLowerCase" target="_blank" rel="noopener">String.prototype.toLowerCase()</a></p>
 <blockquote>
 <p>toLowerCase() 会将调用该方法的字符串值转为小写形式，并返回</p>
+</blockquote>
+</li>
+<li><p><a href="https://developer.mozilla.org/zh-CN/docs/Web/JavaScript/Reference/Global_Objects/String/toString" target="_blank" rel="noopener">String.prototype.toString()</a></p>
+<blockquote>
+<p>toString() 方法返回指定对象的字符串形式</p>
+</blockquote>
+</li>
+<li><p><a href="https://developer.mozilla.org/zh-CN/docs/Web/JavaScript/Reference/Global_Objects/String/toUpperCase" target="_blank" rel="noopener">String.prototype.toUpperCase()</a></p>
+<blockquote>
+<p>toUpperCase() 将调用该方法的字符串值转换为大写形式，并返回</p>
+</blockquote>
+</li>
+<li><p><a href="https://developer.mozilla.org/zh-CN/docs/Web/JavaScript/Reference/Global_Objects/String/valueOf" target="_blank" rel="noopener">String.prototype.valueOf()</a></p>
+<blockquote>
+<p>valueOf() 方法返回一个String对象的原始值（primitive value）</p>
 </blockquote>
 </li>
 </ul>
@@ -474,7 +500,13 @@
 </blockquote>
 </li>
 </ul>
-<h3 id="ES5-1-Standard"><a href="#ES5-1-Standard" class="headerlink" title="ES5.1 Standard"></a>ES5.1 Standard</h3><h3 id="ES6-Standard"><a href="#ES6-Standard" class="headerlink" title="ES6 Standard"></a>ES6 Standard</h3><ul>
+<h3 id="ES5-1-Standard"><a href="#ES5-1-Standard" class="headerlink" title="ES5.1 Standard"></a>ES5.1 Standard</h3><ul>
+<li><a href="https://developer.mozilla.org/zh-CN/docs/Web/JavaScript/Reference/Global_Objects/String/Trim" target="_blank" rel="noopener">String.prototype.trim()</a><blockquote>
+<p>trim() 方法会从一个字符串的两端删除空白字符。在这个上下文中的空白字符是所有的空白字符 (space, tab, no-break space 等) 以及所有行终止符字符（如 LF，CR）</p>
+</blockquote>
+</li>
+</ul>
+<h3 id="ES6-Standard"><a href="#ES6-Standard" class="headerlink" title="ES6 Standard"></a>ES6 Standard</h3><ul>
 <li><p><a href="https://developer.mozilla.org/zh-CN/docs/Web/JavaScript/Reference/Global_Objects/String/fromCodePoint" target="_blank" rel="noopener">String.fromCodePoint()</a></p>
 <blockquote>
 <p>String.fromCodePoint() 静态方法返回使用指定的代码点序列创建的字符串</p>
