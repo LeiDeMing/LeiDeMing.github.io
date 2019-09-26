@@ -268,6 +268,201 @@
   
   
   <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/02/22/js模式第七章/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Nei">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Nei">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2019/02/22/js模式第七章/" itemprop="url">js模式第七章</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2019-02-22T15:39:21+08:00">
+                2019-02-22
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/设计模式/" itemprop="url" rel="index">
+                    <span itemprop="name">设计模式</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+              <span class="post-comments-count">
+                <span class="post-meta-divider">|</span>
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-comment-o"></i>
+                </span>
+                <a href="/2019/02/22/js模式第七章/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count valine-comment-count" data-xid="/2019/02/22/js模式第七章/" itemprop="commentCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <p>有时间在研究本书的设计模式，现已入坑javascirpt设计模式一书。</p>
+<h2 id="单体模式"><a href="#单体模式" class="headerlink" title="单体模式"></a>单体模式</h2><blockquote>
+<p>单体模式顾名思义就是一个类中，它只有一个实例，意思就是第二次，第三次，n次创建的实例要与第一次创建的实例完全相同。<br>我们想要的效果：</p>
+</blockquote>
+<pre><code>var uni=new Universe();
+var uni2=new Universe();
+uni===uni2; //结果为true
+</code></pre><p>要想得到这样的结果，我们应该怎么改造Universe的内部呢？<br>必须想办法保存第一次实例，然后后面实例化的时候，返回第一次保存的实例。所以有下列几个方法：</p>
+<ul>
+<li>用全局变量保存第一次实例。但是全局变量容易被污染。会造成原先保存的实例的消失。</li>
+<li>可以用构造函数的静态属性保存第一次实例，但是呢，静态属性也是暴露的，所以很容易被修改。</li>
+<li>可以使用闭包技术，外界不能操作内部，这样就能很好的保存第一次实例对象，代价是带来了闭包的额外开销。</li>
+</ul>
+<h3 id="静态属性中的实例"><a href="#静态属性中的实例" class="headerlink" title="静态属性中的实例"></a>静态属性中的实例</h3><p>Code：</p>
+<pre><code>function Universe(){
+    if(typeof Universe.instance === &quot;object&quot;){
+        return Universe.instance;
+    }
+
+    this.start_time=0;
+    this.bang=&quot;Big&quot;;
+
+    Universe.instance=this;
+};
+
+var uni=new Universe();
+var uni2=new Universe();
+uni===uni2; //结果为true;
+</code></pre><p>此模式中最大缺点就是静态属性对外面暴露，很容易被修改。</p>
+<h3 id="闭包中的实例"><a href="#闭包中的实例" class="headerlink" title="闭包中的实例"></a>闭包中的实例</h3><p>Code：</p>
+<pre><code>function Universe(){
+    var instance=this;
+
+    this.start_time=0;
+    this.bang=&quot;Big&quot;;
+
+    Universe=function(){
+        return instance;
+    };
+}
+var uni=new Universe();
+var uni2=new Universe();
+uni === uni2; //结果true
+</code></pre><p>第一次创建实例，保存第一次实例对象，然后通过闭包重写了构造函数，返回第一次实例对象。</p>
+<h2 id="工厂模式"><a href="#工厂模式" class="headerlink" title="工厂模式"></a>工厂模式</h2><h2 id="迭代器模式"><a href="#迭代器模式" class="headerlink" title="迭代器模式"></a>迭代器模式</h2><h2 id="装饰着模式"><a href="#装饰着模式" class="headerlink" title="装饰着模式"></a>装饰着模式</h2><h2 id="策略模式"><a href="#策略模式" class="headerlink" title="策略模式"></a>策略模式</h2><h2 id="外观模式"><a href="#外观模式" class="headerlink" title="外观模式"></a>外观模式</h2><h2 id="代理模式"><a href="#代理模式" class="headerlink" title="代理模式"></a>代理模式</h2><h2 id="中介者模式"><a href="#中介者模式" class="headerlink" title="中介者模式"></a>中介者模式</h2><h2 id="观察者模式"><a href="#观察者模式" class="headerlink" title="观察者模式"></a>观察者模式</h2>
+          
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
     <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/02/14/js模式第六章/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -1150,378 +1345,11 @@ console.log(obj.length) //result is 2
 
 
     
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/01/08/js模式第五章/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="Nei">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/images/avatar.gif">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Nei">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2019/01/08/js模式第五章/" itemprop="url">js模式第五章</a></h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2019-01-08T16:43:59+08:00">
-                2019-01-08
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-            <span class="post-category" >
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">分类于</span>
-              
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/设计模式/" itemprop="url" rel="index">
-                    <span itemprop="name">设计模式</span>
-                  </a>
-                </span>
-
-                
-                
-              
-            </span>
-          
-
-          
-            
-              <span class="post-comments-count">
-                <span class="post-meta-divider">|</span>
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-comment-o"></i>
-                </span>
-                <a href="/2019/01/08/js模式第五章/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count valine-comment-count" data-xid="/2019/01/08/js模式第五章/" itemprop="commentCount"></span>
-                </a>
-              </span>
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <h2 id="命名空间模式"><a href="#命名空间模式" class="headerlink" title="命名空间模式"></a>命名空间模式</h2><blockquote>
-<p>命名空间有助于减少程序中所需要的全局变量的数量，并且同事还有助于避免命名冲突或过长的名字前缀。我们可以创建一个全局对象，将所需的方法，属性添加到这个对象中。避免了变量全局污染。而且同样能避免与第三库的命名冲突。但是同样存在一些缺点：</p>
-<ul>
-<li>使用的时候，需要附加全局对象这个前缀，增加了很多重复代码。</li>
-<li>长嵌套名字意味着更长的属性解析查询时间</li>
-<li>一个全局对象意味着，任何部分的代码都能修改这个全局对象，并且影响所有调用该对象的地方。</li>
-</ul>
-</blockquote>
-<h3 id="通用命名空间函数"><a href="#通用命名空间函数" class="headerlink" title="通用命名空间函数"></a>通用命名空间函数</h3><blockquote>
-<p>当我们往这个全局对象添加一个属性时，可能覆盖之前已经定义的属性了，所有我们在添加时，先得检测这个添加的属性在这个全局对象中是否已经存在。Code：</p>
-</blockquote>
-<pre><code>var MYAPP={};
-
-if(typeof MYAPP === &quot;undefined&quot;){
-    var MYAPP={};
-}
-
-var MYAPP = MYAPP || {};
-</code></pre><blockquote>
-<p>这种检测一个对象好使，但是检测链式对象时，显得乏力，代码也会变得臃肿。所有我们需要设计一个可以检测链式对象的方法。Code：</p>
-</blockquote>
-<pre><code>MYAPP.namespace(&apos;MYAPP.modules.module2&apos;);
-</code></pre><blockquote>
-<p>具体的方法实现。Code：</p>
-</blockquote>
-<pre><code>var MYAPP = MYAPP || {};
-
-MYAPP.namespace = function (ns_string){
-    var parts = ns_string.split(&apos;.&apos;),
-        parent = MYAPP,
-        i;
-    if(parent[0] === &quot;MYAPP&quot;){
-        parts = parts.slice(1);
-    }
-
-    for(i=0; i &lt; parts.length; i++&gt;){
-        if(typeof parts[i] === &quot;undefined&quot;){
-            parent[parts[i]]={};
-        }
-        parent = parent[parts[i]]
-    }
-    return parent;
-};
-</code></pre><h2 id="声明依赖关系"><a href="#声明依赖关系" class="headerlink" title="声明依赖关系"></a>声明依赖关系</h2><blockquote>
-<p>在函数或顶部声明代码所依赖的模块是一个很好的方法。因为这种声明仅涉及创建一个局部变量并使其指向所需的模块。Code：</p>
-</blockquote>
-<pre><code>var myFunction = function (){
-    var event = YAHOO.util.Event,
-        dom = YAHOO.util.Dom;
-};
-</code></pre><p>这种模式有如下几个优点：</p>
-<ul>
-<li>显示的依赖声明表明需要的特定脚本已经包含在该页面中。</li>
-<li>在函数顶部的前期声明可以使页面维护者很容易地发现并解析依赖。</li>
-<li>解析局部变量的速度总是要比解析全局变量（YAHOO）要快，甚至比使用全局变量的嵌套属性（YAHOO.util.Dom）还要快。</li>
-<li>将第三方模块赋值给重命名的局部变量，可以拥有更好的代码量，因为我们可以使用更短的局部变量。</li>
-</ul>
-<h2 id="私有属性和方法"><a href="#私有属性和方法" class="headerlink" title="私有属性和方法"></a>私有属性和方法</h2><blockquote>
-<p>js中并没有特殊的语法来表示私有、保护、或公共属性和方法。因为js中所有对象的成员都是公共的。</p>
-</blockquote>
-<p>比如我们随便创建一个对象：</p>
-<pre><code>var obj{
-    name:&apos;nei&apos;,
-    run:function(){
-        console.log(&apos;Run&apos;);
-    }
-};
-
-obj.name //公共的，可以随便访问的。
-</code></pre><p>即使使用构造函数同样如此：</p>
-<pre><code>function Obj(){
-    this.name=&apos;Nei&apos;;
-    this.run=function(){
-        console.log(&apos;run&apos;);
-    };
-}
-
-var o1=new Obj();
-
-o1.name //公共的 可以随便访问的
-</code></pre><p>但是有时我们需要私有成员，所以诞生了下面的这些生成私有成员的方法。</p>
-<h3 id="私有成员"><a href="#私有成员" class="headerlink" title="私有成员"></a>私有成员</h3><blockquote>
-<p>虽然js本身没有直接创建私有成员的方法，但是我们将变量控制在函数作用域内，保证外部访问不到它，这样一样可以创建私有成员，比如我们创建一个类，在类里面创建一个局部变量，然后用公共方法将它暴露出去，这样我们就可以创建一个私有变量，但是有个公共方法又可以访问到它。</p>
-</blockquote>
-<pre><code>function Nei(){
-    var _name=&apos;nei&apos;;
-    this.getName=function(){
-        return _name;
-    };
-}
-
-var n=new Nei();
-n.name   //undefined
-n.getName() //&quot;nei&quot;
-</code></pre><h2 id="模块模式"><a href="#模块模式" class="headerlink" title="模块模式"></a>模块模式</h2><blockquote>
-<p>模块模式就如下几种的集合：</p>
-</blockquote>
-<ul>
-<li>命名空间</li>
-<li>即时函数</li>
-<li>私有和特权成员</li>
-<li>声明依赖</li>
-</ul>
-<h2 id="沙箱模式"><a href="#沙箱模式" class="headerlink" title="沙箱模式"></a>沙箱模式</h2><blockquote>
-<p>顾名思义就是提供了一个可用于模块运行的环境，且不会对其他模块和个人沙箱造成任何影响。</p>
-</blockquote>
-<h3 id="全局构造函数"><a href="#全局构造函数" class="headerlink" title="全局构造函数"></a>全局构造函数</h3><p> 命名空间模式中有一个全局对象，在沙箱模式中，我们可以设置一个全局构造函数，创建一个隔离的沙箱环境。Code：</p>
-<pre><code>new Sandbox(function(box)){
-    ....
-});
-</code></pre><p>通过添加新特征，使这个模式更先进：</p>
-<ul>
-<li>通过第三章的强制new模式，可以假设在创建对象是不需要new操作符。</li>
-<li>构造函数可以接受一个额外的配置参数（或多个），其中该参数指定了对象实例所需要的模块名。希望代码是模块化的，因此绝大部分构造函数提供的功能将被限制在模块中。</li>
-</ul>
-<h2 id="静态成员"><a href="#静态成员" class="headerlink" title="静态成员"></a>静态成员</h2><blockquote>
-<p>静态成员分为公有静态成员和私有静态成员</p>
-</blockquote>
-<h3 id="公有静态成员"><a href="#公有静态成员" class="headerlink" title="公有静态成员"></a>公有静态成员</h3><p>所谓公有就是直接暴露在对象的属性上，外部可以访问。Code：</p>
-<pre><code>var Garget=function(){};
-
-//静态方法
-Garget.isShiny=function(){
-    return &quot;you bet&quot;;
-};
-
-//普通方法
-Garget.prototype.setPrice=function(price){
-    this.price=price;
-};
-
-//可以直接调用静态方法
-Garget.isShiny();//输出 you bet
-
-//普通方法必须创建一个实例，实例调用
-var demo1=new Garget();
-demo1.setPrice(12);
-</code></pre><p>试图以静态方法调用一个实例方法是无法正常运行的。同样，如果使用实例调用静态方法也是无法正常运行的：</p>
-<pre><code>typeof Garget.setPrice; // undefined
-typeof demo1.isShiny; // undefined
-</code></pre><p>如果静态方法也能够被实例调用，只需重新写一个原型方法即可：</p>
-<pre><code>Garget.prototype.isShiny=Garget.isShiny;
-demo1.isShiny; // 输出 “you bet”
-</code></pre><p>但是要注意这里的this指向问题，执行Garget.isShiny时，this指向Garget。执行demo1.isShiny时，this指向demo1。</p>
-<p>我们可以用instanceof确定方法是如何被调用的：</p>
-<pre><code>var Garget=function(price){
-    this.price=price
-};
-
-Garget.isShiny=function(){
-    var msg=&quot;you bet&quot;;
-
-    is(this instanceof Garget){
-        msg += &quot;, it costs $&quot;+ this.price + &quot;!&quot;;
-    }
-    return msg;
-};
-
-Garget.prototype.isShiny=function(){
-    return Garget.isShiny.call(this);
-};
-
-//调用静态方法
-Garget.isShiny; // 输出 &quot;you bet&quot;
-
-//实例调用
-var d1=new Garget(12);
-d1.isShiny(); // 输出 &quot;you bet,it costs $12!&quot;
-</code></pre><h3 id="私有静态成员"><a href="#私有静态成员" class="headerlink" title="私有静态成员"></a>私有静态成员</h3><blockquote>
-<p>私有静态成员具有如下属性：</p>
-<ul>
-<li>以同一个函数所创建的所有对象共享该成员</li>
-<li>构造函数外部不可访问。</li>
-</ul>
-</blockquote>
-<p>利用立即执行函数实现一个简单的私有静态成员：</p>
-<pre><code>var Garget=(function(){
-    var counter=0;
-    return function(){
-        console.log(counter+=1);
-    };
-})();
-
-//多次调用
-var d1=new Garget(); // 1
-var d2=new Garget(); // 2
-var d3=new Garget(); // 3
-</code></pre><p>现在，我们通过一个特权方法将私有属性暴露出去：</p>
-<pre><code>var Garget=(function(){
-    var counter=0,
-        NewGarget;
-
-    NewGarget=function(){
-        counter+=1;
-    };
-
-    //私有特权方法
-    NewGarget.prototype.getLastId=function(){
-        return counter;
-    };
-
-    //重写构造函数
-    return NewGarget;
-})();
-
-//测试
-var d1=new Garget();
-d1.getLastId(); // 1
-var d2=new Garget();
-d2.getLastId(); // 2
-var d3=new Garget();
-d3.getLastId(); // 3
-</code></pre><p>静态属性可以包含非实例相关的方法和数据，并且不会为每个实例重新创建静态属性。</p>
-<h2 id="链模式"><a href="#链模式" class="headerlink" title="链模式"></a>链模式</h2><blockquote>
-<p>链模式最重要的一个要点，需要显示返回的this对象。</p>
-</blockquote>
-
-          
-        
-      
-    </div>
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
   </section>
 
   
   <nav class="pagination">
-    <a class="extend prev" rel="prev" href="/"><i class="fa fa-angle-left"></i></a><a class="page-number" href="/">1</a><span class="page-number current">2</span><a class="page-number" href="/page/3/">3</a><a class="extend next" rel="next" href="/page/3/"><i class="fa fa-angle-right"></i></a>
+    <a class="extend prev" rel="prev" href="/"><i class="fa fa-angle-left"></i></a><a class="page-number" href="/">1</a><span class="page-number current">2</span><a class="page-number" href="/page/3/">3</a><a class="page-number" href="/page/4/">4</a><a class="extend next" rel="next" href="/page/3/"><i class="fa fa-angle-right"></i></a>
   </nav>
 
 
@@ -1567,7 +1395,7 @@ d3.getLastId(); // 3
               
                 <a href="/archives/">
               
-                  <span class="site-state-item-count">15</span>
+                  <span class="site-state-item-count">16</span>
                   <span class="site-state-item-name">日志</span>
                 </a>
               </div>
@@ -1589,7 +1417,7 @@ d3.getLastId(); // 3
               
               <div class="site-state-item site-state-tags">
                 <a href="/tags/index.html">
-                  <span class="site-state-item-count">9</span>
+                  <span class="site-state-item-count">10</span>
                   <span class="site-state-item-name">标签</span>
                 </a>
               </div>
