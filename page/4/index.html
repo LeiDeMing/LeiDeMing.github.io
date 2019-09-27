@@ -268,6 +268,200 @@
   
   
   <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/12/19/什么是normalize/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Nei">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Nei">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2018/12/19/什么是normalize/" itemprop="url">什么是normalize</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-12-19T15:51:35+08:00">
+                2018-12-19
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/css/" itemprop="url" rel="index">
+                    <span itemprop="name">css</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+              <span class="post-comments-count">
+                <span class="post-meta-divider">|</span>
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-comment-o"></i>
+                </span>
+                <a href="/2018/12/19/什么是normalize/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count valine-comment-count" data-xid="/2018/12/19/什么是normalize/" itemprop="commentCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <p>　</p>
+<blockquote>
+<p>　　normalize.css是一个轻量级css文件，它在html元素默认的样式中，提供了更好的跨浏览器一致性。它是现代化的，为html5准备的，相比传统的reset.css，normalize.css是更好的选择。详见戳：<br>　　Normalize.css project site<br>　　Normalize.css source on GitHub<br>　　normalize.css目前被 Twitter Bootstrap, HTML5 Boilerplate, GOV.UK, Rdio, CSS Tricks当做标准化样式，当然还有许多框架,工具，站点使用。</p>
+</blockquote>
+<h1 id="Overview"><a href="#Overview" class="headerlink" title="Overview"></a>Overview</h1><p>　　normalize.css 相比于reset.css是一个更好的选择。normalize.css是由 @necolas and @jon_neal 在不同浏览器默认样式经过了100个小时大量的研究总结出来。<br>normalize.css的目标有如下几点:</p>
+<ul>
+<li>保存了浏览器有用的样式，而不是清除。</li>
+<li>为更加多的html元素初始化了样式</li>
+<li>修复了bug和大部分浏览器的不一致性</li>
+<li>normalize.css运用微妙的改进提高了css可用性</li>
+<li>解释了有评论和详细文档的代码</li>
+</ul>
+<p>　　它提供支持了更多的浏览器（包括移动端浏览器）和标准化html5元素，排版，列表，内联元素(embedded content),表单和表格。<br>尽管normalize.css基于标准化的目的，但是它使用了更好的实用默认样式。</p>
+<h2 id="Normalize-对比-Reset"><a href="#Normalize-对比-Reset" class="headerlink" title="Normalize 对比 Reset"></a>Normalize 对比 Reset</h2><p>　　reset 使用了一种同质的样式重置了几乎所有元素的默认样式。相反，normalize保留下来了许多有用的默认样式,这就意思着你不要重新为所有的排版元素申明样式。<br>　　当一个元素在不同的浏览器有不同的样式时，normalize目标就是保持这些样式的一致性和符合现代浏览器的标准。<br>　　normalize 修复了共同的bug<br>　　它修复了pc端和移动端浏览器的reset所不能修复的bug。这其中包括了html5元素的显示设置，预定义文本的font-size,SVG在IE9上的溢出问题，和许多跟表单相关的跨浏览器问题和一些操作系统问题。<br>　　举个例子,normalize是如何处理html5新的表单类型serch的浏览器一致性。</p>
+<pre><code>/**
+ * 1. Addresses appearance set to searchfield in S5, Chrome
+ * 2. Addresses box-sizing set to border-box in S5, Chrome (include -moz to future-proof)
+ */
+input[type=&quot;search&quot;] {
+    -webkit-appearance: textfield; /* 1 */
+    -moz-box-sizing: content-box;
+    -webkit-box-sizing: content-box; /* 2 */
+    box-sizing: content-box;
+}
+/**
+ * Removes inner padding and search cancel button in S5, Chrome on OS X
+ */
+input[type=&quot;search&quot;]::-webkit-search-decoration,
+input[type=&quot;search&quot;]::-webkit-search-cancel-button {
+    -webkit-appearance: none;
+}
+</code></pre><p>Resets often fail to bring browsers to a level starting point with regards to how an element is rendered.特别是表单，normalize能提供一些有意义的援助。</p>
+<h2 id="normalize-不会紊乱你的调试工具"><a href="#normalize-不会紊乱你的调试工具" class="headerlink" title="normalize 不会紊乱你的调试工具"></a>normalize 不会紊乱你的调试工具</h2><p>　　一个普遍的问题就是，当使用reset的时候，会在你的浏览器调试工具中产生大量的继承链。<br>　　上图就是使用reset样式时，调试工具状况，如果使用normalize，就不会有上述问题，因为normalize有针对的使用样式和慎用多重选择器。</p>
+<h2 id="normalize它是模块化的"><a href="#normalize它是模块化的" class="headerlink" title="normalize它是模块化的"></a>normalize它是模块化的</h2><p>　　这个项目已经被划分成相对独立的模块，让你很容易清楚地了解到哪些元素需要何种样式。<br>　　更进一步来说，它会潜移默化的去除如果在你的网站从不需要的（如,表单正常化）.</p>
+<h2 id="normalize-拥有详细的文档说明"><a href="#normalize-拥有详细的文档说明" class="headerlink" title="normalize 拥有详细的文档说明"></a>normalize 拥有详细的文档说明</h2><p>　　normalize css 代码是基于详细的跨浏览器研究和科学方法的测试。文档有着非常详细的说明，并且在 GitHub Wiki  有着更进一步的扩展说明。这意味着你能够找到并了解到每一行代码的作用，这就是为什么能了解到不同浏览器的异同，并且能够更加简单的运行测试。</p>
+<h2 id="怎么去使用normalize-css"><a href="#怎么去使用normalize-css" class="headerlink" title="怎么去使用normalize.css"></a>怎么去使用normalize.css</h2><p>　　首先，从github安装或者下载normalize（download normalize.css）,有如下两种主要的使用方式：</p>
+<ul>
+<li>方法1：使用normalize作为你的项目（基于css项目）的初始化样式，根据设计者的要求自定义normalize的值。</li>
+<li>方法2：如果有必要的话，直接使用未更改的normalize样式，并且在默认样式表中，将normalize权重设为最高。</li>
+</ul>
+<h2 id="结束语"><a href="#结束语" class="headerlink" title="结束语"></a>结束语</h2><p>　　normalize在css重置样式领域和表现力是非常新颖的。它非常值得你去尝试着用它去创新和提高表现力。<br>　　这个项目已经在github上开源。任何人都能够提出问题和提交修改。整个项目的改动历史对每个人都是可见的，并且修改的每条内容和愿意都可以在提交信息和中找到。</p>
+<h2 id="相关阅读"><a href="#相关阅读" class="headerlink" title="相关阅读"></a>相关阅读</h2><p>详细信息见默认<a href="https://html.spec.whatwg.org/multipage/rendering.html#the-css-user-agent-style-sheet-and-presentational-hints" target="_blank" rel="noopener">UAstyles：WHATWG suggestions for rendering HTML documents, Internet Explorer User Agent Style Sheets</a>,and <a href="http://css-class.com/test/css/defaults/UA-style-sheet-defaults.htm" target="_blank" rel="noopener">CSS2.1 User Agent Style Sheet Defaults</a>.</p>
+<p>全文译自    <a href="http://nicolasgallagher.com/about-normalize-css/" target="_blank" rel="noopener">http://nicolasgallagher.com/about-normalize-css/</a></p>
+
+          
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
     <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/12/13/touch相关/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -478,7 +672,7 @@
               
                 <a href="/archives/">
               
-                  <span class="site-state-item-count">16</span>
+                  <span class="site-state-item-count">17</span>
                   <span class="site-state-item-name">日志</span>
                 </a>
               </div>
@@ -500,7 +694,7 @@
               
               <div class="site-state-item site-state-tags">
                 <a href="/tags/index.html">
-                  <span class="site-state-item-count">10</span>
+                  <span class="site-state-item-count">11</span>
                   <span class="site-state-item-name">标签</span>
                 </a>
               </div>
