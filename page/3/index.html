@@ -268,6 +268,154 @@
   
   
   <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/01/30/Orinoco垃圾回收器/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Nei">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Nei">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2019/01/30/Orinoco垃圾回收器/" itemprop="url">Orinoco垃圾回收器[译]</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2019-01-30T17:21:07+08:00">
+                2019-01-30
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+            
+              <span class="post-comments-count">
+                <span class="post-meta-divider">|</span>
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-comment-o"></i>
+                </span>
+                <a href="/2019/01/30/Orinoco垃圾回收器/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count valine-comment-count" data-xid="/2019/01/30/Orinoco垃圾回收器/" itemprop="commentCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <p>在过去的许多年，v8的垃圾回收器发生了很大的变化。这次，Orinoco项目采用了一个连续，能够并行且并发和回退功能的异常强大的收集器。</p>
+<p>垃圾收集器会周期性的执行下列几个基本的任务：</p>
+<ul>
+<li>鉴别正在运行或者已经没被调用的对象</li>
+<li>回收/再利用已经没被调用的对象的内存</li>
+<li>清理内存</li>
+</ul>
+<p>这些任务一般按顺序执行，有时也会交错执行。在主线程上一些直截了当的方法暂停js执行和按顺序执行所有的任务，这样会造成不可避免和潜在的问题，我们在之前的<a href="https://v8.dev/blog/jank-busters" target="_blank" rel="noopener">博客</a>谈论过.</p>
+<h2 id="主要GC"><a href="#主要GC" class="headerlink" title="主要GC"></a>主要GC</h2><p>GC从堆中收集垃圾<br><img src="http://ww1.sinaimg.cn/large/0060ZzrAgy1fzor82gv64j30lc06lmxb.jpg" alt=""><br>全局GC发生在三个阶段：标记，清楚，整理</p>
+<h3 id="标记"><a href="#标记" class="headerlink" title="标记"></a>标记</h3><p> 垃圾收集器必不可少的就是找出哪些对象能被收集。收集器使用可达性(reachability)代理活跃度(liveness).这意味着在运行时当前一些可访问(reachable)的对象将保留，而那些不可访问对象将被收集起来。</p>
+<p>标记就是可访问对象被找到的过程，GC就是在一系列一直被称为根集(root set)的对象指针开始的。这其中包括执行栈和全局对象。遵循一个指针对应一个对象，然后将这个对象标记为可访问的。GC持续递归的跟踪这些对象的指针，直到每个可访问对象被找到和标记。</p>
+<h3 id="清除"><a href="#清除" class="headerlink" title="清除"></a>清除</h3><p>清除就是非活动对象被添加到空闲列表，所处的那块内存被清理的过程。一旦标记完成，GC会找到不可访问对象的那块连续内存，然后将它们添加到适当的空闲列表里。所谓的空闲列表就是由可以快速查找的内存块分出来的。在未来，当我们想要分配内存时，我们仅仅只需要考虑空闲列表，并且找到一块大小合适的内存块。</p>
+<h3 id="整理"><a href="#整理" class="headerlink" title="整理"></a>整理</h3><p>全局GC会选择evacuate/整理这些碎片化的内存区域。你可以把整理当做是在pc上的硬盘碎片化整理。我们把活动对象复制进当前没被整理的内存区域。通过这种方式，我们就能够充分利用非活动对象它们分散的内存区域了。</p>
+<p>一种潜在的缺点就是当我们分配长时间运行的活动对象时，我们需要很高的代价去复制这些对象，这就是为什么我们选择仅仅整理高度碎片化的区域，且在其他的地方只执行清除，而并不会去复制这些对象。</p>
+<h2 id="分代布局"><a href="#分代布局" class="headerlink" title="分代布局"></a>分代布局</h2><p>在v8中堆被分割进被称为代（<a href="https://v8.dev/blog/orinoco-parallel-scavenger" target="_blank" rel="noopener">generations</a>）的区域.<br>下面是初代(进一步被分割成 ‘nursery’ and ‘intermediate’ sub-generations)和老生代。对象首先被分配进nursery。如果它们还活跃在下一个GC，它们会被送入初代的intermediate中。如果它们还活跃在另一个GC，它们将会被移到老生代中。<br><img src="http://ww1.sinaimg.cn/large/0060ZzrAgy1fzpl9t0v1tj30lb07fmx6.jpg" alt=""></p>
+<p>在垃圾收集器有这样一个术语：“多代假设”.大部分对象基本上在初代就会被清除。我们以GC的角度，换句话说，大部分对象它们在分配后，立即就会变成不可访问的。这种情况不仅仅是在v8和js语言上，它同样发生在大部分的动态语言上。</p>
+<p>v8的多代堆布局就是为了揭露对象运行时的事实情况而设计的。GC本身就是一个整理/活动的GC，这就意味着它能复制活跃在垃圾收集器中的对象。这似乎不合常理：因为在GC运行时，复制对象是非常昂贵的。但是根据多代假设，我们所了解是仅仅只有一部分对象活跃在垃圾收集器中。仅仅是移动这些活跃的对象，所有其他的收集的对象都会变成隐式垃圾。这意味着我们仅仅只需要关注这些活跃对象，而不是所有的收集对象。</p>
+<h2 id="次要GC-Scavenger"><a href="#次要GC-Scavenger" class="headerlink" title="次要GC(Scavenger)"></a>次要GC(Scavenger)</h2><p>在v8中有两个垃圾收集器。来自于堆的<a href="https://v8.dev/blog/trash-talk#major-gc" target="_blank" rel="noopener">主要垃圾收集器</a>.来自于初生代的次要垃圾收集器主要GC在堆中起作用，但是多代假设告诉我们，新声明的对象非常可能需要被收集。</p>
+<p>在次要GC中，活跃在初生代的被收集的对象总是被转移到一个新的区域。v8在初生代有一个名为’semi-space’的设计。它意味着为了满足转移的需要，在全部空间中，有过半的空间总是空着的。在整个清除期间最初的空的空间被称为 ‘To-Space’。那些我们复制对象所在的空间被称为 ‘From-Space’。有一个最糟糕的情况就是当每个对象活跃在清除阶段时，我们必须复制整个对象。</p>
+
+          
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
     <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/01/30/图解http/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -1547,204 +1695,6 @@ Demo(conf)
 
 
     
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/12/20/js模式第三章/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="Nei">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/images/avatar.gif">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Nei">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2018/12/20/js模式第三章/" itemprop="url">js模式第三章</a></h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-12-20T10:38:45+08:00">
-                2018-12-20
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-            <span class="post-category" >
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">分类于</span>
-              
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/设计模式/" itemprop="url" rel="index">
-                    <span itemprop="name">设计模式</span>
-                  </a>
-                </span>
-
-                
-                
-              
-            </span>
-          
-
-          
-            
-              <span class="post-comments-count">
-                <span class="post-meta-divider">|</span>
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-comment-o"></i>
-                </span>
-                <a href="/2018/12/20/js模式第三章/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count valine-comment-count" data-xid="/2018/12/20/js模式第三章/" itemprop="commentCount"></span>
-                </a>
-              </span>
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <h2 id="for循环"><a href="#for循环" class="headerlink" title="for循环"></a>for循环</h2><blockquote>
-<p>循环对象为dom时，保存dom对象的长度可以提高浏览器性能（现在还是的嘛？）</p>
-</blockquote>
-<h2 id="来自构造函数的对象"><a href="#来自构造函数的对象" class="headerlink" title="来自构造函数的对象"></a>来自构造函数的对象</h2><blockquote>
-<p>目前，我所说知道的两种创建对象的方法，对象字面量和new Object。其中，对象字面量方法更简单明了，另一个原因是它只是强调了该对象仅是一个可变哈希映射，而不是从对象中提取属性和方法。与new Object相比，对象字面量没有作用域解析，因为它可能创造了一个一样的局部构造函数，解析器需要从调用Object的位置一直向上查找，直到找到object的全局构造函数。</p>
-</blockquote>
-<pre><code>var car = { goes: &quot;far&quot;} // 对象字面量发
-
-//构造函数法
-var car = new Object();
-car.goes = far;
-</code></pre><blockquote>
-<p>当一操作符调用构造函数时，函数内部将会发生以下情况：</p>
-<ul>
-<li>创建一个空对象并且this变量引用了该对象，同时还继承了该函数的原型。</li>
-<li>属性和方法被加入到this引用的对象中。</li>
-<li>新创建的对象由this所引用，并且最后隐式地返回this（如果没有显式地返回其他对象）。</li>
-</ul>
-</blockquote>
-<pre><code>var Person=function(name){
-    //使用对象字面量模式创建一个新对象
-    //var this=Object.create(Person.prototype);
-
-    向对象添加属性和方法
-    this.name=name;
-    this.say=function(){
-        return &quot;Hello World!&quot;
-    }
-
-    // return this;
-}
-</code></pre><h2 id="自调用构造函数"><a href="#自调用构造函数" class="headerlink" title="自调用构造函数"></a>自调用构造函数</h2><blockquote>
-<p>为了解决实例化对象时，忘记写new的缺点，并使得原型属性可在实例对象中使用，那么可以考虑下面的方法，具体来说，可以在构造函数中检查this是否为构造函数的一个实例，如果为否，构造函数可以再次调用自身，并且在这次调用中正确地使用new操作符：</p>
-</blockquote>
-<pre><code>function Waffle(){
-    if(!(this instanceof Waffle)){
-        return new Waffle();
-    }
-    this.tastes= &quot;yummy&quot;;
-}
-Waffle.prototype.wantAnother = true;
-
-var first=new Waffle(),
-    second=Waffle();
-
-console.log(first.tastes;) //输出&quot;yummy&quot;
-console.log(second.tastes;)//输出&quot;yummy&quot;
-</code></pre>
-          
-        
-      
-    </div>
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
   </section>
 
   
@@ -1795,7 +1745,7 @@ console.log(second.tastes;)//输出&quot;yummy&quot;
               
                 <a href="/archives/">
               
-                  <span class="site-state-item-count">18</span>
+                  <span class="site-state-item-count">19</span>
                   <span class="site-state-item-name">日志</span>
                 </a>
               </div>
@@ -1817,7 +1767,7 @@ console.log(second.tastes;)//输出&quot;yummy&quot;
               
               <div class="site-state-item site-state-tags">
                 <a href="/tags/index.html">
-                  <span class="site-state-item-count">12</span>
+                  <span class="site-state-item-count">13</span>
                   <span class="site-state-item-name">标签</span>
                 </a>
               </div>
