@@ -268,6 +268,284 @@
   
   
   <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/02/14/js模式第六章/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Nei">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Nei">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2019/02/14/js模式第六章/" itemprop="url">js模式第六章</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2019-02-14T16:01:54+08:00">
+                2019-02-14
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/设计模式/" itemprop="url" rel="index">
+                    <span itemprop="name">设计模式</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+              <span class="post-comments-count">
+                <span class="post-meta-divider">|</span>
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-comment-o"></i>
+                </span>
+                <a href="/2019/02/14/js模式第六章/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count valine-comment-count" data-xid="/2019/02/14/js模式第六章/" itemprop="commentCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <h2 id="传统与现代继承模式的比较"><a href="#传统与现代继承模式的比较" class="headerlink" title="传统与现代继承模式的比较"></a>传统与现代继承模式的比较</h2><blockquote>
+<p>“传统”这个术语只是单词”class(类)”的一种表现形式。“现代”模式表述为：其他任何不需要以类的方式考虑的模式。</p>
+</blockquote>
+<h2 id="使用类式继承时的预期结果"><a href="#使用类式继承时的预期结果" class="headerlink" title="使用类式继承时的预期结果"></a>使用类式继承时的预期结果</h2><blockquote>
+<p>实现类式继承的目标是通过构造函数Child()获取来自另外一个构造函数Parent()的属性，从而创建对象。</p>
+</blockquote>
+<pre><code>//父类
+function Parent(name){
+    this.name=name || &quot;Nei&quot;;
+};
+
+// 添加功能
+Parent.prototype.say=function(){
+    return this.name;
+};
+
+//子类
+function Child(){};
+
+inherit(Child,Parent);
+</code></pre><p>inherit函数非原生api，需要自行实现。现在我们来看看怎么实现它。</p>
+<h2 id="类式继承模式-1——默认模式"><a href="#类式继承模式-1——默认模式" class="headerlink" title="类式继承模式#1——默认模式"></a>类式继承模式#1——默认模式</h2><blockquote>
+<p>一种默认模式就是使用Parent构造函数创建一个对象，然后将该对象赋值给子类Child的原型。下面是inherit函数第一种实现：</p>
+</blockquote>
+<pre><code>function inherit(C,P){
+    C.prototype=new P();
+};
+</code></pre><p>牢记一点，原型属性应该指向一个对象，而不是函数。所以它必须指向一个有父构造函数所创建的对象，而不是父构造函数本身。换句话说，要使用new操作符来创建的对象。</p>
+<h3 id="追溯原型链"><a href="#追溯原型链" class="headerlink" title="追溯原型链"></a>追溯原型链</h3><blockquote>
+<p>使用这种模式时，同时继承了自身的属性（name），以及原型链上的属性和方法。那原型链是怎么样工作的呢？当new Parent()时，会创建一个块，保存这个对象，同时保存了name属性。但是当我们调用say方法时，say方法并不在这个块中，但是通过<strong>proto</strong>属性（指向Parent的prototype属性），我们找到了say方法。<br><img src="http://ww1.sinaimg.cn/large/0060ZzrAgy1g074rdjw0kj30rt08fwg7.jpg" alt=""></p>
+</blockquote>
+<p>当我们使用了inherit函数之后，又发生了什么呢？如图：<br><img src="http://ww1.sinaimg.cn/large/0060ZzrAgy1g074t4nqhkj30rr0cs0vn.jpg" alt=""><br>图中可以看到Child构造函数内部什么都没有，只有Parent实例的对象属性和方法被指向到Child的prototype上，Child的prototype上本身是什么都没有。当new Child()时，所创建的对象的<strong>proto</strong>指向Child类的prototype。所以当调用say方法时，在#3上并没有找到该方法，它会向#2上去寻找，在#2上也没有找到该方法，但是因为new Parent()的<strong>proto</strong>指向Parent的prototype，所以我们能在#1上找到该方法。</p>
+<p>还有一个解释this指向的问题。如图：</p>
+<pre><code>var kid=new Child();
+kid.name=&quot;De&quot;;
+kid.say(); //输出 De
+</code></pre><p><img src="http://ww1.sinaimg.cn/large/0060ZzrAgy1g075jkpsv0j30rs0eq770.jpg" alt=""><br>在kid对象上生成了name属性，调用say时，此时的this指向kid。</p>
+<h3 id="此模式缺点"><a href="#此模式缺点" class="headerlink" title="此模式缺点"></a>此模式缺点</h3><p>在继承时，我们将自身属性和原型链上的属性和方法都继承了，但是有时并不需要这些自身属性。在实例化时，并不支持子构造函数传参。Code：</p>
+<pre><code>var s=new Child(&apos;Seth&apos;);
+s.say(); // 输出 &quot;Nei&quot;;
+</code></pre><h2 id="类式继承模式-2——借用构造函数"><a href="#类式继承模式-2——借用构造函数" class="headerlink" title="类式继承模式#2——借用构造函数"></a>类式继承模式#2——借用构造函数</h2><p>此模式解决了默认模式自构造函数不能传参的问题。通过一些方法借用父类构造函数，传递子对象以绑定到this，并且转发任意的参数。Code：</p>
+<pre><code>function Child(a,c,b){
+    Parent.apply(this,arguments);
+};
+</code></pre><p>当时这种方法只能继承Parent自身的属性和方法，不能继承原型链上的属性和方法。</p>
+<pre><code>//父构造函数
+function Article(){
+    this.tags=[&apos;js&apos;,&apos;css&apos;];
+};
+var article=new Article();
+
+function BlogPost(){};
+BlogPost.prototype=article; //默认模式继承
+var blog=new BlogPost();
+
+function StaticPage(){
+    Article.call(this);
+};
+var page=new StaticPage();
+
+console.log(article.hasOwnProperty(&apos;tags&apos;)); //true
+console.log(blog.hasOwnProperty(&apos;tags&apos;)); //false
+console.log(page.hasOwnProperty(&apos;tags&apos;)); //true
+</code></pre><p>2返回了false，因为tags属性并没有在blog对象上，而是在原型链上，而page对象上的tags是借用了构造函数时，获取父类的副本，而不是引用。</p>
+<p>当我们修改tags，看看差异：</p>
+<pre><code>blog.tags.push(&apos;html&apos;);
+page.tags.push(&apos;php&apos;);
+console.log(article.tags.join(&apos;,&apos;));输出 js,css,html
+</code></pre><p>因为blog和article的tags指向了同一个数组，而page的targs时重新创建的的一个副本。</p>
+<h3 id="原型链"><a href="#原型链" class="headerlink" title="原型链"></a>原型链</h3><p>当使用本模式时，原型链时如何工作的呢？Code：</p>
+<pre><code>function Parent(name){
+    this.name=name | &quot;Adam&quot;;
+};
+
+Parent.prototype.say=function(){
+    return this.name;
+};
+
+function Child(name){
+    Parent.apply(this,arguments);
+};
+
+var kid=new Child(&apos;Nei&apos;);
+kid.name; //输出 Nei
+typeof kid.say //输出 undefined
+</code></pre><p>最后为什么会输出undefined呢？因为借用继承只会继承父类的自身属性和方法。并没有继承到父类的prototype属性和方法。所以也就找不到say方法。<img src="http://ww1.sinaimg.cn/large/0060ZzrAgy1g076mso0t6j30l20ce763.jpg" alt=""></p>
+<h3 id="通过借用构造函数实现多重继承"><a href="#通过借用构造函数实现多重继承" class="headerlink" title="通过借用构造函数实现多重继承"></a>通过借用构造函数实现多重继承</h3><p>借用多个构造函数实现多重继承。Code：</p>
+<pre><code>function Cat(){
+    this.legs=5;
+    this.say=function(){
+        return &apos;miao&apos;
+    };
+};
+
+function Bird(){
+    this.wings=3;
+    this.fly=function(){
+        return true;
+    };
+};
+
+function Child(){
+    Cat.apply(this);
+    Bird.apply(this);
+}
+</code></pre><h3 id="优缺点"><a href="#优缺点" class="headerlink" title="优缺点"></a>优缺点</h3><p>缺点：</p>
+<ul>
+<li>无法继承父类原型链上的属性和方法，并且原型也仅是添加可重用方法以及属性的位置，它并不会为每个实例重新创建原型。<br>优点：</li>
+<li>可以获得父类的自身成员的真实副本，也不会存在子对象意外覆盖父对象舒心的风险。</li>
+</ul>
+<h2 id="类式继承模式-3——借用和设置原型"><a href="#类式继承模式-3——借用和设置原型" class="headerlink" title="类式继承模式#3——借用和设置原型"></a>类式继承模式#3——借用和设置原型</h2><p>顾名思义就是先借用父类构造函数，然后再设置原型。Code：</p>
+<pre><code>function Child(a,b,c,d){
+    Parent.apply(this,arguments);
+};
+Child.prototype=new Parent();
+</code></pre><p>此模式优点：</p>
+<ul>
+<li>继承了父类的自身成员和原型链上的成员。</li>
+</ul>
+<p>缺点：</p>
+<ul>
+<li>自身成员被继承了两次。</li>
+<li>constructor紊乱。子类构造函数应该指向本身，但是却指向了父类构造函数。</li>
+</ul>
+<h2 id="类式继承模式-4——共享原型"><a href="#类式继承模式-4——共享原型" class="headerlink" title="类式继承模式#4——共享原型"></a>类式继承模式#4——共享原型</h2><p>共享原型就是父类原型被指向给子类原型。如图：<img src="http://ww1.sinaimg.cn/large/0060ZzrAgy1g0773aieinj30kv0agtai.jpg" alt=""></p>
+<p>Code:<br>    function inherit(C,P){<br>        C.prototype=P.prototype;<br>    };</p>
+<p>但是并不会继承父类自身成员，且如果子类prototype修改，会影响到父类prototype。如图：<img src="http://ww1.sinaimg.cn/large/0060ZzrAgy1g07795ejyhj30rq08fdhz.jpg" alt=""></p>
+<h2 id="类式继承模式-5——临时构造函数"><a href="#类式继承模式-5——临时构造函数" class="headerlink" title="类式继承模式#5——临时构造函数"></a>类式继承模式#5——临时构造函数</h2><h2 id="Klass"><a href="#Klass" class="headerlink" title="Klass"></a>Klass</h2><h2 id="原型继承"><a href="#原型继承" class="headerlink" title="原型继承"></a>原型继承</h2><h2 id="通过赋值属性实现继承"><a href="#通过赋值属性实现继承" class="headerlink" title="通过赋值属性实现继承"></a>通过赋值属性实现继承</h2><h2 id="借用方法"><a href="#借用方法" class="headerlink" title="借用方法"></a>借用方法</h2>
+          
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
     <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/01/30/Orinoco垃圾回收器/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -1239,462 +1517,6 @@ d3.getLastId(); // 3
 
 
     
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/12/24/js模式第四章/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="Nei">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/images/avatar.gif">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Nei">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2018/12/24/js模式第四章/" itemprop="url">js模式第四章</a></h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-12-24T15:30:07+08:00">
-                2018-12-24
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-            <span class="post-category" >
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">分类于</span>
-              
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/设计模式/" itemprop="url" rel="index">
-                    <span itemprop="name">设计模式</span>
-                  </a>
-                </span>
-
-                
-                
-              
-            </span>
-          
-
-          
-            
-              <span class="post-comments-count">
-                <span class="post-meta-divider">|</span>
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-comment-o"></i>
-                </span>
-                <a href="/2018/12/24/js模式第四章/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count valine-comment-count" data-xid="/2018/12/24/js模式第四章/" itemprop="commentCount"></span>
-                </a>
-              </span>
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <h2 id="第四章-函数"><a href="#第四章-函数" class="headerlink" title="第四章 函数"></a>第四章 函数</h2><blockquote>
-<p>函数表达式和函数声明式：</p>
-</blockquote>
-<pre><code>//命名函数表达式
-var demo=funtion d(){
-    console.log(&quot;Hello World!&quot;);
-};
-
-//函数表达式
-var demo=function(){
-    console.log(&quot;Hello World!&quot;);
-};
-
-//函数声明式
-function demo(){
-    console.log(&quot;Hello World!&quot;)
-}
-</code></pre><h3 id="区别："><a href="#区别：" class="headerlink" title="区别："></a>区别：</h3><ul>
-<li>函数表达式又分为<strong>命令函数表达式</strong>和<strong>函数表达式</strong>（匿名函数）,并且<strong>函数表达式</strong>结尾需要加上分号,而函数声明式则不需要。</li>
-<li><p><strong>函数声明式</strong>会进行<strong>变量提升</strong>，<strong>而函数表达式</strong>则不会。</p>
-<p>  //全局函数<br>  function foo(){</p>
-<pre><code>alert(&apos;global foo&apos;);
-</code></pre><p>  }</p>
-<p>  function bar(){</p>
-<pre><code>alert(&apos;global bar&apos;)
-</code></pre><p>  }</p>
-<p>  function hoistMe(){</p>
-<pre><code>console.log(typeof foo); //输出 &quot;function&quot;
-console.log(typeof bar); //输出 &quot;undefined&quot;
-
-foo();//输出&quot;local foo&quot;
-bar();//输出TypeError: bar is not function
-
-//函数声明
-//变量&apos;foo&apos;以及其实现着2被提升
-function foo(){
-    alert(&apos;local foo&apos;);
-}
-
-//函数表达式
-//仅变量 &apos;bar&apos; 提升
-//函数实现并未提升
-var bar = function () {
-    alert(&apos;local bar&apos;)
-}
-</code></pre><p>  }</p>
-</li>
-</ul>
-<h2 id="回调模式"><a href="#回调模式" class="headerlink" title="回调模式"></a>回调模式</h2><blockquote>
-<p>函数都是对象，函数可以被当做参数传递给其他函数，当一个函数被当做参数传递给另一个函数，且执行，这叫回调。</p>
-</blockquote>
-<p>Code：</p>
-<pre><code>function writeCode(callback){
-    //do something
-    callback();
-}
-
-function introduce(){
-    // do something
-}
-
-//传递函数，执行回调
-writeCode(introduce);
-</code></pre><h3 id="回调与作用域"><a href="#回调与作用域" class="headerlink" title="回调与作用域"></a>回调与作用域</h3><blockquote>
-<p>如果传递的对象不是一个函数，而是一个对象的方法，并且这个方法用this来引用所属的对象，那可能会导致意想不到的后果。</p>
-</blockquote>
-<p>假设一个方法paint(),它是一个名为myapp的对象的方法：</p>
-<pre><code>var myapp={};
-myapp.color=&quot;red&quot;;
-myapp.paint=function(node){
-    node.style.color=this.color;
-};
-</code></pre><p>函数findNodes()执行以下语句：</p>
-<pre><code>var findNodes=function(callback){
-    // ...
-    if(typeof callback === &quot;function&quot;){
-        callback(found);
-    }
-};
-</code></pre><p>如果执行findNodes(myapp.paint)并不会得到如期的结果，因为此时this的引用的对象发生了改变，变成了findNodes，而findNodes并没有color这个属性。那我们怎么得到预期的结果呢？</p>
-<p>一个解决方法，我们传递回调函数，并且也传递回调函数所属的对象：</p>
-<pre><code>var findNodes = function(callback,callback_obj){
-    // ...
-    if(typeof callback === &quot;function&quot;){
-        callback(callback_obj,found);
-    }
-};
-</code></pre><p>那我们的写法将变成findNodes(myapp.paint,myapp)，我们也可以将第一个参数写成字符串的形式，这样无需写两遍对象名，<br>findNodes(“paint”,myapp),Code：</p>
-<pre><code>var findNodes = function(callback,callback_obj){
-    // ...  
-    if(typeof callback === &quot;string&quot; ){
-        callback = callback_obj[callback]
-    }
-
-    if(typeof callback === &quot;function&quot;){
-        callback.call(callback_obj,found)
-    }
-};
-</code></pre><h2 id="返回函数"><a href="#返回函数" class="headerlink" title="返回函数"></a>返回函数</h2><blockquote>
-<p>函数也是对象，因此它们也可以用作为返回值。<br>下面有个demo：</p>
-</blockquote>
-<pre><code>var setup=function(){
-    alert(1);
-    return function(){
-        alert(2);
-    };
-};
-var my=setup(); //alert 1
-my(); // alert 2
-</code></pre><blockquote>
-<p>由于setup()包装了返回函数，它创建了一个闭包(粗俗的理解就是函数中的函数)，可以用这个闭包存储一些私有数据，这些数据仅可以被该返回函数访问，但外部代码却无法访问。<br>Code：</p>
-</blockquote>
-<pre><code>var setup=function(){
-    var count = 0;
-    return function(){
-        return (count+=1);
-    };
-};
-
-var next=setup();
-next(); //result is 1
-next(); //result is 2
-next(); //result is 3
-</code></pre><h2 id="自定义函数"><a href="#自定义函数" class="headerlink" title="自定义函数"></a>自定义函数</h2><blockquote>
-<p>如果创建了一个新函数并且将其分配给保存另外函数的同一个变量，那么就以一个新函数覆盖了旧函数。在某种程度上，回收了旧函数指针以指向一个新函数。而这一切发生在旧函数体的内部。在这种情况下，该函数以一个新的实现覆盖并重新定义了自身，这可能听起来比实际上更复杂，Code：</p>
-</blockquote>
-<pre><code>var scareMe=function(){
-    alert(&quot;Boo!&quot;);
-    scareMe=function(){
-        alert(&quot;Double boo!&quot;);
-    };
-};
-
-scareMe(); //输出 Boo
-scareMe(); //输出 Double boo!
-</code></pre><blockquote>
-<p> 当函数有且执行一次时，这种模式非常有效。<br>但是这种模式有个缺点，就是定义在自身时，已添加的属性和方法都会丢失，此外，如果该函数使用了不同的名称，比如重新分配给了另外一个变量或者以对象的方法来使用，那么重定义的部分将永远不会发生。并且将会执行原函数体。<br>Code：</p>
-</blockquote>
-<pre><code>//1 添加一个新属性
-scareMe.property=&quot;property&quot;;
-
-//2 赋值给另一个不同名称的变量
-var prank=scareMe;
-
-//3 作为一个方法使用
-var spooky = {
-    boo:scareMe
-};
-
-// 
-prank(); //输出 &quot;bool&quot;
-prank(); //输出 &quot;bool&quot;
-console.log(prank.property) //输出 &quot;property&quot;
-
-spooky.boo(); //输出 &quot;bool&quot;
-spooky.boo(); //输出 &quot;bool&quot;
-console.log(spooky.boo.property); //输出 &quot;property&quot;
-
-scareMe(); //输出 &quot;Double boo!&quot;
-scareMe(); //输出 &quot;Double boo!&quot;
-console.log(scareMe.property); // 输出 &quot;undefined&quot;
-</code></pre><p>当我们以新名称和作为一个方法使用时，scareMe指针一直被重写，至此scareMe函数自定义的部分一直没有执行。直到当我们直接执行scareMe时，指针没有被重写，自定义部分才得以执行。</p>
-<h2 id="即时函数"><a href="#即时函数" class="headerlink" title="即时函数"></a>即时函数</h2><blockquote>
-<p>即时函数模式，该模式有一下几部分组成：</p>
-</blockquote>
-<ul>
-<li>可以使用函数表达式定义一个函数（函数声明则无法达到这个效果）</li>
-<li>在末尾添加一组括号，这将导致该函数立即执行。</li>
-<li>将整个函数包括在括号中（只有不将该函数分配给变量才需要这样做）。</li>
-</ul>
-<blockquote>
-<p>这种模式的好处就是形成了作用域沙箱。避免了全局污染，并且可以执行一些一次新函数，而不必去创建复用函数。</p>
-</blockquote>
-<pre><code>(function(){
-    var days=[&apos;Sun&apos;,&apos;Mon&apos;,&apos;Tue&apos;,&apos;Wed&apos;,&apos;Thu&apos;,&apos;Fri&apos;,&apos;Sat&apos;],
-        today=new Date(),
-        msg=&apos;Today is &apos; + days[today.getDay()] + &apos;, &apos; + today.getDate();
-    alert(msg);
-}())
-</code></pre><h3 id="即时函数的参数"><a href="#即时函数的参数" class="headerlink" title="即时函数的参数"></a>即时函数的参数</h3><blockquote>
-<p>即时函数同样可以传递参数，Code：</p>
-</blockquote>
-<pre><code>;(function(who,when){
-    console.log(&quot;I met &quot; + who + &quot; on &quot; + when)
-})(&quot;Nei&quot;,new Date());
-</code></pre><h3 id="即时函数的返回值"><a href="#即时函数的返回值" class="headerlink" title="即时函数的返回值"></a>即时函数的返回值</h3><blockquote>
-<p>当然即时函数同样可以返回值，Code：</p>
-</blockquote>
-<pre><code>var result=(function(){
-    return 2+2;
-})();
-</code></pre><blockquote>
-<p>赋值给一个变量时，即时函数可以不需要最外层括号，Code：</p>
-</blockquote>
-<pre><code>var result=function(){
-    return 2+2;
-}();
-</code></pre><blockquote>
-<p>即时函数不单单可以返回整数值，同样还可以返回其他类型，例如返回函数。形成一个闭包，在一个函数作用域中保留变量。Code：</p>
-</blockquote>
-<pre><code>var getResult=(function(){
-    var res = 2 + 2;
-    return function(){
-        return res;
-    };
-})();
-</code></pre><blockquote>
-<p>于是我们可以借用即时函数，在创建对象时，可以将对象的属性永久保留在内存中。Code：</p>
-</blockquote>
-<pre><code>var o = {
-    message: (function(){
-        var who = &quot;me&quot;,
-            what = &quot;call&quot;;
-        return who + &quot; &quot; + what;
-    })(),
-    getMsg:function(){
-        return this.message;
-    }
-};
-</code></pre><h3 id="优点"><a href="#优点" class="headerlink" title="优点"></a>优点</h3><ul>
-<li>即时函数模式创建了自调用的函数局部变量，避免了全局空间被临时变量污染。</li>
-</ul>
-<!-- ## 即时对象初始化 -->
-<h2 id="初始化时分支"><a href="#初始化时分支" class="headerlink" title="初始化时分支"></a>初始化时分支</h2><blockquote>
-<p>初始化时分支时一种优化模式，当知道某个条件在整个程序生命周期内都不会发生改变的时候，仅对该条件测试一次时很有意义的。浏览器嗅探（功能检测）就是一个典型的例子。Code：</p>
-</blockquote>
-<pre><code>var utils = {
-    addListener:function(el,type,fn){
-        if(typeof window.addEvenListener === &quot;function&quot;){
-            el.addEventListener(type,fn,false);
-        }else if(typeof document.attachEvent === &quot;function&quot;){
-            el.attachEven(&apos;on&apos;+type,fn);
-        }
-    },
-    removeListener:function(el,type,fn){
-        //......
-    }
-};
-// 当我们每次调用utils.addListener 或 utils.removeListener时，都会重复执行检测代码。但是对于这样不会变的特性时，我们可以执行一次性检查代码。
-</code></pre><p>一次性检查Code：</p>
-<pre><code>var utils = {
-    addListener:null,
-    removeListener:null
-};
-
-if(typeof window.addEventListener===&quot;function&quot;{
-    utils.addListener = function(el,type,fn){
-        el.addEventListener(type,fn,false);
-    };
-    utils.removeListener = function (el,type,fn) {
-        el.removeEventListener(type,fn,false);
-    }
-}else if(){
-    // ie......
-}else{
-    // 更早浏览器兼容模式
-}
-</code></pre><h2 id="备忘模式"><a href="#备忘模式" class="headerlink" title="备忘模式"></a>备忘模式</h2><blockquote>
-<p>函数也是对象，我们可以添加属性上去，例如我们在大量计算的时候，就可以将结果缓存在函数对象上，Code：</p>
-</blockquote>
-<pre><code>var myFunc = function (param){
-    if(!myFunc.cache[param]){
-        var result = {};
-        //...大计算
-        myFunc.cache[param]=result;
-    }
-    return myFunc.cache[param]
-};
-myFunc.cache={};
-</code></pre><p>当然我们的参数一般都不只一个，这时怎么办呢？看Code：</p>
-<pre><code>var myFunc = function (){
-    var cachekey = JSON.stringfy(Array.prototype.slice.call(arguments)),
-        result;
-    if(!myFunc.cache[cachekey]){
-        result = {};
-        //...大计算
-        myFunc.cache[cachekey]=result;
-    }
-    return myFunc.cache[cachekey]
-};
-myFunc.cache={};
-</code></pre><h2 id="配置对象"><a href="#配置对象" class="headerlink" title="配置对象"></a>配置对象</h2><blockquote>
-<p>调用函数，传入参数时，一种传参方式是多少个参数传递多少个参数，Code：</p>
-</blockquote>
-<pre><code>Demo(one,two,three,four,five,...);
-</code></pre><p>但是这样传参，参数一旦很多，函数将变得难看和难以维护。<br>所以我们传参时，将参数写进一个对象中，这样传参就是只有传递一个对象。</p>
-<pre><code>var conf={
-    username:&apos;Nei&apos;,
-    first:&apos;N&apos;,
-    last:&apos;de&apos;
-};
-
-Demo(conf)
-</code></pre><p>配置对象的优点在于：</p>
-<ul>
-<li>不需要记住众多的参数以及其顺序。</li>
-<li>可以安全忽略可选参数。</li>
-<li>更加易于阅读和维护。</li>
-<li>更加易于添加和删除参数。</li>
-</ul>
-<p>而缺点在于：</p>
-<ul>
-<li>需要记住参数名称。</li>
-<li>属性名称无法被压缩。？<!-- ## curry --></li>
-</ul>
-
-          
-        
-      
-    </div>
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
   </section>
 
   
@@ -1745,7 +1567,7 @@ Demo(conf)
               
                 <a href="/archives/">
               
-                  <span class="site-state-item-count">19</span>
+                  <span class="site-state-item-count">20</span>
                   <span class="site-state-item-name">日志</span>
                 </a>
               </div>
@@ -1767,7 +1589,7 @@ Demo(conf)
               
               <div class="site-state-item site-state-tags">
                 <a href="/tags/index.html">
-                  <span class="site-state-item-count">13</span>
+                  <span class="site-state-item-count">14</span>
                   <span class="site-state-item-name">标签</span>
                 </a>
               </div>
